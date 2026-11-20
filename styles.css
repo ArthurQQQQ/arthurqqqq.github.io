@@ -249,7 +249,14 @@ button { font: inherit; cursor: pointer; }
   overscroll-behavior: contain;
   outline-offset: -3px;
 }
-.preview-dialog-media img { display: block; width: 100%; height: auto; }
+.preview-dialog-media img {
+  display: block;
+  width: 100%;
+  max-width: 146vh;
+  max-width: 146dvh;
+  height: auto;
+  margin-inline: auto;
+}
 .preview-dialog-media.is-actual-size img { width: 1280px; max-width: none; }
 
 .publication-list, .projects-list { margin: 0; padding: 0; list-style: none; }
