@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#09121f">
+  <meta name="theme-color" content="#f9fbfd">
   <meta name="description" content="Jiayi (Arthur) Qiu, an Honors Carolina undergraduate studying continual learning and reliable long-horizon agents.">
   <title>Jiayi (Arthur) Qiu</title>
   <link rel="canonical" href="https://arthurqqqq.github.io/">
-  <link rel="stylesheet" href="styles.css?v=research-figures">
+  <link rel="stylesheet" href="styles.css?v=public-page-previews">
   <script src="app.js?v=research-figures" defer></script>
 </head>
 <body id="home">
@@ -39,36 +39,34 @@
 
     <section class="profile-grid container" id="profiles" aria-label="Research profiles">
       <article class="profile-card" aria-labelledby="github-title">
-        <header class="profile-card-header">
-          <div class="profile-identity">
-            <h2 id="github-title">GitHub</h2>
-            <p>Profile preview</p>
+        <a class="profile-link" href="https://github.com/ArthurQQQQ" aria-labelledby="open-github-profile">
+          <header class="profile-card-header">
+            <div class="profile-identity">
+              <h2 id="github-title">GitHub</h2>
+              <p>@ArthurQQQQ</p>
+            </div>
+            <span class="profile-action" id="open-github-profile">View GitHub</span>
+          </header>
+          <div class="profile-preview">
+            <img src="github-page-preview.jpg" width="1280" height="640" decoding="async"
+              alt="Public GitHub profile with the avatar, repository navigation, and research README">
           </div>
-          <a class="profile-action" href="https://github.com/ArthurQQQQ">View GitHub</a>
-        </header>
-        <iframe class="github-preview-frame" src="github-preview.html?v=research-figures"
-          title="ArthurQQQQ's public GitHub profile preview"
-          sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox"
-          referrerpolicy="no-referrer"></iframe>
+        </a>
       </article>
       <article class="profile-card profile-card--scholar" aria-labelledby="scholar-title">
-        <header class="profile-card-header">
-          <div class="profile-identity">
-            <h2 id="scholar-title">Google Scholar</h2>
-            <p>Publications and citations</p>
+        <a class="profile-link" href="https://scholar.google.com/citations?user=WC9dYREAAAAJ&amp;hl=en" aria-labelledby="open-scholar-profile">
+          <header class="profile-card-header">
+            <div class="profile-identity">
+              <h2 id="scholar-title">Google Scholar</h2>
+              <p>Jiayi (Arthur) Qiu</p>
+            </div>
+            <span class="profile-action" id="open-scholar-profile">View Scholar</span>
+          </header>
+          <div class="profile-preview">
+            <img src="scholar-page-preview.jpg" width="1280" height="640" decoding="async"
+              alt="Public Google Scholar profile with the publication list and citation panel">
           </div>
-          <a class="profile-action" href="https://scholar.google.com/citations?user=WC9dYREAAAAJ&amp;hl=en">View Scholar</a>
-        </header>
-        <ul class="profile-items" aria-label="Selected publications">
-          <li>
-            <a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=WC9dYREAAAAJ&amp;citation_for_view=WC9dYREAAAAJ:zYLM7Y9cAGgC">Bridge Starvation</a>
-            <p>ICML 2026 · Failure Modes of Agentic AI</p>
-          </li>
-          <li>
-            <a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=WC9dYREAAAAJ&amp;citation_for_view=WC9dYREAAAAJ:IjCSPb-OGe4C">Graph Tokens before Graph Propagation</a>
-            <p>ICML 2026 · Graph Foundation Models Workshop</p>
-          </li>
-        </ul>
+        </a>
       </article>
     </section>
 
@@ -88,8 +86,8 @@
                 </div>
               </div>
               <figure class="paper-diagram" data-paper-diagram data-active-step="1">
-                <object class="paper-figure" data="bridge-starvation.svg?v=research-figures" type="image/svg+xml" aria-label="Bridge Starvation retrieval paths" tabindex="-1">
-                  <img src="bridge-starvation.svg?v=research-figures" width="560" height="250" alt="An initial query finds a first clue. A second pass can use a bridge entity to find the supporting source.">
+                <object class="paper-figure" data="bridge-starvation.svg?v=light" type="image/svg+xml" aria-label="Bridge Starvation retrieval paths" tabindex="-1">
+                  <img src="bridge-starvation.svg?v=light" width="560" height="250" alt="An initial query finds a first clue. A second pass can use a bridge entity to find the supporting source.">
                 </object>
                 <div class="diagram-steps" role="group" aria-label="Bridge Starvation retrieval paths steps" hidden>
                   <button type="button" data-step="1" aria-pressed="true"
@@ -113,8 +111,8 @@
                 </div>
               </div>
               <figure class="paper-diagram" data-paper-diagram data-active-step="1">
-                <object class="paper-figure" data="atom-keyed.svg?v=research-figures" type="image/svg+xml" aria-label="Atom-keyed retrieval and source mapping" tabindex="-1">
-                  <img src="atom-keyed.svg?v=research-figures" width="560" height="250" alt="Atomic propositions are ranked, mapped to their original passages, and returned to the reader.">
+                <object class="paper-figure" data="atom-keyed.svg?v=light" type="image/svg+xml" aria-label="Atom-keyed retrieval and source mapping" tabindex="-1">
+                  <img src="atom-keyed.svg?v=light" width="560" height="250" alt="Atomic propositions are ranked, mapped to their original passages, and returned to the reader.">
                 </object>
                 <div class="diagram-steps" role="group" aria-label="Atom-keyed retrieval and source mapping steps" hidden>
                   <button type="button" data-step="1" aria-pressed="true"
@@ -140,8 +138,8 @@
                 </div>
               </div>
               <figure class="paper-diagram" data-paper-diagram data-active-step="1">
-                <object class="paper-figure" data="sift.svg?v=research-figures" type="image/svg+xml" aria-label="SIFT feature-weighting process" tabindex="-1">
-                  <img src="sift.svg?v=research-figures" width="560" height="250" alt="Table rows become short written scenes. A language model scores feature importance, and the weights are applied to tabular inputs.">
+                <object class="paper-figure" data="sift.svg?v=light" type="image/svg+xml" aria-label="SIFT feature-weighting process" tabindex="-1">
+                  <img src="sift.svg?v=light" width="560" height="250" alt="Table rows become short written scenes. A language model scores feature importance, and the weights are applied to tabular inputs.">
                 </object>
                 <div class="diagram-steps" role="group" aria-label="SIFT feature-weighting process steps" hidden>
                   <button type="button" data-step="1" aria-pressed="true"
@@ -167,8 +165,8 @@
                 </div>
               </div>
               <figure class="paper-diagram" data-paper-diagram data-active-step="1">
-                <object class="paper-figure" data="transfer-network.svg?v=research-figures" type="image/svg+xml" aria-label="College transfer network views" tabindex="-1">
-                  <img src="transfer-network.svg?v=research-figures" width="560" height="250" alt="One network connects states to policies. A second connects colleges with bilateral agreements.">
+                <object class="paper-figure" data="transfer-network.svg?v=light" type="image/svg+xml" aria-label="College transfer network views" tabindex="-1">
+                  <img src="transfer-network.svg?v=light" width="560" height="250" alt="One network connects states to policies. A second connects colleges with bilateral agreements.">
                 </object>
                 <div class="diagram-steps" role="group" aria-label="College transfer network views steps" hidden>
                   <button type="button" data-step="1" aria-pressed="true"
