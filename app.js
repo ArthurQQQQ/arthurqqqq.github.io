@@ -1,36 +1,30 @@
-(() => {
-  'use strict';
+'use strict';
 
-  const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+for (const diagram of document.querySelectorAll('[data-paper-diagram]')) {
+  const figure = diagram.querySelector('object');
+  const controls = diagram.querySelector('.diagram-steps');
+  const caption = diagram.querySelector('.diagram-caption');
+  const buttons = [...controls.querySelectorAll('button[data-step]')];
 
-  const demo = document.querySelector('[data-retrieval-demo]');
-  if (demo) {
-    const buttons = Array.from(demo.querySelectorAll('[data-retrieval-state]'));
-    const description = demo.querySelector('[data-retrieval-description]');
-    const descriptions = {
-      single: 'A single pass finds the first clue but misses the bridge.',
-      repair: 'A bounded extra pass follows the bridge to the supporting source.'
-    };
-
-    for (const button of buttons) {
-      button.addEventListener('click', () => {
-        const state = button.dataset.retrievalState;
-        if (!Object.prototype.hasOwnProperty.call(descriptions, state) || demo.dataset.state === state) return;
-        demo.classList.remove('is-transitioning');
-        demo.dataset.state = state;
-        for (const peer of buttons) {
-          peer.setAttribute('aria-pressed', String(peer.dataset.retrievalState === state));
-        }
-        if (description) description.textContent = descriptions[state];
-        if (state === 'repair' && !motionPreference.matches) {
-          window.requestAnimationFrame(() => {
-            if (demo.dataset.state === 'repair') demo.classList.add('is-transitioning');
-          });
-        }
-      });
+  function updateFigure() {
+    const svg = figure.contentDocument?.documentElement;
+    if (svg?.localName === 'svg') {
+      svg.setAttribute('data-active-step', diagram.dataset.activeStep);
     }
-    demo.addEventListener('animationend', event => {
-      if (event.animationName === 'evidence-travel') demo.classList.remove('is-transitioning');
+  }
+
+  for (const button of buttons) {
+    button.addEventListener('click', () => {
+      diagram.dataset.activeStep = button.dataset.step;
+      for (const peer of buttons) {
+        peer.setAttribute('aria-pressed', String(peer === button));
+      }
+      caption.textContent = button.dataset.description;
+      updateFigure();
     });
   }
-})();
+
+  figure.addEventListener('load', updateFigure);
+  updateFigure();
+  controls.hidden = false;
+}

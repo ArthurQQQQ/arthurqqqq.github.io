@@ -1,43 +1,88 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 260" role="img" aria-labelledby="sift-title sift-desc">
-  <title id="sift-title">Scene-based feature reweighting method sketch</title>
-  <desc id="sift-desc">Express examples from tabular rows as natural-language scenes. A language model scores the original features for importance. The normalized scores reweight features for conventional tabular machine learning.</desc>
-  <rect width="480" height="260" fill="#edf5fa"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 250" data-active-step="1" role="img" aria-labelledby="sift-title sift-desc">
+  <title id="sift-title">SIFT feature reweighting mechanism</title>
+  <desc id="sift-desc">Examples from tabular rows become short written scenes. A language model scores the original features, and normalized scores reweight inputs for a conventional tabular model.</desc>
+  <defs>
+    <pattern id="sift-grid" width="18" height="18" patternUnits="userSpaceOnUse">
+      <path d="M18 0H0V18" fill="none" stroke="#20354e" stroke-opacity=".33"/>
+    </pattern>
+    <marker id="sift-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M1 1l6 3-6 3" fill="none" stroke="context-stroke" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+  <style>
+    text { font-family: system-ui, sans-serif; fill: #e7f0fa; }
+    .heading { font: 22px Georgia, serif; }
+    .band-label { fill: #95abc2; font-size: 14px; letter-spacing: .06em; }
+    .node-label { font-size: 16px; font-weight: 560; }
+    .path-note { fill: #95abc2; font-size: 14px; }
+    .band { fill: #0e1b2c; stroke: #263d56; }
+    .box { fill: #101d2e; stroke: #58738f; stroke-width: 1.5; }
+    .detail { fill: none; stroke: #7893ae; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .flow { fill: none; stroke: #6984a0; stroke-width: 1.6; marker-end: url(#sift-arrow); }
+    .flow-scores, .flow-model { stroke-dasharray: 3 4; }
+    .note-scores, .note-model { display: none; }
+    svg[data-active-step="1"] .examples .band { fill: #142438; stroke: #456688; }
+    svg[data-active-step="1"] .examples .box { fill: #142b44; stroke: #85baf5; }
+    svg[data-active-step="1"] .examples .detail, svg[data-active-step="1"] .flow-examples { stroke: #85baf5; }
+    svg[data-active-step="2"] .scores .band, svg[data-active-step="3"] .model .band { fill: #102720; stroke: #34594e; }
+    svg[data-active-step="2"] .scores .box, svg[data-active-step="3"] .model .box { fill: #15362f; stroke: #79dcc9; }
+    svg[data-active-step="2"] .scores .detail, svg[data-active-step="3"] .model .detail { stroke: #79dcc9; }
+    svg[data-active-step="2"] .flow-scores, svg[data-active-step="3"] .flow-model { stroke: #79dcc9; stroke-dasharray: none; }
+    svg[data-active-step="2"] .note-examples, svg[data-active-step="3"] .note-examples { display: none; }
+    svg[data-active-step="2"] .note-scores, svg[data-active-step="3"] .note-model { display: inline; }
+    @media (max-width: 400px) {
+      .heading { font-size: 24px; }
+      .band-label, .path-note { font-size: 16px; }
+      .node-label { font-size: 17.5px; }
+    }
+  </style>
+  <rect width="560" height="250" fill="#0c1727"/>
+  <rect x=".5" y=".5" width="559" height="249" rx="13" fill="none" stroke="#28425e"/>
+  <text class="heading" x="25" y="35">Scene-guided feature weights</text>
+  <path d="M25 50h510" stroke="#2b4562"/>
 
-  <g fill="none" stroke="#a9c7d9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M136 111h43m-10-9 10 9-10 9"/>
-    <path d="M300 111h40m-10-9 10 9-10 9"/>
+  <g class="examples">
+    <rect class="band" x="24" y="65" width="160" height="141" rx="9"/>
+    <rect x="25" y="66" width="158" height="139" rx="8" fill="url(#sift-grid)"/>
+    <text class="band-label" x="37" y="87">EXAMPLES</text>
+    <rect class="box" x="38" y="108" width="48" height="48" rx="5"/>
+    <path class="detail" d="M38 123h48m-48 15h48m-32-15v33m16-33v33"/>
+    <path class="flow flow-examples" d="M91 131h20"/>
+    <path class="box" d="M116 110h47a5 5 0 0 1 5 5v27a5 5 0 0 1-5 5h-24l-10 9v-9h-13a5 5 0 0 1-5-5v-27a5 5 0 0 1 5-5Z"/>
+    <path class="detail" d="M122 121h33m-33 8h27m-27 8h21"/>
+    <text class="node-label" x="104" y="188" text-anchor="middle">Rows to scenes</text>
   </g>
 
-  <g stroke="#a9c7d9" stroke-width="2.5" stroke-linejoin="round">
-    <rect x="43" y="72" width="86" height="83" rx="6" fill="#fff"/>
-    <path d="M49 72h74a6 6 0 0 1 6 6v14H43V78a6 6 0 0 1 6-6Z" fill="#dceefa"/>
-    <path d="M43 112h86m-86 21h86M72 92v63m28-63v63" fill="none"/>
-  </g>
-  <path d="M49 120h16m14 0h14m14 0h16" stroke="#18567e" stroke-width="2.5" stroke-linecap="round"/>
-
-  <g stroke-linecap="round" stroke-linejoin="round">
-    <path d="M198 69h78a9 9 0 0 1 9 9v45a9 9 0 0 1-9 9h-35l-15 13v-13h-28a9 9 0 0 1-9-9V78a9 9 0 0 1 9-9Z" fill="#fff" stroke="#a9c7d9" stroke-width="2.5"/>
-    <path d="M205 87h60m-60 12h53m-53 12h33" fill="none" stroke="#18567e" stroke-width="2.5"/>
-    <rect x="246" y="120" width="51" height="31" rx="6" fill="#18567e"/>
-    <text x="271.5" y="141" fill="#fff" font-family="system-ui, sans-serif" font-size="16" font-weight="600" text-anchor="middle">LLM</text>
+  <g class="scores">
+    <rect class="band" x="200" y="65" width="160" height="141" rx="9"/>
+    <rect x="201" y="66" width="158" height="139" rx="8" fill="url(#sift-grid)"/>
+    <text class="band-label" x="213" y="87">FEATURE PRIOR</text>
+    <rect class="box" x="220" y="108" width="120" height="16" rx="4"/>
+    <rect class="box" x="220" y="130" width="120" height="16" rx="4"/>
+    <rect class="box" x="220" y="152" width="120" height="16" rx="4"/>
+    <path class="detail" d="M231 116h45m-45 22h45m-45 22h45m44-44h7m-7 22h7m-7 22h7"/>
+    <text class="node-label" x="280" y="188" text-anchor="middle">LLM scores columns</text>
   </g>
 
-  <g stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="349" y="84" width="47" height="60" rx="4" fill="#fff" stroke="#a9c7d9"/>
-    <path d="M365 85.5h15v57h-15z" fill="#dceefa"/>
-    <path d="M365 85.5v57m15-57v57m-30-40h45m-45 20h45" fill="none" stroke="#a9c7d9"/>
-    <path d="M367 94h11m-11 19h11m-11 19h11" fill="none" stroke="#18567e"/>
-    <path d="M401 114h12m-5-5 5 5-5 5" fill="none" stroke="#18567e"/>
-    <rect x="418" y="88" width="28" height="52" rx="5" fill="#fff" stroke="#18567e"/>
-    <path d="M432 103v11m0 0-7 8m7-8 7 8" fill="none" stroke="#18567e"/>
-    <circle cx="432" cy="103" r="2.7" fill="#18567e"/>
-    <circle cx="425" cy="122" r="2.7" fill="#18567e"/>
-    <circle cx="439" cy="122" r="2.7" fill="#18567e"/>
+  <g class="model">
+    <rect class="band" x="376" y="65" width="160" height="141" rx="9"/>
+    <rect x="377" y="66" width="158" height="139" rx="8" fill="url(#sift-grid)"/>
+    <text class="band-label" x="389" y="87">MODEL INPUT</text>
+    <rect class="box" x="391" y="114" width="42" height="43" rx="5"/>
+    <path class="detail" d="M401 125h21m-21 10h21m-21 10h21m16-20h9l17 10m-26 0h26m-26 10h9l17-10"/>
+    <rect class="box" x="472" y="110" width="48" height="51" rx="6"/>
+    <path class="detail" d="M496 123v10m0 0-9 9m9-9 9 9"/>
+    <circle cx="496" cy="122" r="3" fill="#e7f0fa"/>
+    <circle cx="487" cy="145" r="3" fill="#e7f0fa"/>
+    <circle cx="505" cy="145" r="3" fill="#e7f0fa"/>
+    <text class="node-label" x="456" y="188" text-anchor="middle">Weighted features</text>
   </g>
 
-  <g fill="#17334a" font-family="system-ui, sans-serif" font-size="21" font-weight="600" text-anchor="middle">
-    <text x="86" y="213">Tabular rows</text>
-    <text x="242" y="213">Score features</text>
-    <text x="398" y="213">Weighted ML</text>
-  </g>
+  <path class="flow flow-scores" d="M187 135h12"/>
+  <path class="flow flow-model" d="M363 135h12"/>
+  <path class="note-examples" d="M25 228h18" stroke="#85baf5" stroke-width="2"/>
+  <path class="note-scores note-model" d="M25 228h18" stroke="#79dcc9" stroke-width="2"/>
+  <text class="path-note note-examples" x="51" y="233">Describe example rows in natural language.</text>
+  <text class="path-note note-scores" x="51" y="233">Estimate the importance of the original features.</text>
+  <text class="path-note note-model" x="51" y="233">Normalize the scores and reweight model inputs.</text>
 </svg>

@@ -1,31 +1,83 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 260" role="img" aria-labelledby="transfer-network-description">
-  <desc id="transfer-network-description">Schematic network of colleges linked by institutional transfer and articulation agreements. Node positions and links are illustrative.</desc>
-  <rect width="480" height="260" fill="#edf5fa"/>
-  <g fill="none" stroke="#18567e" stroke-width="3" stroke-linecap="round">
-    <path d="M62 110 C81 84 98 70 124 58 M62 110 C78 139 102 155 133 163"/>
-    <path d="M124 58 C157 63 182 78 203 99 M133 163 C161 149 187 125 203 99"/>
-    <path d="M203 99 C218 75 243 59 270 54 M203 99 C231 114 255 136 275 161"/>
-    <path d="M270 54 C298 60 324 77 347 100 M275 161 C307 150 331 126 347 100"/>
-    <path d="M347 100 C371 79 394 65 418 59 M347 100 C366 126 392 143 419 151"/>
-    <path d="M124 58 C120 94 125 136 133 163 M270 54 C277 88 278 127 275 161"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 250" data-active-step="1" role="img" aria-labelledby="transfer-title transfer-desc">
+  <title id="transfer-title">Two representations of college transfer</title>
+  <desc id="transfer-desc">The statewide policy view connects illustrative states to policies they adopt. The institutional agreement view links illustrative colleges with bilateral agreements. Node locations and links are schematic.</desc>
+  <defs>
+    <pattern id="transfer-grid" width="18" height="18" patternUnits="userSpaceOnUse">
+      <path d="M18 0H0V18" fill="none" stroke="#20354e" stroke-opacity=".33"/>
+    </pattern>
+  </defs>
+  <style>
+    text { font-family: system-ui, sans-serif; fill: #e7f0fa; }
+    .heading { font: 22px Georgia, serif; }
+    .band-label { fill: #95abc2; font-size: 14px; letter-spacing: .06em; }
+    .node-label { font-size: 15px; font-weight: 560; }
+    .path-note { fill: #95abc2; font-size: 14px; }
+    .view-agreements { display: none; }
+    svg[data-active-step="2"] .view-policies { display: none; }
+    svg[data-active-step="2"] .view-agreements { display: inline; }
+    .policy-edge { fill: none; stroke: #85baf5; stroke-width: 1.55; stroke-opacity: .86; }
+    .agreement-edge { fill: none; stroke: #79dcc9; stroke-width: 1.6; stroke-opacity: .88; }
+    .state-node { fill: #142b44; stroke: #85baf5; stroke-width: 1.6; }
+    .policy-node { fill: #15362f; stroke: #79dcc9; stroke-width: 1.6; }
+    .college-node { fill: #15362f; stroke: #79dcc9; stroke-width: 1.6; }
+    @media (max-width: 400px) {
+      .heading { font-size: 24px; }
+      .band-label, .path-note { font-size: 16px; }
+      .node-label { font-size: 17px; }
+    }
+  </style>
+  <rect width="560" height="250" fill="#0c1727"/>
+  <rect x=".5" y=".5" width="559" height="249" rx="13" fill="none" stroke="#28425e"/>
+  <text class="heading" x="25" y="35">College transfer networks</text>
+  <path d="M25 50h510" stroke="#2b4562"/>
+  <rect x="24" y="65" width="512" height="141" rx="9" fill="#0f1e31" stroke="#263d56"/>
+  <rect x="25" y="66" width="510" height="139" rx="8" fill="url(#transfer-grid)"/>
+
+  <g class="view-policies">
+    <text class="band-label" x="38" y="87">STATES</text>
+    <text class="band-label" x="431" y="87">POLICIES</text>
+    <path d="M266 94v94" stroke="#2c465f" stroke-dasharray="3 5"/>
+    <path class="policy-edge" d="M152 113C230 113 321 120 399 120m-247-7c98 0 157 51 247 51m-247-16c103 0 140-28 247-28m-247 63c91 0 154-19 247-19"/>
+    <g class="state-node">
+      <rect x="132" y="105" width="16" height="16" rx="3"/>
+      <rect x="132" y="140" width="16" height="16" rx="3"/>
+      <rect x="132" y="175" width="16" height="16" rx="3"/>
+    </g>
+    <g class="policy-node">
+      <path d="m411 110 10 10-10 10-10-10Z"/>
+      <path d="m411 154 10 10-10 10-10-10Z"/>
+    </g>
+    <g class="node-label" text-anchor="end">
+      <text x="116" y="119">State A</text>
+      <text x="116" y="154">State B</text>
+      <text x="116" y="189">State C</text>
+    </g>
+    <g class="node-label">
+      <text x="435" y="126">Policy A</text>
+      <text x="435" y="170">Policy B</text>
+    </g>
+    <path d="M25 228h18" stroke="#85baf5" stroke-width="2"/>
+    <text class="path-note" x="51" y="233">A link represents adoption of a statewide policy.</text>
   </g>
-  <g fill="#edf5fa" stroke="#17334a" stroke-width="3">
-    <circle cx="62" cy="110" r="12"/>
-    <circle cx="124" cy="58" r="12"/>
-    <circle cx="133" cy="163" r="12"/>
-    <circle cx="203" cy="99" r="12"/>
-    <circle cx="270" cy="54" r="12"/>
-    <circle cx="275" cy="161" r="12"/>
-    <circle cx="347" cy="100" r="12"/>
-    <circle cx="418" cy="59" r="12"/>
-    <circle cx="419" cy="151" r="12"/>
-  </g>
-  <path d="M37 199 H443" stroke="#a9c7d9" stroke-width="1.5"/>
-  <circle cx="46" cy="227" r="7" fill="#edf5fa" stroke="#17334a" stroke-width="2.5"/>
-  <path d="M151 227 H178" stroke="#18567e" stroke-width="3" stroke-linecap="round"/>
-  <g font-family="system-ui, sans-serif" font-size="20" font-weight="600" fill="#17334a">
-    <text x="62" y="234">Colleges</text>
-    <text x="188" y="234">Agreements</text>
-    <text x="443" y="234" text-anchor="end" fill="#4a6173" font-size="19" font-weight="500">Schematic</text>
+
+  <g class="view-agreements">
+    <text class="band-label" x="38" y="87">INSTITUTIONAL AGREEMENTS</text>
+    <path class="agreement-edge" d="M137 131 260 108m-123 23 108 43m15-66 135 19m-150 47 150-47m-150 47 150 8"/>
+    <g class="college-node">
+      <circle cx="137" cy="131" r="8"/>
+      <circle cx="260" cy="108" r="8"/>
+      <circle cx="245" cy="174" r="8"/>
+      <circle cx="395" cy="127" r="8"/>
+      <circle cx="395" cy="182" r="8"/>
+    </g>
+    <g class="node-label">
+      <text x="120" y="136" text-anchor="end">College A</text>
+      <text x="274" y="109">College B</text>
+      <text x="230" y="191" text-anchor="end">College C</text>
+      <text x="412" y="132">College D</text>
+      <text x="412" y="188">College E</text>
+    </g>
+    <path d="M25 228h18" stroke="#79dcc9" stroke-width="2"/>
+    <text class="path-note" x="51" y="233">A link represents an agreement between colleges.</text>
   </g>
 </svg>

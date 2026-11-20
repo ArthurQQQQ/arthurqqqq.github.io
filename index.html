@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f9fbfd">
+  <meta name="theme-color" content="#09121f">
   <meta name="description" content="Jiayi (Arthur) Qiu, an Honors Carolina undergraduate studying continual learning and reliable long-horizon agents.">
   <title>Jiayi (Arthur) Qiu</title>
   <link rel="canonical" href="https://arthurqqqq.github.io/">
-  <link rel="stylesheet" href="styles.css?v=github-preview">
-  <script src="app.js" defer></script>
+  <link rel="stylesheet" href="styles.css?v=research-figures">
+  <script src="app.js?v=research-figures" defer></script>
 </head>
 <body id="home">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -46,7 +46,7 @@
           </div>
           <a class="profile-action" href="https://github.com/ArthurQQQQ">View GitHub</a>
         </header>
-        <iframe class="github-preview-frame" src="github-preview.html"
+        <iframe class="github-preview-frame" src="github-preview.html?v=research-figures"
           title="ArthurQQQQ's public GitHub profile preview"
           sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox"
           referrerpolicy="no-referrer"></iframe>
@@ -86,30 +86,19 @@
                   <a href="https://icml.cc/virtual/2026/77991" aria-label="ICML program for Bridge Starvation">ICML program</a>
                   <a href="https://github.com/ArthurQQQQ/multipass-multihop-retrieval-ICMLW" aria-label="MULTIPASS code">Code</a>
                 </div>
-                <details class="method-details">
-                  <summary>Try the retrieval sketch</summary>
-                  <div class="retrieval-demo" data-retrieval-demo data-state="single" aria-label="Illustration of bridge retrieval">
-                    <div class="demo-header">
-                      <div class="demo-switch" role="group" aria-label="Retrieval mode">
-                        <button type="button" aria-pressed="true" data-retrieval-state="single">Single pass</button>
-                        <button type="button" aria-pressed="false" data-retrieval-state="repair">Bounded repair</button>
-                      </div>
-                    </div>
-                    <div class="evidence-map" aria-hidden="true">
-                      <svg class="evidence-connectors" viewBox="0 0 600 160" preserveAspectRatio="none" fill="none">
-                        <path class="first-connection" d="M100 80 C190 80 210 80 300 80"/>
-                        <path class="second-connection" d="M300 80 C390 80 410 80 500 80"/>
-                        <path class="travel-mark" d="M100 80 C190 80 210 80 300 80 S410 80 500 80"/>
-                      </svg>
-                      <div class="evidence-node initial-node"><span class="document-mark"><i></i><i></i><i></i></span><span>Initial clue</span></div>
-                      <div class="evidence-node bridge-node"><span class="document-mark"><i></i><i></i><i></i></span><span>Bridge clue</span></div>
-                      <div class="evidence-node support-node"><span class="document-mark"><i></i><i></i><i></i></span><span>Source evidence</span></div>
-                    </div>
-                    <p class="demo-explanation" data-retrieval-description aria-live="polite">A single pass finds the first clue but misses the bridge.</p>
-                  </div>
-                </details>
               </div>
-              <img class="paper-figure" src="bridge-starvation.svg" width="480" height="260" alt="An initial clue leads to a bridge clue, which guides retrieval of the supporting source.">
+              <figure class="paper-diagram" data-paper-diagram data-active-step="1">
+                <object class="paper-figure" data="bridge-starvation.svg?v=research-figures" type="image/svg+xml" aria-label="Bridge Starvation retrieval paths" tabindex="-1">
+                  <img src="bridge-starvation.svg?v=research-figures" width="560" height="250" alt="An initial query finds a first clue. A second pass can use a bridge entity to find the supporting source.">
+                </object>
+                <div class="diagram-steps" role="group" aria-label="Bridge Starvation retrieval paths steps" hidden>
+                  <button type="button" data-step="1" aria-pressed="true"
+                    aria-controls="bridge-starvation-step" data-description="The first search finds an initial clue. The passage needed to answer the question can remain outside the retrieved set.">Single pass</button>
+                  <button type="button" data-step="2" aria-pressed="false"
+                    aria-controls="bridge-starvation-step" data-description="A follow-up query uses the bridge entity from the initial clue, searches the same index, and adds supporting evidence for the reader.">Bounded repair</button>
+                </div>
+                <figcaption class="diagram-caption" id="bridge-starvation-step" aria-live="polite">The first search finds an initial clue. The passage needed to answer the question can remain outside the retrieved set.</figcaption>
+              </figure>
             </article>
           </li>
           <li>
@@ -123,7 +112,20 @@
                   <a href="https://github.com/ArthurQQQQ/atom-keyed-chunk-retrieval-qa-ICMLW" aria-label="Atom-Keyed Retrieval code">Code</a>
                 </div>
               </div>
-              <img class="paper-figure" src="atom-keyed.svg" width="480" height="260" loading="lazy" alt="A query ranks atomic propositions, which map back to complete source passages.">
+              <figure class="paper-diagram" data-paper-diagram data-active-step="1">
+                <object class="paper-figure" data="atom-keyed.svg?v=research-figures" type="image/svg+xml" aria-label="Atom-keyed retrieval and source mapping" tabindex="-1">
+                  <img src="atom-keyed.svg?v=research-figures" width="560" height="250" alt="Atomic propositions are ranked, mapped to their original passages, and returned to the reader.">
+                </object>
+                <div class="diagram-steps" role="group" aria-label="Atom-keyed retrieval and source mapping steps" hidden>
+                  <button type="button" data-step="1" aria-pressed="true"
+                    aria-controls="atom-keyed-step" data-description="Score short propositions against the query so the retrieval decision can use fine-grained evidence.">Rank atoms</button>
+                  <button type="button" data-step="2" aria-pressed="false"
+                    aria-controls="atom-keyed-step" data-description="Follow each selected proposition’s stored mapping to its original source passage.">Trace to source</button>
+                  <button type="button" data-step="3" aria-pressed="false"
+                    aria-controls="atom-keyed-step" data-description="Give the reader the original passages within its context budget, including surrounding evidence.">Read context</button>
+                </div>
+                <figcaption class="diagram-caption" id="atom-keyed-step" aria-live="polite">Score short propositions against the query so the retrieval decision can use fine-grained evidence.</figcaption>
+              </figure>
             </article>
           </li>
           <li>
@@ -137,7 +139,20 @@
                   <a href="https://github.com/ArthurQQQQ/SIFT-LLM-feature-reweighting-tabular-ICDMW" aria-label="SIFT code">Code</a>
                 </div>
               </div>
-              <img class="paper-figure" src="sift.svg" width="480" height="260" loading="lazy" alt="An LLM scores features using scenes written from table rows, then the weighted features feed a tabular model.">
+              <figure class="paper-diagram" data-paper-diagram data-active-step="1">
+                <object class="paper-figure" data="sift.svg?v=research-figures" type="image/svg+xml" aria-label="SIFT feature-weighting process" tabindex="-1">
+                  <img src="sift.svg?v=research-figures" width="560" height="250" alt="Table rows become short written scenes. A language model scores feature importance, and the weights are applied to tabular inputs.">
+                </object>
+                <div class="diagram-steps" role="group" aria-label="SIFT feature-weighting process steps" hidden>
+                  <button type="button" data-step="1" aria-pressed="true"
+                    aria-controls="sift-step" data-description="Turn tabular rows into written scenes that give the feature values context.">Describe examples</button>
+                  <button type="button" data-step="2" aria-pressed="false"
+                    aria-controls="sift-step" data-description="Ask the language model to estimate the semantic importance of the original columns.">Score features</button>
+                  <button type="button" data-step="3" aria-pressed="false"
+                    aria-controls="sift-step" data-description="Normalize the importance scores and use the weights to scale inputs to a standard tabular model.">Apply weights</button>
+                </div>
+                <figcaption class="diagram-caption" id="sift-step" aria-live="polite">Turn tabular rows into written scenes that give the feature values context.</figcaption>
+              </figure>
             </article>
           </li>
           <li>
@@ -151,7 +166,18 @@
                   <a href="https://github.com/democratizing-data-science/Transfer-project-databases-and_code" aria-label="College Transfer and Articulation Network replication code">Code</a>
                 </div>
               </div>
-              <img class="paper-figure" src="transfer-network.svg" width="480" height="260" loading="lazy" alt="Illustrative network in which nodes represent colleges and lines represent bilateral transfer agreements.">
+              <figure class="paper-diagram" data-paper-diagram data-active-step="1">
+                <object class="paper-figure" data="transfer-network.svg?v=research-figures" type="image/svg+xml" aria-label="College transfer network views" tabindex="-1">
+                  <img src="transfer-network.svg?v=research-figures" width="560" height="250" alt="One network connects states to policies. A second connects colleges with bilateral agreements.">
+                </object>
+                <div class="diagram-steps" role="group" aria-label="College transfer network views steps" hidden>
+                  <button type="button" data-step="1" aria-pressed="true"
+                    aria-controls="transfer-network-step" data-description="State and policy nodes form a two-mode network. An edge indicates that a state adopted a policy.">Statewide policies</button>
+                  <button type="button" data-step="2" aria-pressed="false"
+                    aria-controls="transfer-network-step" data-description="College nodes form a separate network. An edge represents a bilateral transfer or articulation agreement.">Institutional agreements</button>
+                </div>
+                <figcaption class="diagram-caption" id="transfer-network-step" aria-live="polite">State and policy nodes form a two-mode network. An edge indicates that a state adopted a policy.</figcaption>
+              </figure>
             </article>
           </li>
         </ol>
@@ -160,13 +186,37 @@
 
     <section class="section-block" id="projects" aria-labelledby="projects-title">
       <div class="container">
-        <div class="section-heading"><h2 id="projects-title">Open-source projects</h2></div>
-        <ul class="projects-list">
-          <li>
-            <h3><a href="https://github.com/ArthurQQQQ/skill-engine">Skill Editor</a></h3>
-            <p>A local workspace for finding, comparing, and maintaining agent skills.</p>
-          </li>
-        </ul>
+        <div class="section-heading"><h2 id="projects-title">Projects</h2></div>
+        <div class="project-categories">
+          <section class="project-category" aria-labelledby="research-code-title">
+            <h3 id="research-code-title">Research code</h3>
+            <ul class="projects-list">
+              <li><a href="https://github.com/ArthurQQQQ/multipass-multihop-retrieval-ICMLW">MULTIPASS</a><p>Bounded second-pass retrieval for long-context memory.</p></li>
+              <li><a href="https://github.com/ArthurQQQQ/atom-keyed-chunk-retrieval-qa-ICMLW">Atom-Keyed Chunk Retrieval</a><p>Ranks propositions and retrieves their original passages.</p></li>
+              <li><a href="https://github.com/ArthurQQQQ/SIFT-LLM-feature-reweighting-tabular-ICDMW">SIFT reproduction</a><p>Reproduction of language-model feature weighting for tabular models.</p></li>
+            </ul>
+          </section>
+          <section class="project-category" aria-labelledby="research-workflows-title">
+            <h3 id="research-workflows-title">Research workflows</h3>
+            <ul class="projects-list">
+              <li><a href="https://github.com/ArthurQQQQ/skill-engine">Skill Editor</a><p>A local workspace for finding, comparing, and maintaining agent skills.</p></li>
+              <li><a href="https://github.com/ArthurQQQQ/advisor-ready-paper-structure">Paper Structure Review</a><p>Scopes research ideas and reviews the argument and structure of paper drafts.</p></li>
+              <li><a href="https://github.com/ArthurQQQQ/paper-presentation-skill">Paper → Presentation</a><p>Builds research talks around mechanisms, worked examples, and evidence.</p></li>
+            </ul>
+          </section>
+          <section class="project-category" aria-labelledby="website-project-title">
+            <h3 id="website-project-title">Personal website</h3>
+            <ul class="projects-list">
+              <li><a href="https://github.com/ArthurQQQQ/arthurqqqq.github.io">Website source</a><p>The site and its interactive figures, hosted on GitHub Pages.</p></li>
+            </ul>
+          </section>
+          <section class="project-category" aria-labelledby="prototype-title">
+            <h3 id="prototype-title">Other builds</h3>
+            <ul class="projects-list">
+              <li><a href="https://github.com/ArthurQQQQ/yuelao-chatgpt-plugin">YueLao</a><p>A Chinese-language conversation prototype with a source-linked case library.</p></li>
+            </ul>
+          </section>
+        </div>
       </div>
     </section>
   </main>
