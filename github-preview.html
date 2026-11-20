@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>ArthurQQQQ on GitHub</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172e43;
+      --muted: #435a6c;
+      --line: #d7e3ec;
+      --wash: #edf4f9;
+      --link: #165a84;
+      font: 14px/1.4 system-ui, sans-serif;
+      color: var(--ink);
+      background: #fff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    body { margin: 0; }
+    main { max-width: 38rem; margin-inline: auto; padding: 11px 16px 8px; }
+    p, h1, ul { margin: 0; }
+    a { color: var(--link); text-underline-offset: 3px; }
+    :focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+
+    .identity { display: flex; gap: 10px; align-items: center; }
+    .identity img {
+      width: 36px;
+      height: 36px;
+      flex: none;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--wash);
+    }
+    h1 { font-size: 15px; font-weight: 670; }
+    h1 a { color: var(--ink); text-decoration: none; }
+    h1 a:hover { text-decoration: underline; }
+    .account { color: var(--muted); font-size: 12px; }
+
+    .view-controls {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--line);
+    }
+    button {
+      min-height: 29px;
+      padding: 3px 9px;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      background: transparent;
+      color: var(--link);
+      font: 600 12px/1.2 system-ui, sans-serif;
+      cursor: pointer;
+    }
+    button:hover, button[aria-pressed="true"] { background: var(--wash); border-color: var(--line); }
+    button[aria-pressed="true"] { color: var(--ink); }
+    .repos { padding: 0; list-style: none; }
+    .repos li { padding: 5px 0 6px; border-bottom: 1px solid var(--line); }
+    .repo-link { font-weight: 650; overflow-wrap: anywhere; }
+    .repo-description {
+      display: -webkit-box;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .repo-meta, .source { color: var(--muted); font-size: 11px; }
+    .repo-meta:empty { display: none; }
+    .source { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 10px; padding-top: 5px; }
+    @media (pointer: coarse) { button { min-height: 34px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="identity">
+      <img id="avatar" src="https://avatars.githubusercontent.com/u/95199667?v=4&amp;s=72" alt="" width="36" height="36" referrerpolicy="no-referrer">
+      <div>
+        <h1><a id="profile-name" href="https://github.com/ArthurQQQQ" target="_blank" rel="noopener noreferrer">Arthur Q</a></h1>
+        <p class="account" id="account">@ArthurQQQQ</p>
+      </div>
+    </header>
+    <div class="view-controls" id="views" role="group" aria-label="Repository view" hidden>
+      <button type="button" id="featured-view" aria-pressed="true" aria-controls="repos">Featured</button>
+      <button type="button" id="recent-view" aria-pressed="false" aria-controls="repos">Recently updated</button>
+    </div>
+    <ul class="repos" id="repos" aria-label="Featured repositories">
+      <li>
+        <a class="repo-link" href="https://github.com/ArthurQQQQ/multipass-multihop-retrieval-ICMLW" target="_blank" rel="noopener noreferrer">MULTIPASS</a>
+        <p class="repo-description">Multi-hop retrieval for long-context memory</p>
+      </li>
+      <li>
+        <a class="repo-link" href="https://github.com/ArthurQQQQ/skill-engine" target="_blank" rel="noopener noreferrer">Skill Editor</a>
+        <p class="repo-description">A local workspace for agent skills</p>
+      </li>
+    </ul>
+    <footer class="source">
+      <span id="status" role="status">Featured links</span>
+      <a href="https://github.com/ArthurQQQQ?tab=repositories" target="_blank" rel="noopener noreferrer">All repositories</a>
+    </footer>
+  </main>
+  <script>
+    'use strict';
+
+    const username = 'ArthurQQQQ';
+    const userKey = username.toLowerCase();
+    const profileUrl = 'https://github.com/' + username;
+    const apiUrl = 'https://api.github.com/users/' + username;
+    const featuredNames = new Map([
+      ['multipass-multihop-retrieval-icmlw', 'MULTIPASS'],
+      ['skill-engine', 'Skill Editor'],
+    ]);
+    const reposList = document.getElementById('repos');
+    const featuredButton = document.getElementById('featured-view');
+    const recentButton = document.getElementById('recent-view');
+    const status = document.getElementById('status');
+
+    function repoRow(repo, name) {
+      const row = document.createElement('li');
+      const link = document.createElement('a');
+      link.className = 'repo-link';
+      link.href = profileUrl + '/' + encodeURIComponent(repo.name);
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.textContent = name;
+      row.append(link);
+
+      if (repo.description) {
+        const description = document.createElement('p');
+        description.className = 'repo-description';
+        description.textContent = repo.description;
+        row.append(description);
+      }
+
+      const details = document.createElement('p');
+      details.className = 'repo-meta';
+      const stars = Number.isInteger(repo.stargazers_count) ? repo.stargazers_count : null;
+      const starLabel = stars === null ? '' : stars + (stars === 1 ? ' star' : ' stars');
+      details.textContent = [repo.language, starLabel].filter(Boolean).join(' · ');
+      row.append(details);
+      return row;
+    }
+
+    function renderRepos(result) {
+      if (!Array.isArray(result)) return;
+      const repos = result.filter(repo =>
+        typeof repo?.name === 'string' &&
+        repo.owner?.login?.toLowerCase() === userKey &&
+        repo.private === false &&
+        !repo.fork &&
+        !repo.archived
+      );
+      const byName = new Map(repos.map(repo => [repo.name.toLowerCase(), repo]));
+      const featured = [...featuredNames].filter(([key]) => byName.has(key));
+      const recent = repos.filter(repo => {
+        const key = repo.name.toLowerCase();
+        return key !== userKey && key !== userKey + '.github.io';
+      }).slice(0, 2);
+      if (recent.length === 0) {
+        reposList.replaceChildren();
+        status.textContent = 'No public repositories to preview';
+        return;
+      }
+
+      function show(view) {
+        const isFeatured = view === 'featured';
+        const rows = isFeatured
+          ? featured.map(([key, label]) => repoRow(byName.get(key), label))
+          : recent.map(repo => repoRow(repo, repo.name));
+        reposList.replaceChildren(...rows);
+        reposList.setAttribute('aria-label', isFeatured ? 'Featured repositories' : 'Recently updated repositories');
+        featuredButton.setAttribute('aria-pressed', String(isFeatured));
+        recentButton.setAttribute('aria-pressed', String(!isFeatured));
+        status.textContent = 'Live from GitHub';
+      }
+
+      featuredButton.addEventListener('click', () => show('featured'));
+      recentButton.addEventListener('click', () => show('recent'));
+      featuredButton.hidden = featured.length === 0;
+      show(featured.length ? 'featured' : 'recent');
+      document.getElementById('views').hidden = false;
+    }
+
+    function renderProfile(profile) {
+      if (profile?.login?.toLowerCase() !== userKey) return;
+      document.getElementById('profile-name').textContent = profile.name || profile.login;
+      const count = profile.public_repos;
+      const account = '@' + profile.login;
+      document.getElementById('account').textContent = Number.isInteger(count)
+        ? account + ' · ' + count + (count === 1 ? ' public repository' : ' public repositories')
+        : account;
+      if (/^https:\/\/avatars\.githubusercontent\.com\/u\/\d+(?:\?.*)?$/.test(profile.avatar_url)) {
+        document.getElementById('avatar').src = profile.avatar_url + (profile.avatar_url.includes('?') ? '&' : '?') + 's=72';
+      }
+    }
+
+    async function load(url, render) {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 4500);
+      try {
+        const response = await fetch(url, {
+          credentials: 'omit',
+          referrerPolicy: 'no-referrer',
+          signal: controller.signal,
+        });
+        if (response.ok) render(await response.json());
+      } catch {
+        // Keep the direct links usable when GitHub is unavailable.
+      } finally {
+        clearTimeout(timeout);
+      }
+    }
+
+    load(apiUrl, renderProfile);
+    load(apiUrl + '/repos?type=owner&sort=updated&direction=desc&per_page=100', renderRepos);
+  </script>
+</body>
+</html>
