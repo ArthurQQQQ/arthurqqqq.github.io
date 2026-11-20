@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f9fbfd">
+  <meta name="description" content="Jiayi (Arthur) Qiu, an Honors Carolina undergraduate studying continual learning and reliable long-horizon agents.">
+  <title>Jiayi (Arthur) Qiu</title>
+  <link rel="canonical" href="https://arthurqqqq.github.io/">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body id="home">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="wordmark" href="#home">Arthur Qiu</a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="#profiles">Profiles</a>
+        <a href="#research">Papers</a>
+        <a href="#projects">Projects</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero container" aria-labelledby="profile-name">
+      <div class="hero-copy">
+        <h1 id="profile-name">Jiayi (Arthur) Qiu</h1>
+        <p class="affiliation"><img class="unc-mark" src="unc-interlocking-nc.png" alt="" width="29" height="23"> <span>Honors Carolina undergraduate at UNC–Chapel Hill</span></p>
+        <p class="research-thesis">I study how agents learn continually from experience and stay reliable over long horizons.</p>
+        <p class="hero-background">I study computer science and economics, with a minor in mathematics.</p>
+        <nav class="social-links" aria-label="Contact">
+          <a href="mailto:arthurq@ad.unc.edu">Email</a>
+        </nav>
+      </div>
+      <img class="portrait" src="portrait.jpg" alt="Jiayi (Arthur) Qiu" width="128" height="128" fetchpriority="high">
+    </section>
+
+    <section class="profile-grid container" id="profiles" aria-label="Research profiles">
+      <article class="profile-card" aria-labelledby="github-title">
+        <header class="profile-card-header">
+          <div class="profile-identity">
+            <h2 id="github-title">GitHub</h2>
+            <p>@ArthurQQQQ</p>
+          </div>
+          <a class="profile-action" href="https://github.com/ArthurQQQQ">View GitHub</a>
+        </header>
+        <ul class="profile-items" aria-label="Selected public repositories">
+          <li>
+            <a href="https://github.com/ArthurQQQQ/multipass-multihop-retrieval-ICMLW">MULTIPASS</a>
+            <p>Multi-hop retrieval for long-context memory</p>
+          </li>
+          <li>
+            <a href="https://github.com/ArthurQQQQ/skill-engine">Skill Editor</a>
+            <p>A local workspace for agent skills</p>
+          </li>
+        </ul>
+      </article>
+      <article class="profile-card profile-card--scholar" aria-labelledby="scholar-title">
+        <header class="profile-card-header">
+          <div class="profile-identity">
+            <h2 id="scholar-title">Google Scholar</h2>
+            <p>Publications and citations</p>
+          </div>
+          <a class="profile-action" href="https://scholar.google.com/citations?user=WC9dYREAAAAJ&amp;hl=en">View Scholar</a>
+        </header>
+        <ul class="profile-items" aria-label="Selected publications">
+          <li>
+            <a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=WC9dYREAAAAJ&amp;citation_for_view=WC9dYREAAAAJ:zYLM7Y9cAGgC">Bridge Starvation</a>
+            <p>ICML 2026 · Failure Modes of Agentic AI</p>
+          </li>
+          <li>
+            <a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=WC9dYREAAAAJ&amp;citation_for_view=WC9dYREAAAAJ:IjCSPb-OGe4C">Graph Tokens before Graph Propagation</a>
+            <p>ICML 2026 · Graph Foundation Models Workshop</p>
+          </li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="section-block" id="research" aria-labelledby="research-title">
+      <div class="container">
+        <div class="section-heading"><h2 id="research-title">Selected papers</h2></div>
+        <ol class="publication-list">
+          <li>
+            <article class="publication">
+              <div class="paper-copy">
+                <h3>Bridge Starvation</h3>
+                <p class="publication-summary">Uses a bridge clue to guide a second retrieval pass and recover evidence missed on the first pass.</p>
+                <p class="paper-meta"><span class="authors">Jiayi (Arthur) Qiu</span><span class="venue">ICML 2026 Workshop on Failure Modes of Agentic AI</span></p>
+                <div class="publication-links">
+                  <a href="https://icml.cc/virtual/2026/77991" aria-label="ICML program for Bridge Starvation">ICML program</a>
+                  <a href="https://github.com/ArthurQQQQ/multipass-multihop-retrieval-ICMLW" aria-label="MULTIPASS code">Code</a>
+                </div>
+                <details class="method-details">
+                  <summary>Try the retrieval sketch</summary>
+                  <div class="retrieval-demo" data-retrieval-demo data-state="single" aria-label="Illustration of bridge retrieval">
+                    <div class="demo-header">
+                      <div class="demo-switch" role="group" aria-label="Retrieval mode">
+                        <button type="button" aria-pressed="true" data-retrieval-state="single">Single pass</button>
+                        <button type="button" aria-pressed="false" data-retrieval-state="repair">Bounded repair</button>
+                      </div>
+                    </div>
+                    <div class="evidence-map" aria-hidden="true">
+                      <svg class="evidence-connectors" viewBox="0 0 600 160" preserveAspectRatio="none" fill="none">
+                        <path class="first-connection" d="M100 80 C190 80 210 80 300 80"/>
+                        <path class="second-connection" d="M300 80 C390 80 410 80 500 80"/>
+                        <path class="travel-mark" d="M100 80 C190 80 210 80 300 80 S410 80 500 80"/>
+                      </svg>
+                      <div class="evidence-node initial-node"><span class="document-mark"><i></i><i></i><i></i></span><span>Initial clue</span></div>
+                      <div class="evidence-node bridge-node"><span class="document-mark"><i></i><i></i><i></i></span><span>Bridge clue</span></div>
+                      <div class="evidence-node support-node"><span class="document-mark"><i></i><i></i><i></i></span><span>Source evidence</span></div>
+                    </div>
+                    <p class="demo-explanation" data-retrieval-description aria-live="polite">A single pass finds the first clue but misses the bridge.</p>
+                  </div>
+                </details>
+              </div>
+              <img class="paper-figure" src="bridge-starvation.svg" width="480" height="260" alt="An initial clue leads to a bridge clue, which guides retrieval of the supporting source.">
+            </article>
+          </li>
+          <li>
+            <article class="publication">
+              <div class="paper-copy">
+                <h3>Atom-Keyed Retrieval</h3>
+                <p class="publication-summary">Ranks fine-grained propositions, then retrieves the complete source passages for the model to read.</p>
+                <p class="paper-meta"><span class="authors">Jiayi (Arthur) Qiu</span><span class="venue">ICML 2026 Workshop on Graph Foundation Models</span></p>
+                <div class="publication-links">
+                  <a href="https://openreview.net/forum?id=4xdvVhh8gb" aria-label="OpenReview record for Atom-Keyed Retrieval">OpenReview</a>
+                  <a href="https://github.com/ArthurQQQQ/atom-keyed-chunk-retrieval-qa-ICMLW" aria-label="Atom-Keyed Retrieval code">Code</a>
+                </div>
+              </div>
+              <img class="paper-figure" src="atom-keyed.svg" width="480" height="260" loading="lazy" alt="A query ranks atomic propositions, which map back to complete source passages.">
+            </article>
+          </li>
+          <li>
+            <article class="publication">
+              <div class="paper-copy">
+                <h3>SIFT</h3>
+                <p class="publication-summary">Turns table rows into written scenes and uses an LLM to weight features for a standard tabular model.</p>
+                <p class="paper-meta"><span class="authors">Jiayi (Arthur) Qiu</span><span class="venue">ICDM 2025 VISTA Workshop · Oral</span></p>
+                <div class="publication-links">
+                  <a href="https://doi.org/10.1109/ICDMW69685.2025.00298" aria-label="IEEE article for SIFT">IEEE</a>
+                  <a href="https://github.com/ArthurQQQQ/SIFT-LLM-feature-reweighting-tabular-ICDMW" aria-label="SIFT code">Code</a>
+                </div>
+              </div>
+              <img class="paper-figure" src="sift.svg" width="480" height="260" loading="lazy" alt="An LLM scores features using scenes written from table rows, then the weighted features feed a tabular model.">
+            </article>
+          </li>
+          <li>
+            <article class="publication">
+              <div class="paper-copy">
+                <h3>The College Transfer and Articulation Network</h3>
+                <p class="publication-summary">Analyzes statewide transfer policies and bilateral agreements between U.S. colleges.</p>
+                <p class="paper-meta"><span class="authors">Manuel S. González Canché, Jiayi Arthur Qiu, Kaiwen Zheng, Mingbo Gong, Chelsea Zhang</span><span class="venue">Research in Higher Education 66, Article 20, 2025</span></p>
+                <div class="publication-links">
+                  <a href="https://link.springer.com/article/10.1007/s11162-024-09831-5" aria-label="Springer article on the College Transfer and Articulation Network">Springer</a>
+                  <a href="https://github.com/democratizing-data-science/Transfer-project-databases-and_code" aria-label="College Transfer and Articulation Network replication code">Code</a>
+                </div>
+              </div>
+              <img class="paper-figure" src="transfer-network.svg" width="480" height="260" loading="lazy" alt="Illustrative network in which nodes represent colleges and lines represent bilateral transfer agreements.">
+            </article>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section-block" id="projects" aria-labelledby="projects-title">
+      <div class="container">
+        <div class="section-heading"><h2 id="projects-title">Open-source projects</h2></div>
+        <ul class="projects-list">
+          <li>
+            <h3><a href="https://github.com/ArthurQQQQ/skill-engine">Skill Editor</a></h3>
+            <p>A local workspace for finding, comparing, and maintaining agent skills.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner"><span>Jiayi (Arthur) Qiu</span><a href="#home">Back to top</a></div>
+  </footer>
+</body>
+</html>

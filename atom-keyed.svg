@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 260" role="img" aria-labelledby="ak-title ak-desc">
+  <title id="ak-title">Atom-keyed chunk retrieval method sketch</title>
+  <desc id="ak-desc">Rank atomic propositions against the query, use their deterministic source mappings to retrieve full chunks, and give the budgeted chunks to the reader.</desc>
+  <rect width="480" height="260" fill="#edf5fa"/>
+
+  <g fill="none" stroke="#a9c7d9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M136 111h43m-10-9 10 9-10 9"/>
+    <path d="M300 111h43m-10-9 10 9-10 9"/>
+  </g>
+
+  <g stroke-linejoin="round">
+    <path d="M52 80h68a9 9 0 0 1 9 9v44a9 9 0 0 1-9 9H87l-16 13v-13H52a9 9 0 0 1-9-9V89a9 9 0 0 1 9-9Z" fill="#fff" stroke="#a9c7d9" stroke-width="2.5"/>
+    <path d="M75 102a11 11 0 0 1 22 0c0 7-10 8-10 15" fill="none" stroke="#18567e" stroke-width="3.4" stroke-linecap="round"/>
+    <circle cx="87" cy="125" r="2.1" fill="#18567e"/>
+  </g>
+
+  <g stroke-width="2.5">
+    <rect x="191" y="67" width="98" height="26" rx="5" fill="#dceefa" stroke="#18567e"/>
+    <rect x="191" y="103" width="98" height="26" rx="5" fill="#fff" stroke="#a9c7d9"/>
+    <rect x="191" y="139" width="98" height="26" rx="5" fill="#fff" stroke="#a9c7d9"/>
+    <circle cx="205" cy="80" r="3.5" fill="#18567e"/>
+    <circle cx="205" cy="116" r="3.5" fill="#a9c7d9"/>
+    <circle cx="205" cy="152" r="3.5" fill="#a9c7d9"/>
+    <path d="M217 80h54" fill="none" stroke="#18567e" stroke-linecap="round"/>
+    <path d="M217 116h48m-48 36h55" fill="none" stroke="#a9c7d9" stroke-linecap="round"/>
+  </g>
+
+  <g stroke-width="2.5" stroke-linejoin="round">
+    <rect x="376" y="75" width="64" height="92" rx="5" fill="#dceefa" stroke="#a9c7d9"/>
+    <path d="M366 63h48l17 17v72a5 5 0 0 1-5 5h-60a5 5 0 0 1-5-5V68a5 5 0 0 1 5-5Z" fill="#fff" stroke="#18567e"/>
+    <path d="M414 63v17h17" fill="none" stroke="#18567e"/>
+    <rect x="371" y="105" width="50" height="13" rx="3" fill="#dceefa" stroke="none"/>
+    <path d="M376 94h38m-38 38h39m-39 12h28" fill="none" stroke="#a9c7d9" stroke-linecap="round"/>
+    <path d="M376 111.5h37" fill="none" stroke="#18567e" stroke-linecap="round"/>
+  </g>
+
+  <g fill="#17334a" font-family="system-ui, sans-serif" font-size="21" font-weight="600" text-anchor="middle">
+    <text x="86" y="213">Query</text>
+    <text x="240" y="213">Rank atoms</text>
+    <text x="398" y="213">Read chunks</text>
+  </g>
+</svg>

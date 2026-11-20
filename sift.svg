@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 260" role="img" aria-labelledby="sift-title sift-desc">
+  <title id="sift-title">Scene-based feature reweighting method sketch</title>
+  <desc id="sift-desc">Express examples from tabular rows as natural-language scenes. A language model scores the original features for importance. The normalized scores reweight features for conventional tabular machine learning.</desc>
+  <rect width="480" height="260" fill="#edf5fa"/>
+
+  <g fill="none" stroke="#a9c7d9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M136 111h43m-10-9 10 9-10 9"/>
+    <path d="M300 111h40m-10-9 10 9-10 9"/>
+  </g>
+
+  <g stroke="#a9c7d9" stroke-width="2.5" stroke-linejoin="round">
+    <rect x="43" y="72" width="86" height="83" rx="6" fill="#fff"/>
+    <path d="M49 72h74a6 6 0 0 1 6 6v14H43V78a6 6 0 0 1 6-6Z" fill="#dceefa"/>
+    <path d="M43 112h86m-86 21h86M72 92v63m28-63v63" fill="none"/>
+  </g>
+  <path d="M49 120h16m14 0h14m14 0h16" stroke="#18567e" stroke-width="2.5" stroke-linecap="round"/>
+
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <path d="M198 69h78a9 9 0 0 1 9 9v45a9 9 0 0 1-9 9h-35l-15 13v-13h-28a9 9 0 0 1-9-9V78a9 9 0 0 1 9-9Z" fill="#fff" stroke="#a9c7d9" stroke-width="2.5"/>
+    <path d="M205 87h60m-60 12h53m-53 12h33" fill="none" stroke="#18567e" stroke-width="2.5"/>
+    <rect x="246" y="120" width="51" height="31" rx="6" fill="#18567e"/>
+    <text x="271.5" y="141" fill="#fff" font-family="system-ui, sans-serif" font-size="16" font-weight="600" text-anchor="middle">LLM</text>
+  </g>
+
+  <g stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="349" y="84" width="47" height="60" rx="4" fill="#fff" stroke="#a9c7d9"/>
+    <path d="M365 85.5h15v57h-15z" fill="#dceefa"/>
+    <path d="M365 85.5v57m15-57v57m-30-40h45m-45 20h45" fill="none" stroke="#a9c7d9"/>
+    <path d="M367 94h11m-11 19h11m-11 19h11" fill="none" stroke="#18567e"/>
+    <path d="M401 114h12m-5-5 5 5-5 5" fill="none" stroke="#18567e"/>
+    <rect x="418" y="88" width="28" height="52" rx="5" fill="#fff" stroke="#18567e"/>
+    <path d="M432 103v11m0 0-7 8m7-8 7 8" fill="none" stroke="#18567e"/>
+    <circle cx="432" cy="103" r="2.7" fill="#18567e"/>
+    <circle cx="425" cy="122" r="2.7" fill="#18567e"/>
+    <circle cx="439" cy="122" r="2.7" fill="#18567e"/>
+  </g>
+
+  <g fill="#17334a" font-family="system-ui, sans-serif" font-size="21" font-weight="600" text-anchor="middle">
+    <text x="86" y="213">Tabular rows</text>
+    <text x="242" y="213">Score features</text>
+    <text x="398" y="213">Weighted ML</text>
+  </g>
+</svg>

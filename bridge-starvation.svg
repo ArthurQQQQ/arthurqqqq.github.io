@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 260" role="img" aria-labelledby="title desc">
+  <title id="title">Bounded bridge retrieval</title>
+  <desc id="desc">An initial clue leads to a bridge entity. A targeted second retrieval pass follows the bridge to the supporting source.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 0l10 5-10 5z" fill="#18567e"/>
+    </marker>
+  </defs>
+  <rect width="480" height="260" rx="18" fill="#edf5fa"/>
+  <g fill="none" stroke="#18567e" stroke-width="2" marker-end="url(#arrow)">
+    <path d="M121 112h78"/>
+    <path d="M281 112h77"/>
+  </g>
+  <path d="M109 84C183 37 297 37 370 84" fill="none" stroke="#a9c7d9" stroke-width="2" stroke-dasharray="5 7"/>
+  <g fill="#fff" stroke="#a9c7d9" stroke-width="2">
+    <rect x="49" y="76" width="63" height="75" rx="9"/>
+    <rect x="209" y="76" width="63" height="75" rx="9"/>
+    <rect x="369" y="76" width="63" height="75" rx="9" stroke="#18567e" fill="#dcecf6"/>
+  </g>
+  <g stroke-linecap="round" stroke-width="4" fill="none">
+    <path d="M65 98h32m-32 13h30m-30 13h19" stroke="#a9c7d9"/>
+    <path d="M225 98h31m-31 26h20" stroke="#a9c7d9"/>
+    <path d="M225 111h31m129-13h31m-31 13h31m-31 13h21" stroke="#18567e"/>
+  </g>
+  <g fill="#17334a" font-family="system-ui,sans-serif" font-size="19" font-weight="650" text-anchor="middle">
+    <text x="80" y="191">Initial clue</text>
+    <text x="240" y="191">Bridge clue</text>
+    <text x="400" y="191">Source</text>
+  </g>
+  <text x="240" y="225" fill="#4a6173" font-family="system-ui,sans-serif" font-size="17" text-anchor="middle">Bounded second pass</text>
+</svg>

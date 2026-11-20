@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 260" role="img" aria-labelledby="transfer-network-description">
+  <desc id="transfer-network-description">Schematic network of colleges linked by institutional transfer and articulation agreements. Node positions and links are illustrative.</desc>
+  <rect width="480" height="260" fill="#edf5fa"/>
+  <g fill="none" stroke="#18567e" stroke-width="3" stroke-linecap="round">
+    <path d="M62 110 C81 84 98 70 124 58 M62 110 C78 139 102 155 133 163"/>
+    <path d="M124 58 C157 63 182 78 203 99 M133 163 C161 149 187 125 203 99"/>
+    <path d="M203 99 C218 75 243 59 270 54 M203 99 C231 114 255 136 275 161"/>
+    <path d="M270 54 C298 60 324 77 347 100 M275 161 C307 150 331 126 347 100"/>
+    <path d="M347 100 C371 79 394 65 418 59 M347 100 C366 126 392 143 419 151"/>
+    <path d="M124 58 C120 94 125 136 133 163 M270 54 C277 88 278 127 275 161"/>
+  </g>
+  <g fill="#edf5fa" stroke="#17334a" stroke-width="3">
+    <circle cx="62" cy="110" r="12"/>
+    <circle cx="124" cy="58" r="12"/>
+    <circle cx="133" cy="163" r="12"/>
+    <circle cx="203" cy="99" r="12"/>
+    <circle cx="270" cy="54" r="12"/>
+    <circle cx="275" cy="161" r="12"/>
+    <circle cx="347" cy="100" r="12"/>
+    <circle cx="418" cy="59" r="12"/>
+    <circle cx="419" cy="151" r="12"/>
+  </g>
+  <path d="M37 199 H443" stroke="#a9c7d9" stroke-width="1.5"/>
+  <circle cx="46" cy="227" r="7" fill="#edf5fa" stroke="#17334a" stroke-width="2.5"/>
+  <path d="M151 227 H178" stroke="#18567e" stroke-width="3" stroke-linecap="round"/>
+  <g font-family="system-ui, sans-serif" font-size="20" font-weight="600" fill="#17334a">
+    <text x="62" y="234">Colleges</text>
+    <text x="188" y="234">Agreements</text>
+    <text x="443" y="234" text-anchor="end" fill="#4a6173" font-size="19" font-weight="500">Schematic</text>
+  </g>
+</svg>
