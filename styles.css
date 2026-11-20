@@ -134,10 +134,13 @@ button { font: inherit; cursor: pointer; }
   border-radius: 12px;
   background: var(--surface);
   box-shadow: 0 2px 4px rgb(23 46 67 / .045);
-  transition: border-color .18s ease;
+  transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
 }
 .profile-card--scholar { --card-head: #eaf4fb; }
-.profile-card:hover, .profile-card:focus-within { border-color: var(--strong-line); }
+.profile-card:hover, .profile-card:focus-within {
+  border-color: var(--strong-line);
+  box-shadow: 0 7px 22px rgb(23 46 67 / .09);
+}
 .profile-link { display: block; border-radius: inherit; color: var(--ink); text-decoration: none; }
 .profile-card-header {
   display: flex;
@@ -187,6 +190,68 @@ button { font: inherit; cursor: pointer; }
   object-fit: contain;
   object-position: top center;
 }
+.profile-card:has(.profile-tools:not([hidden])) .profile-preview { border-radius: 0; }
+.profile-tools {
+  display: flex;
+  justify-content: flex-end;
+  padding: 4px 12px;
+  border-top: 1px solid var(--line);
+}
+.profile-enlarge, .preview-control {
+  min-height: 36px;
+  padding: 4px 9px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--blue);
+  background: transparent;
+  font-size: 14px;
+  font-weight: 580;
+}
+.profile-enlarge:hover, .preview-control:hover {
+  border-color: var(--strong-line);
+  background: var(--raised);
+}
+
+.preview-dialog {
+  width: min(68rem, calc(100% - 28px));
+  max-width: none;
+  max-height: calc(100% - 28px);
+  margin: auto;
+  padding: 0;
+  border: 1px solid var(--strong-line);
+  border-radius: 12px;
+  color: var(--ink);
+  background: var(--surface);
+  box-shadow: 0 16px 50px rgb(23 46 67 / .25);
+}
+.preview-dialog:not([open]) { display: none; }
+.preview-dialog[open] { display: grid; grid-template-rows: auto minmax(0, 1fr); }
+.preview-dialog::backdrop { background: rgb(17 37 55 / .55); }
+.preview-dialog-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px 12px;
+  padding: 9px clamp(10px, 2vw, 17px);
+  border-bottom: 1px solid var(--line);
+  background: var(--page);
+}
+.preview-dialog-header h2 { font: 400 clamp(19px, 3vw, 24px)/1.15 var(--font-display); }
+.preview-dialog-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 3px; }
+.preview-dialog-actions form { margin: 0; }
+.preview-control { display: inline-flex; align-items: center; text-decoration: none; }
+.preview-control[aria-pressed="true"] { border-color: var(--strong-line); background: var(--raised); }
+.preview-dialog-media {
+  max-height: 73vh;
+  max-height: 73dvh;
+  overflow: auto;
+  overscroll-behavior: contain;
+  outline-offset: -3px;
+}
+.preview-dialog-media img { display: block; width: 100%; height: auto; }
+.preview-dialog-media.is-actual-size img { width: 1280px; max-width: none; }
+
 .publication-list, .projects-list { margin: 0; padding: 0; list-style: none; }
 
 .section-block { padding-block: 16px 30px; }
@@ -279,10 +344,18 @@ button { font: inherit; cursor: pointer; }
 
 @media (prefers-reduced-motion: no-preference) {
   .hero { animation: hero-enter .35s ease-out both; }
+  .preview-dialog[open] { animation: preview-enter .16s ease-out both; }
   @keyframes hero-enter {
     from { opacity: .55; transform: translateY(5px); }
     to { opacity: 1; transform: translateY(0); }
   }
+  @keyframes preview-enter {
+    from { opacity: 0; transform: translateY(4px) scale(.99); }
+    to { opacity: 1; transform: none; }
+  }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .profile-card:hover { transform: translateY(-2px); }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -307,10 +380,10 @@ button { font: inherit; cursor: pointer; }
   .main-nav a { font-size: 13px; }
 }
 @media (pointer: coarse) {
-  .profile-action, .publication-links a, .social-links a, .diagram-steps button { min-height: 44px; }
+  .profile-action, .publication-links a, .social-links a, .diagram-steps button, .profile-enlarge, .preview-control { min-height: 44px; }
 }
 @media print {
-  .site-header, .site-footer, .diagram-steps, .profile-preview { display: none; }
+  .site-header, .site-footer, .diagram-steps, .profile-preview, .profile-tools, .preview-dialog[open] { display: none; }
   .paper-diagram, .publication, .project-category { break-inside: avoid; }
   .container { width: 100%; }
 }

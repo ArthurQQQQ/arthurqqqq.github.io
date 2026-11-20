@@ -7,8 +7,8 @@
   <meta name="description" content="Jiayi (Arthur) Qiu, an Honors Carolina undergraduate studying continual learning and reliable long-horizon agents.">
   <title>Jiayi (Arthur) Qiu</title>
   <link rel="canonical" href="https://arthurqqqq.github.io/">
-  <link rel="stylesheet" href="styles.css?v=public-page-previews">
-  <script src="app.js?v=research-figures" defer></script>
+  <link rel="stylesheet" href="styles.css?v=preview-viewer">
+  <script src="app.js?v=preview-viewer" defer></script>
 </head>
 <body id="home">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -48,10 +48,14 @@
             <span class="profile-action" id="open-github-profile">View GitHub</span>
           </header>
           <div class="profile-preview">
-            <img src="github-page-preview.jpg" width="1280" height="640" decoding="async"
+            <img src="github-page-preview.jpg?v=theme-header" width="1280" height="640" decoding="async"
               alt="Public GitHub profile with the avatar, repository navigation, and research README">
           </div>
         </a>
+        <div class="profile-tools" hidden>
+          <button type="button" class="profile-enlarge" data-preview-open aria-haspopup="dialog"
+            aria-controls="profile-preview-dialog" aria-label="Enlarge preview of GitHub">Enlarge preview</button>
+        </div>
       </article>
       <article class="profile-card profile-card--scholar" aria-labelledby="scholar-title">
         <a class="profile-link" href="https://scholar.google.com/citations?user=WC9dYREAAAAJ&amp;hl=en" aria-labelledby="open-scholar-profile">
@@ -67,6 +71,10 @@
               alt="Public Google Scholar profile with the publication list and citation panel">
           </div>
         </a>
+        <div class="profile-tools" hidden>
+          <button type="button" class="profile-enlarge" data-preview-open aria-haspopup="dialog"
+            aria-controls="profile-preview-dialog" aria-label="Enlarge preview of Google Scholar">Enlarge preview</button>
+        </div>
       </article>
     </section>
 
@@ -218,6 +226,22 @@
       </div>
     </section>
   </main>
+
+  <dialog class="preview-dialog" id="profile-preview-dialog" aria-labelledby="preview-title">
+    <header class="preview-dialog-header">
+      <h2 id="preview-title">Profile preview</h2>
+      <div class="preview-dialog-actions">
+        <button type="button" class="preview-control" id="preview-zoom" aria-pressed="false">Actual size</button>
+        <a class="preview-control" id="preview-original">Open original</a>
+        <form method="dialog">
+          <button type="submit" class="preview-control" autofocus>Close</button>
+        </form>
+      </div>
+    </header>
+    <div class="preview-dialog-media" role="region" aria-label="Page screenshot" tabindex="-1">
+      <img id="preview-image" src="github-page-preview.jpg?v=theme-header" width="1280" height="640" alt="" loading="lazy">
+    </div>
+  </dialog>
 
   <footer class="site-footer">
     <div class="container footer-inner"><span>Jiayi (Arthur) Qiu</span><a href="#home">Back to top</a></div>
