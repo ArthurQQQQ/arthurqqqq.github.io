@@ -261,6 +261,25 @@ button { font: inherit; cursor: pointer; }
 
 .publication-list, .projects-list { margin: 0; padding: 0; list-style: none; }
 
+.entry-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 9px;
+}
+.entry-label {
+  max-width: 100%;
+  padding: 1px 7px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: var(--raised);
+  color: var(--muted);
+  font-size: .8125rem;
+  font-weight: 550;
+  line-height: 1.45;
+}
+.entry-label--platform { border-color: var(--line); background: var(--surface); }
+
 .section-block { padding-block: 16px 30px; }
 .section-block > .container { padding-top: 20px; border-top: 1px solid var(--strong-line); }
 .section-heading { margin-bottom: 14px; }
@@ -284,7 +303,6 @@ button { font: inherit; cursor: pointer; }
 .publication-summary { max-width: 58ch; margin-top: 8px; color: var(--ink); }
 .paper-meta { margin-top: 9px; color: var(--muted); font-size: 14px; line-height: 1.45; }
 .paper-meta > span { display: block; }
-.paper-meta .venue { margin-top: 2px; }
 .publication-links { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 13px; }
 
 .paper-diagram {
