@@ -3,33 +3,33 @@
   <desc id="atom-desc">The query ranks short atomic propositions. A stored source identifier traces a selected atom back to its original passage. The reader receives selected passages within a context budget.</desc>
   <defs>
     <pattern id="atom-grid" width="18" height="18" patternUnits="userSpaceOnUse">
-      <path d="M18 0H0V18" fill="none" stroke="#b8cde4" stroke-opacity=".33"/>
+      <path d="M18 0H0V18" fill="none" stroke="#53668e" stroke-opacity=".33"/>
     </pattern>
     <marker id="atom-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M1 1l6 3-6 3" fill="none" stroke="context-stroke" stroke-linecap="round" stroke-linejoin="round"/>
     </marker>
   </defs>
   <style>
-    text { font-family: system-ui, sans-serif; fill: #172e47; }
+    text { font-family: system-ui, sans-serif; fill: #eceef9; }
     .heading { font: 22px Georgia, serif; }
-    .band-label { fill: #46627c; font-size: 14px; letter-spacing: .06em; }
+    .band-label { fill: #b4bbd2; font-size: 14px; letter-spacing: .06em; }
     .node-label { font-size: 16px; font-weight: 560; }
-    .path-note { fill: #46627c; font-size: 14px; }
-    .rank-box, .source-box, .reader-box { fill: #f5f9fd; stroke: #83a1be; stroke-width: 1.5; }
-    .rank-ink, .source-ink, .reader-ink { fill: none; stroke: #537796; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-    .rank-line, .trace-line, .read-line { fill: none; stroke: #617f9b; stroke-width: 1.6; marker-end: url(#atom-arrow); }
+    .path-note { fill: #b4bbd2; font-size: 14px; }
+    .rank-box, .source-box, .reader-box { fill: #192130; stroke: #65759a; stroke-width: 1.5; }
+    .rank-ink, .source-ink, .reader-ink { fill: none; stroke: #91a2cd; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .rank-line, .trace-line, .read-line { fill: none; stroke: #8795ba; stroke-width: 1.6; marker-end: url(#atom-arrow); }
     .trace-line, .read-line { stroke-dasharray: 4 5; }
     .trace-note, .read-note { display: none; }
-    svg[data-active-step="1"] .rank-box { fill: #dfefff; stroke: #3679b5; }
-    svg[data-active-step="1"] .rank-line, svg[data-active-step="1"] .rank-ink { stroke: #3679b5; }
+    svg[data-active-step="1"] .rank-box { fill: #243a60; stroke: #99b5ff; }
+    svg[data-active-step="1"] .rank-line, svg[data-active-step="1"] .rank-ink { stroke: #99b5ff; }
     svg[data-active-step="2"] .chosen-atom,
     svg[data-active-step="2"] .source-box,
     svg[data-active-step="3"] .source-box,
-    svg[data-active-step="3"] .reader-box { fill: #d8f1e9; stroke: #1c766c; }
+    svg[data-active-step="3"] .reader-box { fill: #173932; stroke: #79d9c3; }
     svg[data-active-step="2"] .source-ink, svg[data-active-step="2"] .chosen-ink,
-    svg[data-active-step="3"] .source-ink, svg[data-active-step="3"] .reader-ink { stroke: #1c766c; }
+    svg[data-active-step="3"] .source-ink, svg[data-active-step="3"] .reader-ink { stroke: #79d9c3; }
     svg[data-active-step="2"] .trace-line,
-    svg[data-active-step="3"] .read-line { stroke: #1c766c; stroke-dasharray: none; }
+    svg[data-active-step="3"] .read-line { stroke: #79d9c3; stroke-dasharray: none; }
     svg[data-active-step="2"] .rank-note, svg[data-active-step="3"] .rank-note { display: none; }
     svg[data-active-step="2"] .trace-note, svg[data-active-step="3"] .read-note { display: inline; }
     @media (max-width: 400px) {
@@ -38,12 +38,12 @@
       .node-label { font-size: 18px; }
     }
   </style>
-  <rect width="560" height="250" fill="#fbfdff"/>
-  <rect x=".5" y=".5" width="559" height="249" rx="13" fill="none" stroke="#aac5df"/>
+  <rect width="560" height="250" fill="#141824"/>
+  <rect x=".5" y=".5" width="559" height="249" rx="13" fill="none" stroke="#30374f"/>
   <text class="heading" x="25" y="35">Atoms and source passages</text>
-  <path d="M25 50h510" stroke="#bdd2e8"/>
-  <rect x="24" y="65" width="249" height="141" rx="9" fill="#edf5fd" stroke="#c4d8eb"/>
-  <rect x="287" y="65" width="249" height="141" rx="9" fill="#f4f8fc" stroke="#c4d8eb"/>
+  <path d="M25 50h510" stroke="#3e4865"/>
+  <rect x="24" y="65" width="249" height="141" rx="9" fill="#1b2337" stroke="#394361"/>
+  <rect x="287" y="65" width="249" height="141" rx="9" fill="#1a2132" stroke="#394361"/>
   <path d="M33 66h231a8 8 0 0 1 8 8v123a8 8 0 0 1-8 8H33a8 8 0 0 1-8-8V74a8 8 0 0 1 8-8Zm263 0h231a8 8 0 0 1 8 8v123a8 8 0 0 1-8 8H296a8 8 0 0 1-8-8V74a8 8 0 0 1 8-8Z" fill="url(#atom-grid)"/>
   <text class="band-label" x="38" y="87">RANKING UNIT</text>
   <text class="band-label" x="301" y="87">READING UNIT</text>
@@ -58,11 +58,11 @@
     <rect class="rank-box chosen-atom" x="169" y="128" width="65" height="16" rx="4"/>
     <rect class="rank-box" x="169" y="150" width="65" height="16" rx="4" opacity=".6"/>
     <path class="rank-ink chosen-ink" d="M190 136h32"/>
-    <path d="M179 135h1m-1 2h1" stroke="#172e47" stroke-width="2" stroke-linecap="round"/>
-    <path d="M180 114h40m-40 44h38" stroke="#6586a4" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M179 135h1m-1 2h1" stroke="#eceef9" stroke-width="2" stroke-linecap="round"/>
+    <path d="M180 114h40m-40 44h38" stroke="#93a5c8" stroke-width="1.5" stroke-linecap="round"/>
   </g>
   <rect class="source-box" x="326" y="107" width="69" height="60" rx="7"/>
-  <path d="M338 120h43m-43 32h32" stroke="#6586a4" stroke-linecap="round" stroke-width="1.5"/>
+  <path d="M338 120h43m-43 32h32" stroke="#93a5c8" stroke-linecap="round" stroke-width="1.5"/>
   <path class="source-ink" d="M338 131h40m-40 10h34"/>
   <rect class="reader-box" x="462" y="110" width="51" height="54" rx="7"/>
   <path class="reader-ink" d="M481 124h-7v26h7m13-26h7v26h-7m-12-18h11m-11 9h11"/>
@@ -73,8 +73,8 @@
     <text x="361" y="188">Source chunk</text>
     <text x="487" y="188">Reader</text>
   </g>
-  <path class="rank-note" d="M25 228h18" stroke="#3679b5" stroke-width="2"/>
-  <path class="trace-note read-note" d="M25 228h18" stroke="#1c766c" stroke-width="2"/>
+  <path class="rank-note" d="M25 228h18" stroke="#99b5ff" stroke-width="2"/>
+  <path class="trace-note read-note" d="M25 228h18" stroke="#79d9c3" stroke-width="2"/>
   <text class="path-note rank-note" x="51" y="233">Rank short propositions against the query.</text>
   <text class="path-note trace-note" x="51" y="233">Follow the selected atom’s stored source link.</text>
   <text class="path-note read-note" x="51" y="233">Send original passage context to the reader.</text>

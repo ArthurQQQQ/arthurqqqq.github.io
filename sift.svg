@@ -3,31 +3,31 @@
   <desc id="sift-desc">Examples from tabular rows become short written scenes. A language model scores the original features, and normalized scores reweight inputs for a conventional tabular model.</desc>
   <defs>
     <pattern id="sift-grid" width="18" height="18" patternUnits="userSpaceOnUse">
-      <path d="M18 0H0V18" fill="none" stroke="#b8cde4" stroke-opacity=".33"/>
+      <path d="M18 0H0V18" fill="none" stroke="#53668e" stroke-opacity=".33"/>
     </pattern>
     <marker id="sift-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M1 1l6 3-6 3" fill="none" stroke="context-stroke" stroke-linecap="round" stroke-linejoin="round"/>
     </marker>
   </defs>
   <style>
-    text { font-family: system-ui, sans-serif; fill: #172e47; }
+    text { font-family: system-ui, sans-serif; fill: #eceef9; }
     .heading { font: 22px Georgia, serif; }
-    .band-label { fill: #46627c; font-size: 14px; letter-spacing: .06em; }
+    .band-label { fill: #b4bbd2; font-size: 14px; letter-spacing: .06em; }
     .node-label { font-size: 16px; font-weight: 560; }
-    .path-note { fill: #46627c; font-size: 14px; }
-    .band { fill: #f4f8fc; stroke: #c4d8eb; }
-    .box { fill: #f5f9fd; stroke: #83a1be; stroke-width: 1.5; }
-    .detail { fill: none; stroke: #537796; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-    .flow { fill: none; stroke: #617f9b; stroke-width: 1.6; marker-end: url(#sift-arrow); }
+    .path-note { fill: #b4bbd2; font-size: 14px; }
+    .band { fill: #1a2132; stroke: #394361; }
+    .box { fill: #192130; stroke: #65759a; stroke-width: 1.5; }
+    .detail { fill: none; stroke: #91a2cd; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .flow { fill: none; stroke: #8795ba; stroke-width: 1.6; marker-end: url(#sift-arrow); }
     .flow-scores, .flow-model { stroke-dasharray: 3 4; }
     .note-scores, .note-model { display: none; }
-    svg[data-active-step="1"] .examples .band { fill: #eaf4fe; stroke: #a4c5e5; }
-    svg[data-active-step="1"] .examples .box { fill: #dfefff; stroke: #3679b5; }
-    svg[data-active-step="1"] .examples .detail, svg[data-active-step="1"] .flow-examples { stroke: #3679b5; }
-    svg[data-active-step="2"] .scores .band, svg[data-active-step="3"] .model .band { fill: #edf9f5; stroke: #9ccbbf; }
-    svg[data-active-step="2"] .scores .box, svg[data-active-step="3"] .model .box { fill: #d8f1e9; stroke: #1c766c; }
-    svg[data-active-step="2"] .scores .detail, svg[data-active-step="3"] .model .detail { stroke: #1c766c; }
-    svg[data-active-step="2"] .flow-scores, svg[data-active-step="3"] .flow-model { stroke: #1c766c; stroke-dasharray: none; }
+    svg[data-active-step="1"] .examples .band { fill: #1b2a43; stroke: #536d9b; }
+    svg[data-active-step="1"] .examples .box { fill: #243a60; stroke: #99b5ff; }
+    svg[data-active-step="1"] .examples .detail, svg[data-active-step="1"] .flow-examples { stroke: #99b5ff; }
+    svg[data-active-step="2"] .scores .band, svg[data-active-step="3"] .model .band { fill: #142e2c; stroke: #37685f; }
+    svg[data-active-step="2"] .scores .box, svg[data-active-step="3"] .model .box { fill: #173932; stroke: #79d9c3; }
+    svg[data-active-step="2"] .scores .detail, svg[data-active-step="3"] .model .detail { stroke: #79d9c3; }
+    svg[data-active-step="2"] .flow-scores, svg[data-active-step="3"] .flow-model { stroke: #79d9c3; stroke-dasharray: none; }
     svg[data-active-step="2"] .note-examples, svg[data-active-step="3"] .note-examples { display: none; }
     svg[data-active-step="2"] .note-scores, svg[data-active-step="3"] .note-model { display: inline; }
     @media (max-width: 400px) {
@@ -36,10 +36,10 @@
       .node-label { font-size: 17.5px; }
     }
   </style>
-  <rect width="560" height="250" fill="#fbfdff"/>
-  <rect x=".5" y=".5" width="559" height="249" rx="13" fill="none" stroke="#aac5df"/>
+  <rect width="560" height="250" fill="#141824"/>
+  <rect x=".5" y=".5" width="559" height="249" rx="13" fill="none" stroke="#30374f"/>
   <text class="heading" x="25" y="35">Scene-guided feature weights</text>
-  <path d="M25 50h510" stroke="#bdd2e8"/>
+  <path d="M25 50h510" stroke="#3e4865"/>
 
   <g class="examples">
     <rect class="band" x="24" y="65" width="160" height="141" rx="9"/>
@@ -72,16 +72,16 @@
     <path class="detail" d="M401 125h21m-21 10h21m-21 10h21m16-20h9l17 10m-26 0h26m-26 10h9l17-10"/>
     <rect class="box" x="472" y="110" width="48" height="51" rx="6"/>
     <path class="detail" d="M496 123v10m0 0-9 9m9-9 9 9"/>
-    <circle cx="496" cy="122" r="3" fill="#172e47"/>
-    <circle cx="487" cy="145" r="3" fill="#172e47"/>
-    <circle cx="505" cy="145" r="3" fill="#172e47"/>
+    <circle cx="496" cy="122" r="3" fill="#eceef9"/>
+    <circle cx="487" cy="145" r="3" fill="#eceef9"/>
+    <circle cx="505" cy="145" r="3" fill="#eceef9"/>
     <text class="node-label" x="456" y="188" text-anchor="middle">Weighted features</text>
   </g>
 
   <path class="flow flow-scores" d="M187 135h12"/>
   <path class="flow flow-model" d="M363 135h12"/>
-  <path class="note-examples" d="M25 228h18" stroke="#3679b5" stroke-width="2"/>
-  <path class="note-scores note-model" d="M25 228h18" stroke="#1c766c" stroke-width="2"/>
+  <path class="note-examples" d="M25 228h18" stroke="#99b5ff" stroke-width="2"/>
+  <path class="note-scores note-model" d="M25 228h18" stroke="#79d9c3" stroke-width="2"/>
   <text class="path-note note-examples" x="51" y="233">Describe example rows in natural language.</text>
   <text class="path-note note-scores" x="51" y="233">Estimate the importance of the original features.</text>
   <text class="path-note note-model" x="51" y="233">Normalize the scores and reweight model inputs.</text>
