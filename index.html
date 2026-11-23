@@ -8,8 +8,7 @@
   <title>Jiayi (Arthur) Qiu</title>
   <link rel="canonical" href="https://arthurqqqq.github.io/">
   <link rel="preload" href="google-sans-flex-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=portrait-and-copy">
-  <script src="app.js?v=preview-viewer" defer></script>
+  <link rel="stylesheet" href="styles.css?v=scroll-and-links">
 </head>
 <body id="home">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -51,10 +50,6 @@
               alt="Public GitHub profile with the avatar, repository navigation, and research README">
           </div>
         </a>
-        <div class="profile-tools" hidden>
-          <button type="button" class="profile-enlarge" data-preview-open aria-haspopup="dialog"
-            aria-controls="profile-preview-dialog" aria-label="Enlarge preview of GitHub">Enlarge preview</button>
-        </div>
       </article>
       <article class="profile-card" aria-labelledby="scholar-title">
         <a class="profile-link" href="https://scholar.google.com/citations?user=WC9dYREAAAAJ&amp;hl=en" aria-labelledby="open-scholar-profile">
@@ -67,10 +62,6 @@
               alt="Public Google Scholar profile with the publication list and citation panel">
           </div>
         </a>
-        <div class="profile-tools" hidden>
-          <button type="button" class="profile-enlarge" data-preview-open aria-haspopup="dialog"
-            aria-controls="profile-preview-dialog" aria-label="Enlarge preview of Google Scholar">Enlarge preview</button>
-        </div>
       </article>
     </section>
 
@@ -92,18 +83,7 @@
                   <a href="https://github.com/ArthurQQQQ/multipass-multihop-retrieval-ICMLW" aria-label="MULTIPASS code">Code</a>
                 </div>
               </div>
-              <figure class="paper-diagram" data-paper-diagram data-active-step="1">
-                <object class="paper-figure" data="bridge-starvation.svg?v=graphite" type="image/svg+xml" aria-label="Bridge Starvation retrieval paths" tabindex="-1">
-                  <img src="bridge-starvation.svg?v=graphite" width="560" height="250" alt="An initial query finds a first clue. A second pass can use a bridge entity to find the supporting source.">
-                </object>
-                <div class="diagram-steps" role="group" aria-label="Bridge Starvation retrieval paths steps" hidden>
-                  <button type="button" data-step="1" aria-pressed="true"
-                    aria-controls="bridge-starvation-step" data-description="The first search finds an initial clue. The passage needed to answer the question can remain outside the retrieved set.">Single pass</button>
-                  <button type="button" data-step="2" aria-pressed="false"
-                    aria-controls="bridge-starvation-step" data-description="A follow-up query uses the bridge entity from the initial clue, searches the same index, and adds supporting evidence for the reader.">Bounded repair</button>
-                </div>
-                <figcaption class="diagram-caption" id="bridge-starvation-step" aria-live="polite">The first search finds an initial clue. The passage needed to answer the question can remain outside the retrieved set.</figcaption>
-              </figure>
+              <img class="paper-figure" src="bridge-starvation.svg?v=graphite" width="560" height="250" alt="An initial query finds a first clue. A second pass can use a bridge entity to find the supporting source." loading="lazy">
             </article>
           </li>
           <li>
@@ -120,20 +100,7 @@
                   <a href="https://github.com/ArthurQQQQ/atom-keyed-chunk-retrieval-qa-ICMLW" aria-label="Atom-Keyed Retrieval code">Code</a>
                 </div>
               </div>
-              <figure class="paper-diagram" data-paper-diagram data-active-step="1">
-                <object class="paper-figure" data="atom-keyed.svg?v=graphite" type="image/svg+xml" aria-label="Atom-keyed retrieval and source mapping" tabindex="-1">
-                  <img src="atom-keyed.svg?v=graphite" width="560" height="250" alt="Atomic propositions are ranked, mapped to their original passages, and returned to the reader.">
-                </object>
-                <div class="diagram-steps" role="group" aria-label="Atom-keyed retrieval and source mapping steps" hidden>
-                  <button type="button" data-step="1" aria-pressed="true"
-                    aria-controls="atom-keyed-step" data-description="Score short propositions against the query so the retrieval decision can use fine-grained evidence.">Rank atoms</button>
-                  <button type="button" data-step="2" aria-pressed="false"
-                    aria-controls="atom-keyed-step" data-description="Follow each selected proposition’s stored mapping to its original source passage.">Trace to source</button>
-                  <button type="button" data-step="3" aria-pressed="false"
-                    aria-controls="atom-keyed-step" data-description="Give the reader the original passages within its context budget, including surrounding evidence.">Read context</button>
-                </div>
-                <figcaption class="diagram-caption" id="atom-keyed-step" aria-live="polite">Score short propositions against the query so the retrieval decision can use fine-grained evidence.</figcaption>
-              </figure>
+              <img class="paper-figure" src="atom-keyed.svg?v=graphite" width="560" height="250" alt="Atomic propositions are ranked, mapped to their original passages, and returned to the reader." loading="lazy">
             </article>
           </li>
           <li>
@@ -150,48 +117,7 @@
                   <a href="https://github.com/ArthurQQQQ/SIFT-LLM-feature-reweighting-tabular-ICDMW" aria-label="SIFT code">Code</a>
                 </div>
               </div>
-              <figure class="paper-diagram" data-paper-diagram data-active-step="1">
-                <object class="paper-figure" data="sift.svg?v=graphite" type="image/svg+xml" aria-label="SIFT feature-weighting process" tabindex="-1">
-                  <img src="sift.svg?v=graphite" width="560" height="250" alt="Table rows become short written scenes. A language model scores feature importance, and the weights are applied to tabular inputs.">
-                </object>
-                <div class="diagram-steps" role="group" aria-label="SIFT feature-weighting process steps" hidden>
-                  <button type="button" data-step="1" aria-pressed="true"
-                    aria-controls="sift-step" data-description="Turn tabular rows into written scenes that give the feature values context.">Describe examples</button>
-                  <button type="button" data-step="2" aria-pressed="false"
-                    aria-controls="sift-step" data-description="Ask the language model to estimate the semantic importance of the original columns.">Score features</button>
-                  <button type="button" data-step="3" aria-pressed="false"
-                    aria-controls="sift-step" data-description="Normalize the importance scores and use the weights to scale inputs to a standard tabular model.">Apply weights</button>
-                </div>
-                <figcaption class="diagram-caption" id="sift-step" aria-live="polite">Turn tabular rows into written scenes that give the feature values context.</figcaption>
-              </figure>
-            </article>
-          </li>
-          <li>
-            <article class="publication">
-              <div class="paper-copy">
-                <div class="entry-heading">
-                  <h3>The College Transfer and Articulation Network</h3>
-                  <span class="entry-label">Research in Higher Education · 2025</span>
-                </div>
-                <p class="publication-summary">Maps statewide transfer policies and agreements between individual colleges in the U.S.</p>
-                <p class="paper-meta">Manuel S. González Canché, Jiayi Arthur Qiu, Kaiwen Zheng, Mingbo Gong, Chelsea Zhang<span>Vol. 66, Article 20</span></p>
-                <div class="publication-links">
-                  <a href="https://link.springer.com/article/10.1007/s11162-024-09831-5" aria-label="Springer article on the College Transfer and Articulation Network">Springer</a>
-                  <a href="https://github.com/democratizing-data-science/Transfer-project-databases-and_code" aria-label="College Transfer and Articulation Network replication code">Code</a>
-                </div>
-              </div>
-              <figure class="paper-diagram" data-paper-diagram data-active-step="1">
-                <object class="paper-figure" data="transfer-network.svg?v=graphite" type="image/svg+xml" aria-label="College transfer network views" tabindex="-1">
-                  <img src="transfer-network.svg?v=graphite" width="560" height="250" alt="One network connects states to policies. A second connects colleges with bilateral agreements.">
-                </object>
-                <div class="diagram-steps" role="group" aria-label="College transfer network views steps" hidden>
-                  <button type="button" data-step="1" aria-pressed="true"
-                    aria-controls="transfer-network-step" data-description="State and policy nodes form a two-mode network. An edge indicates that a state adopted a policy.">Statewide policies</button>
-                  <button type="button" data-step="2" aria-pressed="false"
-                    aria-controls="transfer-network-step" data-description="College nodes form a separate network. An edge represents a bilateral transfer or articulation agreement.">Institutional agreements</button>
-                </div>
-                <figcaption class="diagram-caption" id="transfer-network-step" aria-live="polite">State and policy nodes form a two-mode network. An edge indicates that a state adopted a policy.</figcaption>
-              </figure>
+              <img class="paper-figure" src="sift.svg?v=graphite" width="560" height="250" alt="Table rows become short written scenes. A language model scores feature importance, and the weights are applied to tabular inputs." loading="lazy">
             </article>
           </li>
         </ol>
@@ -254,21 +180,22 @@
               </li>
             </ul>
           </section>
-          <section class="project-category" aria-labelledby="website-project-title">
-            <h3 id="website-project-title">Personal website</h3>
-            <ul class="projects-list">
-              <li>
-                <div class="entry-heading">
-                  <a href="https://github.com/ArthurQQQQ/arthurqqqq.github.io">Website source</a>
-                  <span class="entry-label">GitHub Pages</span>
-                </div>
-                <p>Source code, including the interactive paper figures.</p>
-              </li>
-            </ul>
-          </section>
-          <section class="project-category" aria-labelledby="prototype-title">
+          <section class="project-category other-builds" aria-labelledby="prototype-title">
             <h3 id="prototype-title">Other builds</h3>
             <ul class="projects-list">
+              <li>
+                <a class="project-preview" href="color-transfer-preview.gif"
+                  aria-labelledby="color-transfer-title color-transfer-action">
+                  <div class="entry-heading">
+                    <span id="color-transfer-title">Color Transfer</span>
+                    <span class="entry-label">WebGPU study</span>
+                  </div>
+                  <p>Applies a reference palette to a lit surface.</p>
+                  <img src="color-transfer-still.png" width="560" height="250" loading="lazy"
+                    alt="A lit sphere split between neutral gray and a grade with cool shadows and warm highlights">
+                  <span id="color-transfer-action" class="project-preview-action">View animation (GIF)</span>
+                </a>
+              </li>
               <li>
                 <div class="entry-heading">
                   <a href="https://github.com/ArthurQQQQ/yuelao-chatgpt-plugin">YueLao</a>
@@ -282,22 +209,6 @@
       </div>
     </section>
   </main>
-
-  <dialog class="preview-dialog" id="profile-preview-dialog" aria-labelledby="preview-title">
-    <header class="preview-dialog-header">
-      <h2 id="preview-title">Profile preview</h2>
-      <div class="preview-dialog-actions">
-        <button type="button" class="preview-control" id="preview-zoom" aria-pressed="false">Actual size</button>
-        <a class="preview-control" id="preview-original">Open original</a>
-        <form method="dialog">
-          <button type="submit" class="preview-control" autofocus>Close</button>
-        </form>
-      </div>
-    </header>
-    <div class="preview-dialog-media" role="region" aria-label="Page screenshot" tabindex="-1">
-      <img id="preview-image" src="github-page-preview.jpg?v=project-venues" width="1280" height="640" alt="" loading="lazy">
-    </div>
-  </dialog>
 
   <footer class="site-footer">
     <div class="container footer-inner"><span>Jiayi (Arthur) Qiu</span><a href="#home">Back to top</a></div>
