@@ -8,7 +8,8 @@
   <title>Jiayi (Arthur) Qiu</title>
   <link rel="canonical" href="https://arthurqqqq.github.io/">
   <link rel="preload" href="google-sans-flex-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=scroll-and-links">
+  <link rel="stylesheet" href="styles.css?v=research-scroll">
+  <script src="research-scroll.js" defer></script>
 </head>
 <body id="home">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -67,7 +68,10 @@
 
     <section class="section-block" id="research" aria-labelledby="research-title">
       <div class="container">
-        <div class="section-heading"><h2 id="research-title">Selected papers</h2></div>
+        <div class="section-heading">
+          <h2 id="research-title">Selected papers</h2>
+          <span class="scroll-note">Scroll to follow each diagram</span>
+        </div>
         <ol class="publication-list">
           <li>
             <article class="publication">
@@ -83,7 +87,18 @@
                   <a href="https://github.com/ArthurQQQQ/multipass-multihop-retrieval-ICMLW" aria-label="MULTIPASS code">Code</a>
                 </div>
               </div>
-              <img class="paper-figure" src="bridge-starvation.svg?v=graphite" width="560" height="250" alt="An initial query finds a first clue. A second pass can use a bridge entity to find the supporting source." loading="lazy">
+              <figure class="paper-media" aria-label="An initial query finds a first clue. A second pass can use a bridge entity to find the supporting source.">
+                <object class="paper-figure" data="bridge-starvation.svg?v=research-scroll" type="image/svg+xml" aria-hidden="true" tabindex="-1">
+                  <img src="bridge-starvation.svg?v=research-scroll" width="560" height="250" alt="">
+                </object>
+                <figcaption>
+                  <ol class="paper-phases" aria-label="Diagram sequence">
+                  <li>First clue</li>
+                  <li>Bridge query</li>
+                  <li>Supporting source</li>
+                  </ol>
+                </figcaption>
+              </figure>
             </article>
           </li>
           <li>
@@ -100,7 +115,18 @@
                   <a href="https://github.com/ArthurQQQQ/atom-keyed-chunk-retrieval-qa-ICMLW" aria-label="Atom-Keyed Retrieval code">Code</a>
                 </div>
               </div>
-              <img class="paper-figure" src="atom-keyed.svg?v=graphite" width="560" height="250" alt="Atomic propositions are ranked, mapped to their original passages, and returned to the reader." loading="lazy">
+              <figure class="paper-media" aria-label="Atomic propositions are ranked, mapped to their original passages, and returned to the reader.">
+                <object class="paper-figure" data="atom-keyed.svg?v=research-scroll" type="image/svg+xml" aria-hidden="true" tabindex="-1">
+                  <img src="atom-keyed.svg?v=research-scroll" width="560" height="250" alt="">
+                </object>
+                <figcaption>
+                  <ol class="paper-phases" aria-label="Diagram sequence">
+                  <li>Rank claims</li>
+                  <li>Trace to source</li>
+                  <li>Read context</li>
+                  </ol>
+                </figcaption>
+              </figure>
             </article>
           </li>
           <li>
@@ -117,7 +143,18 @@
                   <a href="https://github.com/ArthurQQQQ/SIFT-LLM-feature-reweighting-tabular-ICDMW" aria-label="SIFT code">Code</a>
                 </div>
               </div>
-              <img class="paper-figure" src="sift.svg?v=graphite" width="560" height="250" alt="Table rows become short written scenes. A language model scores feature importance, and the weights are applied to tabular inputs." loading="lazy">
+              <figure class="paper-media" aria-label="Table rows become short written scenes. A language model scores feature importance, and the weights are applied to tabular inputs.">
+                <object class="paper-figure" data="sift.svg?v=research-scroll" type="image/svg+xml" aria-hidden="true" tabindex="-1">
+                  <img src="sift.svg?v=research-scroll" width="560" height="250" alt="">
+                </object>
+                <figcaption>
+                  <ol class="paper-phases" aria-label="Diagram sequence">
+                  <li>Describe examples</li>
+                  <li>Score features</li>
+                  <li>Apply weights</li>
+                  </ol>
+                </figcaption>
+              </figure>
             </article>
           </li>
         </ol>
@@ -180,22 +217,9 @@
               </li>
             </ul>
           </section>
-          <section class="project-category other-builds" aria-labelledby="prototype-title">
+          <section class="project-category" aria-labelledby="prototype-title">
             <h3 id="prototype-title">Other builds</h3>
             <ul class="projects-list">
-              <li>
-                <a class="project-preview" href="color-transfer-preview.gif"
-                  aria-labelledby="color-transfer-title color-transfer-action">
-                  <div class="entry-heading">
-                    <span id="color-transfer-title">Color Transfer</span>
-                    <span class="entry-label">WebGPU study</span>
-                  </div>
-                  <p>Applies a reference palette to a lit surface.</p>
-                  <img src="color-transfer-still.png" width="560" height="250" loading="lazy"
-                    alt="A lit sphere split between neutral gray and a grade with cool shadows and warm highlights">
-                  <span id="color-transfer-action" class="project-preview-action">View animation (GIF)</span>
-                </a>
-              </li>
               <li>
                 <div class="entry-heading">
                   <a href="https://github.com/ArthurQQQQ/yuelao-chatgpt-plugin">YueLao</a>

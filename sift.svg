@@ -8,6 +8,18 @@
     <marker id="sift-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M1 1l6 3-6 3" fill="none" stroke="context-stroke" stroke-linecap="round" stroke-linejoin="round"/>
     </marker>
+    <radialGradient id="sift-example-light" cx="50%" cy="46%" r="70%">
+      <stop stop-color="#456bad" stop-opacity=".56"/>
+      <stop offset="1" stop-color="#456bad" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="sift-score-light" cx="50%" cy="46%" r="70%">
+      <stop stop-color="#3a8f79" stop-opacity=".51"/>
+      <stop offset="1" stop-color="#3a8f79" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="sift-model-light" cx="67%" cy="46%" r="70%">
+      <stop stop-color="#9f7747" stop-opacity=".48"/>
+      <stop offset="1" stop-color="#9f7747" stop-opacity="0"/>
+    </radialGradient>
   </defs>
   <style>
     text { font-family: system-ui, sans-serif; fill: #eceef9; }
@@ -20,20 +32,47 @@
     .detail { fill: none; stroke: #91a2cd; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
     .flow { fill: none; stroke: #8795ba; stroke-width: 1.6; marker-end: url(#sift-arrow); }
     .flow-scores, .flow-model { stroke-dasharray: 3 4; }
-    .note-scores, .note-model { display: none; }
+    .focus-light { opacity: 0; }
+    .examples, .scores, .model { opacity: .84; }
+    .note-examples, .note-scores, .note-model { opacity: 0; }
+    svg[data-active-step="1"] .examples,
+    svg[data-active-step="2"] .scores,
+    svg[data-active-step="3"] .model,
+    svg[data-active-step="1"] .note-examples,
+    svg[data-active-step="2"] .note-scores,
+    svg[data-active-step="3"] .note-model { opacity: 1; }
+    svg[data-active-step="1"] .examples .focus-light,
+    svg[data-active-step="2"] .scores .focus-light,
+    svg[data-active-step="3"] .model .focus-light {
+      opacity: calc(.64 + .30 * var(--scroll-accent, 0));
+    }
     svg[data-active-step="1"] .examples .band { fill: #1b2a43; stroke: #536d9b; }
     svg[data-active-step="1"] .examples .box { fill: #243a60; stroke: #99b5ff; }
     svg[data-active-step="1"] .examples .detail, svg[data-active-step="1"] .flow-examples { stroke: #99b5ff; }
-    svg[data-active-step="2"] .scores .band, svg[data-active-step="3"] .model .band { fill: #142e2c; stroke: #37685f; }
-    svg[data-active-step="2"] .scores .box, svg[data-active-step="3"] .model .box { fill: #173932; stroke: #79d9c3; }
-    svg[data-active-step="2"] .scores .detail, svg[data-active-step="3"] .model .detail { stroke: #79d9c3; }
-    svg[data-active-step="2"] .flow-scores, svg[data-active-step="3"] .flow-model { stroke: #79d9c3; stroke-dasharray: none; }
-    svg[data-active-step="2"] .note-examples, svg[data-active-step="3"] .note-examples { display: none; }
-    svg[data-active-step="2"] .note-scores, svg[data-active-step="3"] .note-model { display: inline; }
+    svg[data-active-step="2"] .scores .band { fill: #142e2c; stroke: #37685f; }
+    svg[data-active-step="2"] .scores .box { fill: #173932; stroke: #79d9c3; }
+    svg[data-active-step="2"] .scores .detail, svg[data-active-step="2"] .flow-scores { stroke: #79d9c3; }
+    svg[data-active-step="2"] .flow-scores, svg[data-active-step="3"] .flow-model { stroke-dasharray: none; }
+    svg[data-active-step="3"] .model .band { fill: #2e261f; stroke: #73583b; }
+    svg[data-active-step="3"] .model .box { fill: #3e3024; stroke: #e9bf8a; }
+    svg[data-active-step="3"] .model .detail, svg[data-active-step="3"] .flow-model { stroke: #e9bf8a; }
+    @media (prefers-reduced-motion: no-preference) {
+      .focus-light, .examples, .scores, .model { transition: opacity .26s ease; }
+      .band, .box { transition: fill .24s ease, stroke .24s ease; }
+      .detail, .flow { transition: stroke .24s ease; }
+    }
     @media (max-width: 400px) {
       .heading { font-size: 24px; }
       .band-label, .path-note { font-size: 16px; }
       .node-label { font-size: 17.5px; }
+    }
+    svg[data-scroll-driven] * { transition: none; }
+    .scroll-signal { display: none; pointer-events: none; }
+    svg[data-scroll-driven][data-active-step="1"] .signal-one,
+    svg[data-scroll-driven][data-active-step="2"] .signal-two,
+    svg[data-scroll-driven][data-active-step="3"] .signal-three {
+      display: inline;
+      transform: translateX(calc(var(--phase-progress, 0) * var(--travel)));
     }
   </style>
   <rect width="560" height="250" fill="#141824"/>
@@ -43,6 +82,7 @@
 
   <g class="examples">
     <rect class="band" x="24" y="65" width="160" height="141" rx="9"/>
+    <rect class="focus-light" x="25" y="66" width="158" height="139" rx="8" fill="url(#sift-example-light)"/>
     <rect x="25" y="66" width="158" height="139" rx="8" fill="url(#sift-grid)"/>
     <text class="band-label" x="37" y="87">EXAMPLES</text>
     <rect class="box" x="38" y="108" width="48" height="48" rx="5"/>
@@ -55,6 +95,7 @@
 
   <g class="scores">
     <rect class="band" x="200" y="65" width="160" height="141" rx="9"/>
+    <rect class="focus-light" x="201" y="66" width="158" height="139" rx="8" fill="url(#sift-score-light)"/>
     <rect x="201" y="66" width="158" height="139" rx="8" fill="url(#sift-grid)"/>
     <text class="band-label" x="213" y="87">FEATURE PRIOR</text>
     <rect class="box" x="220" y="108" width="120" height="16" rx="4"/>
@@ -66,6 +107,7 @@
 
   <g class="model">
     <rect class="band" x="376" y="65" width="160" height="141" rx="9"/>
+    <rect class="focus-light" x="377" y="66" width="158" height="139" rx="8" fill="url(#sift-model-light)"/>
     <rect x="377" y="66" width="158" height="139" rx="8" fill="url(#sift-grid)"/>
     <text class="band-label" x="389" y="87">MODEL INPUT</text>
     <rect class="box" x="391" y="114" width="42" height="43" rx="5"/>
@@ -81,8 +123,12 @@
   <path class="flow flow-scores" d="M187 135h12"/>
   <path class="flow flow-model" d="M363 135h12"/>
   <path class="note-examples" d="M25 228h18" stroke="#99b5ff" stroke-width="2"/>
-  <path class="note-scores note-model" d="M25 228h18" stroke="#79d9c3" stroke-width="2"/>
+  <path class="note-scores" d="M25 228h18" stroke="#79d9c3" stroke-width="2"/>
+  <path class="note-model" d="M25 228h18" stroke="#e9bf8a" stroke-width="2"/>
   <text class="path-note note-examples" x="51" y="233">Describe example rows in natural language.</text>
   <text class="path-note note-scores" x="51" y="233">Estimate the importance of the original features.</text>
   <text class="path-note note-model" x="51" y="233">Normalize the scores and reweight model inputs.</text>
+  <circle class="scroll-signal signal-one" cx="94" cy="131" r="2.9" fill="#c9d7ff" style="--travel: 14px"/>
+  <circle class="scroll-signal signal-two" cx="189" cy="135" r="2.9" fill="#a7f3d9" style="--travel: 8px"/>
+  <circle class="scroll-signal signal-three" cx="365" cy="135" r="2.9" fill="#ffe1b0" style="--travel: 8px"/>
 </svg>

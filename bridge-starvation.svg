@@ -11,6 +11,14 @@
     <marker id="bridge-mint-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M1 1l6 3-6 3" fill="none" stroke="#79d9c3" stroke-linecap="round" stroke-linejoin="round"/>
     </marker>
+    <radialGradient id="bridge-clue-light">
+      <stop stop-color="#6e96f6" stop-opacity=".32"/>
+      <stop offset="1" stop-color="#6e96f6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bridge-follow-up-light">
+      <stop stop-color="#5dbda9" stop-opacity=".36"/>
+      <stop offset="1" stop-color="#5dbda9" stop-opacity="0"/>
+    </radialGradient>
   </defs>
   <style>
     text { font-family: system-ui, sans-serif; fill: #eceef9; }
@@ -23,17 +31,42 @@
     .known-ink { fill: none; stroke: #99b5ff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
     .future-ink { fill: none; stroke: #91a2cd; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
     .gap { fill: none; stroke: #e0ad66; stroke-width: 1.5; stroke-dasharray: 4 5; }
-    .path-note.on-single { fill: #f0be79; }
-    .on-repair { display: none; }
-    svg[data-active-step="2"] .on-single { display: none; }
-    svg[data-active-step="2"] .on-repair { display: inline; }
-    svg[data-active-step="2"] .future { fill: #173932; stroke: #79d9c3; }
-    svg[data-active-step="2"] .future-ink { stroke: #79d9c3; }
-    svg[data-active-step="2"] .late-band { fill: #142e2c; stroke: #37685f; }
+    .path-note.step-one { fill: #f0be79; }
+    .step-one, .step-two, .step-three { display: none; }
+    .first-repair, .second-repair, .paper-light { opacity: 0; }
+    svg[data-active-step="1"] .step-one,
+    svg[data-active-step="2"] .step-two,
+    svg[data-active-step="3"] .step-three { display: inline; }
+    svg:is([data-active-step="2"], [data-active-step="3"]) .first-repair { opacity: 1; }
+    svg[data-active-step="3"] .second-repair { opacity: 1; }
+    svg:is([data-active-step="2"], [data-active-step="3"]) .first-gap,
+    svg[data-active-step="3"] .second-gap { opacity: 0; }
+    svg:is([data-active-step="2"], [data-active-step="3"]) .bridge-node,
+    svg[data-active-step="3"] .source-node { fill: #173932; stroke: #79d9c3; }
+    svg:is([data-active-step="2"], [data-active-step="3"]) .bridge-icon,
+    svg[data-active-step="3"] .source-icon { stroke: #79d9c3; }
+    svg:is([data-active-step="2"], [data-active-step="3"]) .late-band { fill: #142e2c; stroke: #37685f; }
+    svg[data-active-step="1"] .clue-light,
+    svg[data-active-step="2"] .query-light,
+    svg[data-active-step="3"] .source-light { opacity: calc(.55 + .4 * var(--scroll-accent, 0)); }
+    @media (prefers-reduced-motion: no-preference) {
+      .first-repair, .second-repair, .gap { transition: opacity .22s ease; }
+      .late-band, .bridge-node, .source-node, .bridge-icon, .source-icon {
+        transition: fill .27s ease, stroke .27s ease;
+      }
+    }
     @media (max-width: 400px) {
       .heading { font-size: 24px; }
       .band-label, .path-note { font-size: 16px; }
       .node-label { font-size: 18px; }
+    }
+    svg[data-scroll-driven] * { transition: none; }
+    .scroll-signal { display: none; pointer-events: none; }
+    svg[data-scroll-driven][data-active-step="1"] .signal-one,
+    svg[data-scroll-driven][data-active-step="2"] .signal-two,
+    svg[data-scroll-driven][data-active-step="3"] .signal-three {
+      display: inline;
+      transform: translateX(calc(var(--phase-progress, 0) * var(--travel)));
     }
   </style>
   <rect width="560" height="250" fill="#141824"/>
@@ -42,15 +75,19 @@
   <path d="M25 50h510" stroke="#3e4865"/>
   <rect x="24" y="65" width="249" height="141" rx="9" fill="#1b2337" stroke="#394361"/>
   <rect class="late-band" x="287" y="65" width="249" height="141" rx="9" fill="#1a2132" stroke="#394361"/>
+  <ellipse class="paper-light clue-light" cx="210" cy="137" rx="55" ry="60" fill="url(#bridge-clue-light)"/>
+  <ellipse class="paper-light query-light" cx="339" cy="137" rx="50" ry="61" fill="url(#bridge-follow-up-light)"/>
+  <ellipse class="paper-light source-light" cx="484" cy="137" rx="51" ry="61" fill="url(#bridge-follow-up-light)"/>
   <path d="M33 66h231a8 8 0 0 1 8 8v123a8 8 0 0 1-8 8H33a8 8 0 0 1-8-8V74a8 8 0 0 1 8-8Zm263 0h231a8 8 0 0 1 8 8v123a8 8 0 0 1-8 8H296a8 8 0 0 1-8-8V74a8 8 0 0 1 8-8Z" fill="url(#bridge-grid)"/>
   <text class="band-label" x="38" y="87">INITIAL LOOKUP</text>
   <text class="band-label" x="301" y="87">FOLLOW-UP LOOKUP</text>
 
   <path d="M114 137h63" stroke="#99b5ff" fill="none" stroke-width="1.6" marker-end="url(#bridge-blue-arrow)"/>
-  <path class="gap on-single" d="M243 137h63m66 0h79"/>
-  <g class="on-repair" fill="none" stroke="#79d9c3" stroke-width="1.8" marker-end="url(#bridge-mint-arrow)">
-    <path d="M243 137h63"/>
-    <path d="M372 137h79"/>
+  <path class="gap first-gap" d="M243 137h63"/>
+  <path class="gap second-gap" d="M372 137h79"/>
+  <g fill="none" stroke="#79d9c3" stroke-width="1.8" marker-end="url(#bridge-mint-arrow)">
+    <path class="first-repair" d="M243 137h63"/>
+    <path class="second-repair" d="M372 137h79"/>
   </g>
 
   <rect class="known" x="53" y="112" width="57" height="50" rx="7"/>
@@ -59,10 +96,10 @@
   <path class="known-ink" d="M194 123h32m-32 10h25m-25 10h21m-21 10h13"/>
   <path d="M194 143h21" stroke="#79d9c3" stroke-width="2.5" stroke-linecap="round"/>
 
-  <rect class="future" x="311" y="112" width="57" height="50" rx="7"/>
-  <path class="future-ink" d="M329 134a7 7 0 1 1 14 0 7 7 0 0 1-14 0Zm12 5 7 7m-29-24h8"/>
-  <rect class="future" x="456" y="110" width="57" height="54" rx="7"/>
-  <path class="future-ink" d="M468 123h32m-32 10h27m-27 10h21m-21 10h15"/>
+  <rect class="future bridge-node" x="311" y="112" width="57" height="50" rx="7"/>
+  <path class="future-ink bridge-icon" d="M329 134a7 7 0 1 1 14 0 7 7 0 0 1-14 0Zm12 5 7 7m-29-24h8"/>
+  <rect class="future source-node" x="456" y="110" width="57" height="54" rx="7"/>
+  <path class="future-ink source-icon" d="M468 123h32m-32 10h27m-27 10h21m-21 10h15"/>
 
   <g class="node-label" text-anchor="middle">
     <text x="82" y="188">Question</text>
@@ -70,8 +107,12 @@
     <text x="339" y="188">Bridge query</text>
     <text x="484" y="188">Source</text>
   </g>
-  <path class="on-single" d="M25 228h18" stroke="#e0ad66" stroke-dasharray="3 3"/>
-  <path class="on-repair" d="M25 228h18" stroke="#79d9c3" stroke-width="2"/>
-  <text class="path-note on-single" x="51" y="233">Supporting evidence can stay out of reach.</text>
-  <text class="path-note on-repair" x="51" y="233">The extra search follows a clue from the initial result.</text>
+  <path class="step-one" d="M25 228h18" stroke="#e0ad66" stroke-dasharray="3 3"/>
+  <path class="first-repair" d="M25 228h18" stroke="#79d9c3" stroke-width="2"/>
+  <text class="path-note step-one" x="51" y="233">Supporting evidence can stay out of reach.</text>
+  <text class="path-note step-two" x="51" y="233">Use the first clue to form a follow-up query.</text>
+  <text class="path-note step-three" x="51" y="233">The follow-up search can recover the source.</text>
+  <circle class="scroll-signal signal-one" cx="120" cy="137" r="2.9" fill="#c9d7ff" style="--travel: 50px"/>
+  <circle class="scroll-signal signal-two" cx="249" cy="137" r="2.9" fill="#a7f3d9" style="--travel: 50px"/>
+  <circle class="scroll-signal signal-three" cx="378" cy="137" r="2.9" fill="#ffe1b0" style="--travel: 66px"/>
 </svg>
