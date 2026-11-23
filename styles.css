@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "Google Sans Flex";
+  src: url("google-sans-flex-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+}
+
 :root {
   color-scheme: dark;
   --page: #101116;
@@ -8,10 +16,10 @@
   --line: #323544;
   --strong-line: #535a70;
   --blue: #b9c4ff;
-  --font-display: Georgia, "Times New Roman", serif;
   --content-width: 1000px;
   --page-edge: clamp(20px, 5vw, 48px);
-  font: 16px/1.62 system-ui, sans-serif;
+  font: 16px/1.59 "Google Sans Flex", system-ui, sans-serif;
+  font-optical-sizing: auto;
   color: var(--ink);
   background: var(--page);
 }
@@ -96,14 +104,16 @@ button { font: inherit; cursor: pointer; }
   content: "";
 }
 .hero h1 {
-  font: 400 clamp(39px, 6vw, 72px)/1.03 var(--font-display);
-  letter-spacing: -.038em;
+  font-size: clamp(39px, 5.3vw, 66px);
+  font-weight: 400;
+  line-height: 1.06;
+  letter-spacing: -.025em;
 }
 .affiliation {
   display: flex;
   align-items: center;
   gap: 9px;
-  margin-top: 10px;
+  margin-top: 8px;
   color: var(--muted);
   font-size: 14px;
 }
@@ -121,10 +131,10 @@ button { font: inherit; cursor: pointer; }
 }
 .research-thesis {
   max-width: 42ch;
-  margin-top: 23px;
+  margin-top: 20px;
   color: var(--ink);
   font-size: clamp(18px, 2.5vw, 21px);
-  line-height: 1.45;
+  line-height: 1.49;
 }
 .hero-background { max-width: 62ch; margin-top: 9px; color: var(--muted); }
 .social-links { margin-top: 12px; font-size: 14px; }
@@ -245,7 +255,7 @@ button { font: inherit; cursor: pointer; }
   border-bottom: 1px solid var(--line);
   background: var(--page);
 }
-.preview-dialog-header h2 { font: 400 clamp(19px, 3vw, 24px)/1.15 var(--font-display); }
+.preview-dialog-header h2 { font-size: clamp(19px, 3vw, 24px); font-weight: 500; line-height: 1.18; }
 .preview-dialog-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 3px; }
 .preview-dialog-actions form { margin: 0; }
 .preview-control { display: inline-flex; align-items: center; text-decoration: none; }
@@ -286,8 +296,10 @@ button { font: inherit; cursor: pointer; }
 .section-block > .container { padding-top: 21px; border-top: 1px solid var(--strong-line); }
 .section-heading { margin-bottom: 18px; }
 .section-heading h2 {
-  font: 400 clamp(29px, 4vw, 36px)/1.12 var(--font-display);
-  letter-spacing: -.028em;
+  font-size: clamp(28px, 4vw, 34px);
+  font-weight: 450;
+  line-height: 1.16;
+  letter-spacing: -.02em;
 }
 .publication-list > li { border-top: 1px solid var(--line); }
 .publication {
@@ -300,7 +312,9 @@ button { font: inherit; cursor: pointer; }
 .paper-copy { min-width: 0; }
 .paper-copy .entry-heading { display: grid; gap: 5px; }
 .paper-copy h3 {
-  font: 400 clamp(22px, 2.6vw, 31px)/1.16 var(--font-display);
+  font-size: clamp(22px, 2.6vw, 29px);
+  font-weight: 500;
+  line-height: 1.19;
   letter-spacing: -.014em;
 }
 .publication-summary { max-width: 46ch; margin-top: 11px; color: var(--ink); }
@@ -361,7 +375,9 @@ button { font: inherit; cursor: pointer; }
 .project-category { min-width: 0; padding-top: 12px; border-top: 1px solid var(--line); }
 .project-category h3 {
   color: var(--ink);
-  font: 400 23px/1.15 var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.2;
 }
 .projects-list { margin-top: 6px; }
 .projects-list li { padding-block: 9px; }
