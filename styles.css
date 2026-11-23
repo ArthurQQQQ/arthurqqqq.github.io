@@ -84,10 +84,11 @@ button { font: inherit; cursor: pointer; }
 .main-nav a:hover { color: var(--blue); text-decoration: underline; }
 
 .hero {
+  --portrait-size: 144px;
   position: relative;
   isolation: isolate;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 128px;
+  grid-template-columns: minmax(0, 1fr) var(--portrait-size);
   align-items: start;
   gap: clamp(22px, 6vw, 72px);
   padding-block: clamp(42px, 7vw, 88px) clamp(40px, 6vw, 68px);
@@ -120,12 +121,12 @@ button { font: inherit; cursor: pointer; }
 .unc-mark { display: block; width: 27px; height: auto; flex: none; }
 .portrait {
   display: block;
-  width: 128px;
-  height: 128px;
+  width: var(--portrait-size);
+  height: auto;
+  aspect-ratio: 1;
   margin-top: 6px;
   border: 1px solid var(--strong-line);
   border-radius: 7px;
-  box-shadow: 0 0 0 5px var(--page);
   background: var(--raised);
   object-fit: cover;
 }
@@ -164,14 +165,7 @@ button { font: inherit; cursor: pointer; }
   gap: 10px;
   padding: 10px 13px;
 }
-.profile-identity {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 1px 8px;
-}
-.profile-identity h2 { font-size: 16px; font-weight: 640; line-height: 1.35; }
-.profile-identity p { color: var(--muted); font-size: 13px; line-height: 1.45; }
+.profile-card-header h2 { font-size: 16px; font-weight: 600; line-height: 1.35; }
 .profile-action, .publication-links a {
   color: var(--blue);
   font-size: .875rem;
@@ -286,11 +280,10 @@ button { font: inherit; cursor: pointer; }
   gap: 3px 11px;
 }
 .entry-label {
-  color: var(--blue);
+  color: var(--muted);
   font-size: .8125rem;
   line-height: 1.45;
 }
-.entry-label--platform { color: var(--muted); }
 
 .section-block { padding-block: 19px 40px; }
 .section-block > .container { padding-top: 21px; border-top: 1px solid var(--strong-line); }
@@ -326,46 +319,40 @@ button { font: inherit; cursor: pointer; }
 .paper-diagram {
   min-width: 0;
   margin: 0;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--surface);
-  overflow: hidden;
 }
 .paper-figure {
   display: block;
   width: 100%;
   aspect-ratio: 560 / 250;
   border: 0;
-  background: var(--surface);
+  border-radius: 8px;
 }
 .paper-figure img { display: block; width: 100%; height: auto; }
 .diagram-steps {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px 7px;
-  padding: 10px 13px 0;
-  border-top: 1px solid var(--line);
+  gap: 3px 16px;
+  margin-top: 8px;
 }
 .diagram-steps button {
   min-height: 35px;
-  padding: 4px 9px;
-  border: 1px solid transparent;
-  border-radius: 6px;
-  color: var(--blue);
+  padding: 4px 0;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  color: var(--muted);
   background: transparent;
   font-size: 13px;
   font-weight: 600;
   text-align: left;
 }
-.diagram-steps button:hover { border-color: var(--strong-line); background: var(--raised); }
+.diagram-steps button:hover { color: var(--ink); }
 .diagram-steps button[aria-pressed="true"] {
-  border-color: #506488;
+  border-color: var(--blue);
   color: var(--blue);
-  background: var(--raised);
 }
 .diagram-caption {
-  min-height: 4.45em;
-  padding: 7px 13px 10px;
+  min-height: 3.26em;
+  margin-top: 7px;
   color: var(--muted);
   font-size: 14px;
   line-height: 1.45;
@@ -407,12 +394,12 @@ button { font: inherit; cursor: pointer; }
 @media (max-width: 560px) {
   .profile-grid, .project-categories { grid-template-columns: minmax(0, 1fr); }
   .profile-grid { gap: 21px; }
-  .hero { grid-template-columns: minmax(0, 1fr) 70px; gap: 0 15px; padding-top: 33px; }
+  .hero { --portrait-size: 78px; gap: 0 15px; padding-top: 33px; }
   .hero-copy { display: contents; }
   .hero h1 { font-size: clamp(29px, 7.1vw, 34px); }
   .affiliation { grid-column: 1; font-size: 13px; }
   .unc-mark { width: 22px; }
-  .portrait { grid-area: 1 / 2 / span 2; width: 70px; height: 70px; }
+  .portrait { grid-area: 1 / 2 / span 2; }
   .research-thesis, .hero-background, .social-links { grid-column: 1 / -1; }
   .header-inner { min-height: 52px; gap: 11px; }
   .main-nav a { font-size: 13px; }
