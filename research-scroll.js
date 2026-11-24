@@ -92,7 +92,7 @@ function updatePinning() {
 function scrollBounds(story) {
   const viewport = window.innerHeight;
   if (!story.row.hasAttribute('data-pinned')) {
-    const top = window.scrollY + story.image.getBoundingClientRect().top;
+    const top = window.scrollY + story.figure.getBoundingClientRect().top;
     return { start: top - viewport * 0.86, end: top - viewport * 0.21 };
   }
 
