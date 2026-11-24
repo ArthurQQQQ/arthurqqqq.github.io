@@ -65,13 +65,62 @@
       .band-label, .path-note { font-size: 16px; }
       .node-label { font-size: 18px; }
     }
+    svg[data-scroll-driven] {
+      --rank-strength: calc(var(--weight-one, 1) * 100%);
+      --trace-strength: calc(var(--weight-two, 0) * 100%);
+      --read-strength: calc(var(--weight-three, 0) * 100%);
+      --source-strength: calc((var(--weight-two, 0) + var(--weight-three, 0)) * 100%);
+    }
     svg[data-scroll-driven] * { transition: none; }
+    svg[data-scroll-driven] .rank-light { opacity: calc(.82 * var(--weight-one, 1)); }
+    svg[data-scroll-driven] .source-light { opacity: calc(.82 * var(--weight-two, 0)); }
+    svg[data-scroll-driven] .reader-light { opacity: calc(.82 * var(--weight-three, 0)); }
+    svg[data-scroll-driven] .rank-box {
+      fill: color-mix(in srgb, #243a60 var(--rank-strength), #192130);
+      stroke: color-mix(in srgb, #99b5ff var(--rank-strength), #65759a);
+    }
+    svg[data-scroll-driven] .rank-ink {
+      stroke: color-mix(in srgb, #99b5ff var(--rank-strength), #91a2cd);
+    }
+    svg[data-scroll-driven] .rank-line {
+      stroke: color-mix(in srgb, #99b5ff var(--rank-strength), #8795ba);
+    }
+    svg[data-scroll-driven] .chosen-atom {
+      fill: color-mix(in srgb, #173932 var(--trace-strength), color-mix(in srgb, #243a60 var(--rank-strength), #192130));
+      stroke: color-mix(in srgb, #79d9c3 var(--trace-strength), color-mix(in srgb, #99b5ff var(--rank-strength), #65759a));
+    }
+    svg[data-scroll-driven] .chosen-ink {
+      stroke: color-mix(in srgb, #79d9c3 var(--trace-strength), color-mix(in srgb, #99b5ff var(--rank-strength), #91a2cd));
+    }
+    svg[data-scroll-driven] .source-box {
+      fill: color-mix(in srgb, #173932 var(--source-strength), #192130);
+      stroke: color-mix(in srgb, #79d9c3 var(--source-strength), #65759a);
+    }
+    svg[data-scroll-driven] .source-ink {
+      stroke: color-mix(in srgb, #79d9c3 var(--source-strength), #91a2cd);
+    }
+    svg[data-scroll-driven] .trace-line {
+      stroke: color-mix(in srgb, #79d9c3 var(--source-strength), #8795ba);
+    }
+    svg[data-scroll-driven] .reader-box {
+      fill: color-mix(in srgb, #3e3024 var(--read-strength), #192130);
+      stroke: color-mix(in srgb, #e9bf8a var(--read-strength), #65759a);
+    }
+    svg[data-scroll-driven] .reader-ink {
+      stroke: color-mix(in srgb, #e9bf8a var(--read-strength), #91a2cd);
+    }
+    svg[data-scroll-driven] .read-line {
+      stroke: color-mix(in srgb, #e9bf8a var(--read-strength), #8795ba);
+    }
+    svg[data-scroll-driven] :is(.trace-line, .read-line) { stroke-dasharray: none; }
     .scroll-signal { display: none; pointer-events: none; }
-    svg[data-scroll-driven][data-active-step="1"] .signal-one,
-    svg[data-scroll-driven][data-active-step="2"] .signal-two,
-    svg[data-scroll-driven][data-active-step="3"] .signal-three {
+    .signal-one { --signal-weight: var(--weight-one, 1); --signal-progress: var(--progress-one, 0); }
+    .signal-two { --signal-weight: var(--weight-two, 0); --signal-progress: var(--progress-two, 0); }
+    .signal-three { --signal-weight: var(--weight-three, 0); --signal-progress: var(--progress-three, 0); }
+    svg[data-scroll-driven] .scroll-signal {
       display: inline;
-      transform: translateX(calc(var(--phase-progress, 0) * var(--travel)));
+      opacity: var(--signal-weight);
+      transform: translateX(calc(var(--signal-progress) * var(--travel)));
     }
   </style>
   <rect width="560" height="250" fill="#141824"/>

@@ -32,11 +32,12 @@
     .future-ink { fill: none; stroke: #91a2cd; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
     .gap { fill: none; stroke: #e0ad66; stroke-width: 1.5; stroke-dasharray: 4 5; }
     .path-note.step-one { fill: #f0be79; }
-    .step-one, .step-two, .step-three { display: none; }
+    .step-one, .step-two, .step-three, .repair-note { display: none; }
     .first-repair, .second-repair, .paper-light { opacity: 0; }
     svg[data-active-step="1"] .step-one,
     svg[data-active-step="2"] .step-two,
-    svg[data-active-step="3"] .step-three { display: inline; }
+    svg[data-active-step="3"] .step-three,
+    svg:is([data-active-step="2"], [data-active-step="3"]) .repair-note { display: inline; }
     svg:is([data-active-step="2"], [data-active-step="3"]) .first-repair { opacity: 1; }
     svg[data-active-step="3"] .second-repair { opacity: 1; }
     svg:is([data-active-step="2"], [data-active-step="3"]) .first-gap,
@@ -49,24 +50,73 @@
     svg[data-active-step="1"] .clue-light,
     svg[data-active-step="2"] .query-light,
     svg[data-active-step="3"] .source-light { opacity: calc(.55 + .4 * var(--scroll-accent, 0)); }
-    @media (prefers-reduced-motion: no-preference) {
-      .first-repair, .second-repair, .gap { transition: opacity .22s ease; }
-      .late-band, .bridge-node, .source-node, .bridge-icon, .source-icon {
-        transition: fill .27s ease, stroke .27s ease;
-      }
-    }
     @media (max-width: 400px) {
       .heading { font-size: 24px; }
       .band-label, .path-note { font-size: 16px; }
       .node-label { font-size: 18px; }
     }
-    svg[data-scroll-driven] * { transition: none; }
+    svg[data-scroll-driven] {
+      --clue-weight: var(--weight-one, 1);
+      --query-weight: var(--weight-two, 0);
+      --source-weight: var(--weight-three, 0);
+      --repair-weight: calc(var(--query-weight) + var(--source-weight));
+    }
+    svg[data-scroll-driven] .clue-light {
+      opacity: calc(var(--clue-weight) * (.55 + .4 * var(--progress-one, 0)));
+    }
+    svg[data-scroll-driven] .query-light {
+      opacity: calc(var(--query-weight) * (.55 + .4 * var(--progress-two, 0)));
+    }
+    svg[data-scroll-driven] .source-light {
+      opacity: calc(var(--source-weight) * (.55 + .4 * var(--progress-three, 0)));
+    }
+    svg[data-scroll-driven] .known {
+      fill: color-mix(in srgb, #1e2c46, #243a60 calc(var(--clue-weight) * 100%));
+      stroke: color-mix(in srgb, #7388b6, #99b5ff calc(var(--clue-weight) * 100%));
+    }
+    svg[data-scroll-driven] .known-ink {
+      stroke: color-mix(in srgb, #92a6d1, #99b5ff calc(var(--clue-weight) * 100%));
+    }
+    svg[data-scroll-driven] .initial-link { opacity: calc(.62 + .38 * var(--clue-weight)); }
+    svg[data-scroll-driven] .bridge-node, svg[data-scroll-driven] .bridge-icon {
+      --node-weight: var(--repair-weight);
+    }
+    svg[data-scroll-driven] .source-node, svg[data-scroll-driven] .source-icon {
+      --node-weight: var(--source-weight);
+    }
+    svg[data-scroll-driven] :is(.bridge-node, .source-node) {
+      fill: color-mix(in srgb, #192130, #173932 calc(var(--node-weight) * 100%));
+      stroke: color-mix(in srgb, #65759a, #79d9c3 calc(var(--node-weight) * 100%));
+    }
+    svg[data-scroll-driven] :is(.bridge-icon, .source-icon) {
+      stroke: color-mix(in srgb, #91a2cd, #79d9c3 calc(var(--node-weight) * 100%));
+    }
+    svg[data-scroll-driven] .late-band {
+      fill: color-mix(in srgb, #1a2132, #142e2c calc(var(--repair-weight) * 100%));
+      stroke: color-mix(in srgb, #394361, #37685f calc(var(--repair-weight) * 100%));
+    }
+    svg[data-scroll-driven] .first-gap { opacity: var(--clue-weight); }
+    svg[data-scroll-driven] .first-repair { opacity: var(--repair-weight); }
+    svg[data-scroll-driven] .second-gap { opacity: calc(1 - var(--source-weight)); }
+    svg[data-scroll-driven] .second-repair { opacity: var(--source-weight); }
+
     .scroll-signal { display: none; pointer-events: none; }
-    svg[data-scroll-driven][data-active-step="1"] .signal-one,
-    svg[data-scroll-driven][data-active-step="2"] .signal-two,
-    svg[data-scroll-driven][data-active-step="3"] .signal-three {
+    svg[data-scroll-driven] .scroll-signal {
       display: inline;
-      transform: translateX(calc(var(--phase-progress, 0) * var(--travel)));
+      opacity: var(--signal-weight);
+      transform: translateX(calc(var(--signal-progress) * var(--travel)));
+    }
+    .signal-one {
+      --signal-weight: var(--clue-weight);
+      --signal-progress: var(--progress-one, 0);
+    }
+    .signal-two {
+      --signal-weight: var(--query-weight);
+      --signal-progress: var(--progress-two, 0);
+    }
+    .signal-three {
+      --signal-weight: var(--source-weight);
+      --signal-progress: var(--progress-three, 0);
     }
   </style>
   <rect width="560" height="250" fill="#141824"/>
@@ -82,7 +132,7 @@
   <text class="band-label" x="38" y="87">INITIAL LOOKUP</text>
   <text class="band-label" x="301" y="87">FOLLOW-UP LOOKUP</text>
 
-  <path d="M114 137h63" stroke="#99b5ff" fill="none" stroke-width="1.6" marker-end="url(#bridge-blue-arrow)"/>
+  <path class="initial-link" d="M114 137h63" stroke="#99b5ff" fill="none" stroke-width="1.6" marker-end="url(#bridge-blue-arrow)"/>
   <path class="gap first-gap" d="M243 137h63"/>
   <path class="gap second-gap" d="M372 137h79"/>
   <g fill="none" stroke="#79d9c3" stroke-width="1.8" marker-end="url(#bridge-mint-arrow)">
@@ -108,7 +158,7 @@
     <text x="484" y="188">Source</text>
   </g>
   <path class="step-one" d="M25 228h18" stroke="#e0ad66" stroke-dasharray="3 3"/>
-  <path class="first-repair" d="M25 228h18" stroke="#79d9c3" stroke-width="2"/>
+  <path class="repair-note" d="M25 228h18" stroke="#79d9c3" stroke-width="2"/>
   <text class="path-note step-one" x="51" y="233">Supporting evidence can stay out of reach.</text>
   <text class="path-note step-two" x="51" y="233">Use the first clue to form a follow-up query.</text>
   <text class="path-note step-three" x="51" y="233">The follow-up search can recover the source.</text>

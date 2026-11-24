@@ -67,12 +67,59 @@
       .node-label { font-size: 17.5px; }
     }
     svg[data-scroll-driven] * { transition: none; }
+    .examples, .flow-examples {
+      --focus-weight: var(--weight-one, 1);
+      --focus-band: #1b2a43;
+      --focus-edge: #536d9b;
+      --focus-fill: #243a60;
+      --focus-ink: #99b5ff;
+    }
+    .scores, .flow-scores {
+      --focus-weight: var(--weight-two, 0);
+      --focus-band: #142e2c;
+      --focus-edge: #37685f;
+      --focus-fill: #173932;
+      --focus-ink: #79d9c3;
+    }
+    .model, .flow-model {
+      --focus-weight: var(--weight-three, 0);
+      --focus-band: #2e261f;
+      --focus-edge: #73583b;
+      --focus-fill: #3e3024;
+      --focus-ink: #e9bf8a;
+    }
+    svg[data-scroll-driven] :is(.examples, .scores, .model, .flow) {
+      --focus-strength: calc(var(--focus-weight) * 100%);
+    }
+    svg[data-scroll-driven] :is(.examples, .scores, .model) {
+      opacity: calc(.84 + .16 * var(--focus-weight));
+    }
+    svg[data-scroll-driven] :is(.examples, .scores, .model) .focus-light {
+      opacity: calc(.82 * var(--focus-weight));
+    }
+    svg[data-scroll-driven] :is(.examples, .scores, .model) .band {
+      fill: color-mix(in srgb, var(--focus-band) var(--focus-strength), #1a2132);
+      stroke: color-mix(in srgb, var(--focus-edge) var(--focus-strength), #394361);
+    }
+    svg[data-scroll-driven] :is(.examples, .scores, .model) .box {
+      fill: color-mix(in srgb, var(--focus-fill) var(--focus-strength), #192130);
+      stroke: color-mix(in srgb, var(--focus-ink) var(--focus-strength), #65759a);
+    }
+    svg[data-scroll-driven] :is(.examples, .scores, .model) .detail {
+      stroke: color-mix(in srgb, var(--focus-ink) var(--focus-strength), #91a2cd);
+    }
+    svg[data-scroll-driven] .flow {
+      stroke: color-mix(in srgb, var(--focus-ink) var(--focus-strength), #8795ba);
+      stroke-dasharray: none;
+    }
     .scroll-signal { display: none; pointer-events: none; }
-    svg[data-scroll-driven][data-active-step="1"] .signal-one,
-    svg[data-scroll-driven][data-active-step="2"] .signal-two,
-    svg[data-scroll-driven][data-active-step="3"] .signal-three {
+    .signal-one { --signal-weight: var(--weight-one, 1); --signal-progress: var(--progress-one, 0); }
+    .signal-two { --signal-weight: var(--weight-two, 0); --signal-progress: var(--progress-two, 0); }
+    .signal-three { --signal-weight: var(--weight-three, 0); --signal-progress: var(--progress-three, 0); }
+    svg[data-scroll-driven] .scroll-signal {
       display: inline;
-      transform: translateX(calc(var(--phase-progress, 0) * var(--travel)));
+      opacity: var(--signal-weight);
+      transform: translateX(calc(var(--signal-progress) * var(--travel)));
     }
   </style>
   <rect width="560" height="250" fill="#141824"/>
@@ -128,7 +175,7 @@
   <text class="path-note note-examples" x="51" y="233">Describe example rows in natural language.</text>
   <text class="path-note note-scores" x="51" y="233">Estimate the importance of the original features.</text>
   <text class="path-note note-model" x="51" y="233">Normalize the scores and reweight model inputs.</text>
-  <circle class="scroll-signal signal-one" cx="94" cy="131" r="2.9" fill="#c9d7ff" style="--travel: 14px"/>
-  <circle class="scroll-signal signal-two" cx="189" cy="135" r="2.9" fill="#a7f3d9" style="--travel: 8px"/>
-  <circle class="scroll-signal signal-three" cx="365" cy="135" r="2.9" fill="#ffe1b0" style="--travel: 8px"/>
+  <circle class="scroll-signal signal-one" cx="93" cy="131" r="3.3" fill="#c9d7ff" style="--travel: 16px"/>
+  <circle class="scroll-signal signal-two" cx="233" cy="138" r="3.3" fill="#a7f3d9" style="--travel: 41px"/>
+  <circle class="scroll-signal signal-three" cx="440" cy="135" r="3.3" fill="#ffe1b0" style="--travel: 22px"/>
 </svg>

@@ -1,91 +1,78 @@
-'use strict';
+import { gsap, ScrollTrigger } from './vendor/gsap-scrolltrigger-3.15.1.js';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const research = document.getElementById('research');
-const motion = window.matchMedia('(prefers-reduced-motion: no-preference)');
+const phaseNames = ['one', 'two', 'three'];
 const stories = [...research.querySelectorAll('.publication-list > li')].map(row => ({
   row,
   article: row.querySelector('.publication'),
   figure: row.querySelector('.paper-media'),
   image: row.querySelector('.paper-figure'),
-  phases: [...row.querySelectorAll('.paper-phases li')],
+  labels: [...row.querySelectorAll('.paper-phases li')],
   svg: null,
-  stage: 0,
-  position: '',
-  phaseProgress: '',
+  stage: -1,
+  progress: -1,
 }));
 
-let pendingFrame = 0;
+const clamp = gsap.utils.clamp(0, 1);
+const round = gsap.utils.snap(0.0001);
 
-function scrollPosition(story) {
-  const viewport = window.innerHeight;
-  if (story.row.hasAttribute('data-pinned')) {
-    const bounds = story.row.getBoundingClientRect();
-    const stickyTop = Number.parseFloat(getComputedStyle(story.article).top);
-    const runway = Math.max(1, bounds.height - story.article.getBoundingClientRect().height);
-    return (stickyTop - bounds.top) / runway;
+function blendAt(progress, center) {
+  const t = clamp((progress - (center - 0.065)) / 0.13);
+  return t * t * (3 - 2 * t);
+}
+
+function paintStory(story, progress, imageLoaded = false) {
+  if (story.progress === progress && !imageLoaded) return;
+
+  story.progress = progress;
+  const stage = Math.min(2, Math.floor(progress * 3));
+  const stepChanged = story.stage !== stage;
+  if (stepChanged) {
+    story.labels[story.stage]?.removeAttribute('aria-current');
+    story.labels[stage].setAttribute('aria-current', 'step');
+    story.stage = stage;
+    story.figure.dataset.step = String(stage + 1);
   }
 
-  // Short viewports keep the normal flow and advance as the image crosses the screen.
-  const imageTop = story.image.getBoundingClientRect().top;
-  return (viewport * 0.76 - imageTop) / (viewport * 0.55);
-}
+  const revealMiddle = blendAt(progress, 1 / 3);
+  const revealEnd = blendAt(progress, 2 / 3);
+  const weights = [1 - revealMiddle, revealMiddle - revealEnd, revealEnd];
+  story.figure.style.setProperty('--scroll-accent', round(progress));
+  story.figure.style.setProperty('--blend-middle', round(revealMiddle));
+  story.figure.style.setProperty('--blend-end', round(revealEnd));
 
-function updateFrame() {
-  pendingFrame = 0;
-  if (!motion.matches) return;
-
-  // Read the sections before applying any changes to the page or SVG documents.
-  const positions = stories.map(story => Math.min(1, Math.max(0, scrollPosition(story))));
-  stories.forEach((story, index) => {
-    const progress = positions[index];
-    const stage = Math.min(story.phases.length, Math.floor(progress * story.phases.length) + 1);
-    const position = progress.toFixed(4);
-
-    if (position !== story.position || stage !== story.stage) {
-      story.position = position;
-      story.phaseProgress = (progress * story.phases.length - (stage - 1)).toFixed(4);
-      story.figure.style.setProperty('--scroll-accent', position);
-      story.svg?.style.setProperty('--scroll-accent', position);
-      story.svg?.style.setProperty('--phase-progress', story.phaseProgress);
-    }
-
-    if (stage !== story.stage) {
-      story.phases[story.stage - 1]?.removeAttribute('aria-current');
-      story.phases[stage - 1].setAttribute('aria-current', 'step');
-      story.stage = stage;
-      story.figure.dataset.step = String(stage);
-      story.svg?.setAttribute('data-active-step', String(stage));
-    }
+  if (!story.svg) return;
+  if (stepChanged || imageLoaded) {
+    story.svg.setAttribute('data-scroll-driven', '');
+    story.svg.setAttribute('data-active-step', String(stage + 1));
+  }
+  story.svg.style.setProperty('--scroll-accent', round(progress));
+  phaseNames.forEach((name, index) => {
+    story.svg.style.setProperty('--weight-' + name, round(weights[index]));
+    story.svg.style.setProperty('--progress-' + name, round(clamp(progress * 3 - index)));
   });
 }
 
-function scheduleFrame() {
-  if (motion.matches && !pendingFrame) pendingFrame = requestAnimationFrame(updateFrame);
-}
+function resetStory(story) {
+  story.labels[story.stage]?.removeAttribute('aria-current');
+  story.stage = -1;
+  story.progress = -1;
+  story.row.removeAttribute('data-pinned');
+  story.figure.removeAttribute('data-step');
+  story.figure.style.removeProperty('--scroll-accent');
+  story.figure.style.removeProperty('--blend-middle');
+  story.figure.style.removeProperty('--blend-end');
 
-function updateLayout() {
-  const enabled = motion.matches;
-  const viewport = window.innerHeight;
-  const canPin = enabled && viewport >= 560;
-  const pinned = stories.map(story => canPin && story.article.offsetHeight <= viewport - 125);
-  research.toggleAttribute('data-scroll-motion', enabled);
-
-  stories.forEach((story, index) => {
-    story.row.toggleAttribute('data-pinned', pinned[index]);
-    story.svg?.toggleAttribute('data-scroll-driven', enabled);
-    if (enabled) return;
-
-    story.phases[story.stage - 1]?.removeAttribute('aria-current');
-    story.stage = 0;
-    story.position = '';
-    story.phaseProgress = '';
-    story.figure.removeAttribute('data-step');
-    story.figure.style.removeProperty('--scroll-accent');
-    story.svg?.style.removeProperty('--scroll-accent');
-    story.svg?.style.removeProperty('--phase-progress');
-    story.svg?.setAttribute('data-active-step', '1');
-  });
-  scheduleFrame();
+  if (!story.svg) return;
+  story.svg.removeAttribute('data-scroll-driven');
+  story.svg.setAttribute('data-active-step', '1');
+  story.svg.style.removeProperty('--scroll-accent');
+  for (const name of phaseNames) {
+    story.svg.style.removeProperty('--weight-' + name);
+    story.svg.style.removeProperty('--progress-' + name);
+  }
 }
 
 function attachImage(story) {
@@ -93,21 +80,77 @@ function attachImage(story) {
   if (svg?.localName !== 'svg') return;
 
   story.svg = svg;
-  svg.toggleAttribute('data-scroll-driven', motion.matches);
-  svg.setAttribute('data-active-step', String(story.stage || 1));
-  if (story.position) {
-    svg.style.setProperty('--scroll-accent', story.position);
-    svg.style.setProperty('--phase-progress', story.phaseProgress);
-  }
+  if (story.progress >= 0) paintStory(story, story.progress, true);
 }
 
-const resizeObserver = new ResizeObserver(updateLayout);
+function updatePinning() {
+  const viewport = window.innerHeight;
+  const pinned = stories.map(story => viewport >= 560 && story.article.offsetHeight <= viewport - 125);
+  stories.forEach((story, index) => story.row.toggleAttribute('data-pinned', pinned[index]));
+}
+
+function scrollBounds(story) {
+  const viewport = window.innerHeight;
+  if (!story.row.hasAttribute('data-pinned')) {
+    const top = window.scrollY + story.image.getBoundingClientRect().top;
+    return { start: top - viewport * 0.86, end: top - viewport * 0.21 };
+  }
+
+  const row = story.row.getBoundingClientRect();
+  const stickyTop = Number.parseFloat(getComputedStyle(story.article).top);
+  const pinnedStart = window.scrollY + row.top - stickyTop;
+  const run = row.height - story.article.getBoundingClientRect().height;
+  const lead = Math.min(86, viewport * 0.13);
+  return { start: pinnedStart - lead, end: pinnedStart + Math.max(1, run) };
+}
+
 for (const story of stories) {
   story.image.addEventListener('load', () => attachImage(story));
   attachImage(story);
-  resizeObserver.observe(story.article);
 }
-window.addEventListener('scroll', scheduleFrame, { passive: true });
-window.addEventListener('resize', updateLayout, { passive: true });
-motion.addEventListener('change', updateLayout);
-updateLayout();
+
+gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
+  research.setAttribute('data-scroll-motion', '');
+  updatePinning();
+
+  for (const story of stories) {
+    const playhead = { progress: 0 };
+    paintStory(story, 0);
+    const animation = gsap.to(playhead, {
+      progress: 1,
+      duration: 1,
+      ease: 'none',
+      paused: true,
+      onUpdate: () => paintStory(story, playhead.progress),
+    });
+    ScrollTrigger.create({
+      trigger: story.row,
+      start: () => scrollBounds(story).start,
+      end: () => scrollBounds(story).end,
+      animation,
+      scrub: true,
+    });
+  }
+
+  let refreshFrame = 0;
+  function scheduleRefresh() {
+    if (refreshFrame) return;
+    refreshFrame = requestAnimationFrame(() => {
+      refreshFrame = 0;
+      updatePinning();
+      ScrollTrigger.refresh();
+    });
+  }
+
+  const resizeObserver = new ResizeObserver(scheduleRefresh);
+  for (const story of stories) resizeObserver.observe(story.article);
+  window.addEventListener('resize', scheduleRefresh, { passive: true });
+
+  return () => {
+    cancelAnimationFrame(refreshFrame);
+    resizeObserver.disconnect();
+    window.removeEventListener('resize', scheduleRefresh);
+    research.removeAttribute('data-scroll-motion');
+    stories.forEach(resetStory);
+  };
+});
