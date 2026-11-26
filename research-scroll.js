@@ -2,6 +2,16 @@ import { gsap, ScrollTrigger } from './vendor/gsap-scrolltrigger-3.15.1.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const main = document.getElementById('main');
+const profiles = document.getElementById('profiles');
+const profileGrid = profiles.querySelector('.profile-grid');
+const profileCards = [...profileGrid.querySelectorAll('.profile-card')];
+const profileLinks = profileCards.map(card => card.querySelector('.profile-link'));
+const compactProfiles = window.matchMedia('(max-width: 560px)');
+const profileStops = [
+  { row: profiles, slide: profileGrid, guides: profileLinks, compact: false },
+  ...profileCards.map((row, i) => ({ row, slide: profileLinks[i], guides: [profileLinks[i]], compact: true })),
+];
 const research = document.getElementById('research');
 const phaseNames = ['one', 'two', 'three'];
 const stories = [...research.querySelectorAll('.publication-list > li')].map(row => ({
@@ -90,26 +100,39 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
   research.setAttribute('data-scroll-motion', '');
 
   let dockTop = 0;
-  let dockTravel = 0;
+  let paperTravel = 0;
+  let profileTravel = 0;
 
   function updateRailStops() {
     const viewport = window.innerHeight;
     dockTop = Math.round(Math.min(108, Math.max(72, viewport * .12)));
-    dockTravel = Math.round(Math.min(220, Math.max(144, viewport * .24)));
-    research.style.setProperty('--paper-dock-top', dockTop + 'px');
-    research.style.setProperty('--paper-dock-travel', dockTravel + 'px');
+    paperTravel = Math.round(Math.min(220, Math.max(144, viewport * .24)));
+    profileTravel = Math.round(Math.min(136, Math.max(96, viewport * .16)));
+    main.style.setProperty('--rail-dock-top', dockTop + 'px');
+    research.style.setProperty('--rail-dock-travel', paperTravel + 'px');
+    profiles.style.setProperty('--rail-dock-travel', profileTravel + 'px');
 
+    const room = viewport - dockTop - 24;
+    for (const link of profileLinks) link.removeAttribute('data-rail-engaged');
+    for (const stop of profileStops) {
+      const fits = stop.compact === compactProfiles.matches && stop.slide.offsetHeight <= room;
+      stop.row.toggleAttribute('data-rail-stop', fits);
+    }
     for (const story of stories) {
-      const fits = viewport >= 560 && story.article.offsetHeight <= viewport - dockTop - 24;
+      const fits = viewport >= 560 && story.article.offsetHeight <= room;
       story.row.toggleAttribute('data-rail-stop', fits);
       if (!fits) story.article.removeAttribute('data-rail-engaged');
     }
   }
 
+  function dockStart(row) {
+    return window.scrollY + row.getBoundingClientRect().top - dockTop;
+  }
+
   function scrollBounds(story) {
     if (story.row.hasAttribute('data-rail-stop')) {
-      const start = window.scrollY + story.row.getBoundingClientRect().top - dockTop;
-      return { start, end: start + dockTravel };
+      const start = dockStart(story.row);
+      return { start, end: start + paperTravel };
     }
 
     const top = window.scrollY + story.figure.getBoundingClientRect().top;
@@ -119,6 +142,21 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
 
   updateRailStops();
   ScrollTrigger.addEventListener('refreshInit', updateRailStops);
+
+  for (const stop of profileStops) {
+    function updateGuides({ isActive }) {
+      if (!stop.row.hasAttribute('data-rail-stop')) return;
+      for (const link of stop.guides) link.toggleAttribute('data-rail-engaged', isActive);
+    }
+
+    ScrollTrigger.create({
+      trigger: stop.row,
+      start: () => dockStart(stop.row),
+      end: () => dockStart(stop.row) + profileTravel,
+      onToggle: updateGuides,
+      onRefresh: updateGuides,
+    });
+  }
 
   for (const story of stories) {
     const playhead = { progress: 0 };
@@ -149,6 +187,7 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
   }
 
   const resizeObserver = new ResizeObserver(scheduleRefresh);
+  for (const link of profileLinks) resizeObserver.observe(link);
   for (const story of stories) resizeObserver.observe(story.article);
   window.addEventListener('resize', scheduleRefresh, { passive: true });
 
@@ -158,8 +197,11 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
     window.removeEventListener('resize', scheduleRefresh);
     ScrollTrigger.removeEventListener('refreshInit', updateRailStops);
     research.removeAttribute('data-scroll-motion');
-    research.style.removeProperty('--paper-dock-top');
-    research.style.removeProperty('--paper-dock-travel');
+    main.style.removeProperty('--rail-dock-top');
+    profiles.style.removeProperty('--rail-dock-travel');
+    research.style.removeProperty('--rail-dock-travel');
+    for (const stop of profileStops) stop.row.removeAttribute('data-rail-stop');
+    for (const link of profileLinks) link.removeAttribute('data-rail-engaged');
     stories.forEach(resetStory);
   };
 });
