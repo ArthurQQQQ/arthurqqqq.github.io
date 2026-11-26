@@ -8,8 +8,8 @@
   <title>Jiayi (Arthur) Qiu</title>
   <link rel="canonical" href="https://arthurqqqq.github.io/">
   <link rel="preload" href="google-sans-flex-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=profile-sliders">
-  <script type="module" src="research-scroll.js?v=profile-sliders"></script>
+  <link rel="stylesheet" href="styles.css?v=publication-rail">
+  <script type="module" src="research-scroll.js?v=publication-rail"></script>
 </head>
 <body id="home">
   <div class="pegboard" aria-hidden="true"></div>
@@ -19,14 +19,14 @@
       <a class="wordmark" href="#home">Arthur Qiu</a>
       <nav class="main-nav" aria-label="Main navigation">
         <a href="#profiles">Profiles</a>
-        <a href="#research">Papers</a>
+        <a href="#research">Publications</a>
         <a href="#projects">Projects</a>
       </nav>
     </div>
   </header>
 
   <main id="main">
-    <section class="hero container" aria-labelledby="profile-name">
+    <section class="hero container rail-card" aria-labelledby="profile-name">
       <div class="portrait-mount rail-card">
         <img class="portrait" src="portrait.jpg" alt="Jiayi (Arthur) Qiu" width="128" height="128" fetchpriority="high">
       </div>
@@ -45,7 +45,7 @@
     <section class="profile-section container" id="profiles" aria-label="Research profiles">
       <div class="profile-grid">
         <article class="profile-card" aria-labelledby="github-title">
-          <a class="profile-link rail-card" href="https://github.com/ArthurQQQQ" aria-labelledby="open-github-profile">
+          <a class="profile-link" href="https://github.com/ArthurQQQQ" aria-labelledby="open-github-profile">
             <header class="profile-card-header">
               <h2 id="github-title">GitHub</h2>
               <span class="profile-action" id="open-github-profile">View GitHub</span>
@@ -56,7 +56,7 @@
             </div>
           </a>
         </article>
-        <article class="profile-card" aria-labelledby="scholar-title">
+        <article class="profile-card" id="scholar-preview" aria-labelledby="scholar-title">
           <a class="profile-link rail-card" href="https://scholar.google.com/citations?user=WC9dYREAAAAJ&amp;hl=en" aria-labelledby="open-scholar-profile">
             <header class="profile-card-header">
               <h2 id="scholar-title">Google Scholar</h2>
@@ -73,9 +73,12 @@
 
     <section class="section-block" id="research" aria-labelledby="research-title">
       <div class="container">
-        <div class="section-heading">
-          <h2 id="research-title">Selected papers</h2>
-          <a id="paper-preview-link" href="https://arthurqqqq.github.io/#research" hidden>View animations on the live site</a>
+        <div class="section-heading publications-heading rail-card">
+          <h2 id="research-title">Publications</h2>
+          <div class="publications-links">
+            <a href="https://scholar.google.com/citations?user=WC9dYREAAAAJ&amp;hl=en">More on Google Scholar</a>
+            <a id="paper-preview-link" href="https://arthurqqqq.github.io/#research" hidden>View animations on the live site</a>
+          </div>
         </div>
         <ol class="publication-list">
           <li>
