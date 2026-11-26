@@ -16,6 +16,9 @@
   --line: #343539;
   --strong-line: #484a50;
   --blue: #c4d0f5;
+  --brass: #f0c380;
+  --paper-stock: #eee7d9;
+  --paper-ink: #25221e;
   --content-width: 1040px;
   --page-edge: clamp(20px, 5vw, 48px);
   --board-inset: max(var(--page-edge), calc((100% - var(--content-width)) / 2));
@@ -71,10 +74,10 @@ a:hover { text-decoration-thickness: 2px; }
   box-sizing: border-box;
   width: calc(var(--rail-gap) + var(--rail-width) / 2 + 2px);
   height: clamp(25px, 3vw, 34px);
-  border: 1px solid #52555a;
+  border: 1px solid var(--guide-line, #52555a);
   background:
     linear-gradient(90deg, #1a1c1e, #1a1c1e) var(--guide-edge) center / 3px 65% no-repeat,
-    linear-gradient(#3b3d42, #282a2e);
+    linear-gradient(var(--guide-face, #3b3d42), var(--guide-shade, #282a2e));
   pointer-events: none;
   content: "";
 }
@@ -150,65 +153,106 @@ a:hover { text-decoration-thickness: 2px; }
   --portrait-size: 128px;
   display: grid;
   grid-template:
-    "name portrait" auto
-    "statement portrait" auto
-    "details portrait" auto
-    / minmax(0, 1fr) clamp(153px, 18vw, 212px);
+    "intro portrait"
+    "details paper"
+    / minmax(0, 1fr) clamp(182px, 22vw, 252px);
   align-items: start;
-  gap: 15px clamp(24px, 4vw, 48px);
-  margin-block: clamp(24px, 4vw, 44px) 24px;
-  padding: clamp(30px, 4.1vw, 52px);
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  background: linear-gradient(142deg, #24262a, var(--surface) 66%);
+  gap: 18px clamp(18px, 3vw, 34px);
+  margin-block: clamp(26px, 4vw, 48px) 28px;
+}
+.intro-sheet {
+  --guide-line: #f3cb93;
+  --guide-face: #e7b679;
+  --guide-shade: #aa7745;
+  grid-area: intro;
+  padding: clamp(23px, 4.6vw, 49px);
+  border: 1px solid #eee3cf;
+  border-radius: 5px;
+  background: var(--paper-stock);
+  color: var(--paper-ink);
 }
 .hero h1 {
-  grid-area: name;
-  font-size: clamp(38px, 5.1vw, 62px);
+  font-size: clamp(36px, 4.85vw, 62px);
   font-weight: 480;
-  line-height: 1.02;
+  line-height: 1.04;
   letter-spacing: -.032em;
   text-wrap: balance;
 }
+.research-thesis {
+  max-width: 44ch;
+  margin-top: clamp(10px, 2vw, 18px);
+  font-size: clamp(17px, 2vw, 23px);
+  font-weight: 440;
+  line-height: 1.38;
+  letter-spacing: -.013em;
+  text-wrap: pretty;
+}
+.hero-details {
+  grid-area: details;
+  padding: clamp(16px, 2.5vw, 26px);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--muted);
+}
+.hero-details p { max-width: 63ch; }
+.hero-details p + p { margin-top: 8px; }
 .affiliation {
   display: flex;
   align-items: center;
   gap: 9px;
-  color: var(--muted);
+  color: var(--ink);
   font-size: 14px;
 }
 .unc-mark { display: block; width: 27px; height: auto; flex: none; }
 .portrait-mount {
   grid-area: portrait;
-  align-self: center;
-  justify-self: center;
-  padding: 6px;
-  border: 1px solid var(--strong-line);
-  border-radius: 10px;
-  background: var(--raised);
+  align-self: end;
+  display: grid;
+  justify-items: center;
+  padding: 17px 16px 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
 }
 .portrait {
   display: block;
   width: var(--portrait-size);
   height: auto;
   aspect-ratio: 1;
-  border-radius: 5px;
+  border-radius: 3px;
+  outline: 1px solid rgb(255 255 255 / .18);
   object-fit: cover;
 }
-.research-thesis {
-  grid-area: statement;
-  max-width: 43ch;
-  color: var(--ink);
-  font-size: clamp(18px, 2vw, 24px);
-  font-weight: 450;
-  line-height: 1.33;
-  letter-spacing: -.015em;
-  text-wrap: pretty;
+.social-links { margin-top: 6px; font-size: 14px; }
+.social-links a {
+  display: inline-flex;
+  min-height: 32px;
+  align-items: center;
+  color: var(--brass);
 }
-.hero-details { grid-area: details; max-width: 62ch; color: var(--muted); }
-.hero-details p + p { margin-top: 8px; }
-.social-links { margin-top: 12px; font-size: 14px; }
-.social-links a { display: inline-flex; min-height: 30px; align-items: center; }
+.hero-paper {
+  grid-area: paper;
+  display: grid;
+  min-width: 0;
+  gap: 7px;
+  padding: 8px 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: .875rem;
+  font-weight: 525;
+  line-height: 1.3;
+  text-decoration: none;
+}
+.hero-paper img { display: block; width: 100%; height: auto; border-radius: 4px; }
+.hero-paper span { padding-inline: 3px; }
+.hero-paper:hover span { color: var(--brass); text-decoration: underline; }
+.portrait-mount::before, .hero-paper::before { display: none; }
+@media (min-width: 721px) {
+  .intro-sheet::after, .hero-details::after { display: none; }
+}
 
 .profile-grid, .project-categories {
   display: grid;
@@ -283,6 +327,23 @@ a:hover { text-decoration-thickness: 2px; }
   font-size: .84375rem;
   line-height: 1.45;
 }
+.venue-label {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 7px;
+}
+.venue-mark {
+  display: block;
+  flex: none;
+  width: 37px;
+  height: 20px;
+  padding: 2px 3px;
+  border-radius: 3px;
+  background: #f5f5f6;
+  object-fit: contain;
+}
+.venue-mark-icdm { background: #14171e; }
 
 .section-block { padding-block: 18px 46px; }
 .section-heading { margin-bottom: 21px; }
@@ -406,19 +467,22 @@ a:hover { text-decoration-thickness: 2px; }
 @media (max-width: 720px) {
   .publication { grid-template-columns: minmax(0, 1fr); gap: 16px; }
   .hero {
-    --portrait-size: clamp(66px, 19.5vw, 84px);
+    --portrait-size: clamp(65px, 18vw, 96px);
     grid-template:
-      "name portrait"
-      "statement statement"
+      "intro intro"
       "details details"
-      / minmax(0, 1fr) auto;
-    gap: 15px;
-    padding: clamp(17px, 4.5vw, 30px);
+      "portrait paper"
+      / minmax(92px, .72fr) minmax(0, 1.28fr);
+    align-items: stretch;
+    gap: 13px;
   }
-  .hero h1 { align-self: center; font-size: clamp(29px, 7.5vw, 46px); }
+  .hero h1 { font-size: clamp(30px, 7.6vw, 48px); }
   .affiliation { font-size: 13px; }
   .unc-mark { width: 22px; }
-  .portrait-mount { padding: 4px; }
+  .portrait-mount { align-self: stretch; align-content: center; padding: 9px 7px 5px; }
+  .portrait-mount::before { display: block; }
+  .portrait-mount::after { display: none; }
+  .hero-paper { align-content: center; }
 }
 @media (max-width: 560px) {
   .profile-grid, .project-categories { grid-template-columns: minmax(0, 1fr); }
@@ -430,7 +494,7 @@ a:hover { text-decoration-thickness: 2px; }
   .publication-links a, .social-links a { min-height: 44px; }
 }
 @media print {
-  .hero, .portrait-mount { background: none; }
+  .intro-sheet, .portrait-mount { background: none; }
   .pegboard, .rail-card::before, .rail-card::after { display: none; }
   :root {
     color-scheme: light;
@@ -440,6 +504,7 @@ a:hover { text-decoration-thickness: 2px; }
     --ink: #171b22;
     --muted: #414853;
     --blue: #164a72;
+    --brass: #6b471c;
     --line: #d7dbe2;
     --strong-line: #aeb6c4;
   }

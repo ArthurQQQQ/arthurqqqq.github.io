@@ -8,7 +8,7 @@
   <title>Jiayi (Arthur) Qiu</title>
   <link rel="canonical" href="https://arthurqqqq.github.io/">
   <link rel="preload" href="google-sans-flex-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=rail-guides">
+  <link rel="stylesheet" href="styles.css?v=board-exhibit">
   <script type="module" src="research-scroll.js?v=rail-guides"></script>
 </head>
 <body id="home">
@@ -26,20 +26,26 @@
   </header>
 
   <main id="main">
-    <section class="hero container rail-card" aria-labelledby="profile-name">
-      <h1 id="profile-name">Jiayi (Arthur) Qiu</h1>
-      <p class="research-thesis">I study how agents learn continually from experience and stay reliable over long horizons.</p>
-      <div class="portrait-mount">
-        <img class="portrait" src="portrait.jpg" alt="Jiayi (Arthur) Qiu" width="128" height="128" fetchpriority="high">
+    <section class="hero container" aria-labelledby="profile-name">
+      <div class="intro-sheet rail-card">
+        <h1 id="profile-name">Jiayi (Arthur) Qiu</h1>
+        <p class="research-thesis">I study how agents learn continually from experience and stay reliable over long horizons.</p>
       </div>
-      <div class="hero-details">
+      <div class="hero-details rail-card">
         <p class="affiliation"><img class="unc-mark" src="unc-interlocking-nc.png" alt="" width="29" height="23"> <span>Honors Carolina undergraduate at UNC–Chapel Hill</span></p>
         <p>I major in computer science and economics and minor in mathematics.</p>
         <p>I work with <a href="https://www.ssriva.com/">Shashank Srivastava</a> (<a href="https://l3.cs.unc.edu/" aria-label="Learning from Language Lab (L³)">Lab</a>) and <a href="https://cs.unc.edu/person/snigdha-chaturvedi/">Snigdha Chaturvedi</a> (<a href="https://nlp.cs.unc.edu/#lab-Chaturvedi-Lab" aria-label="Chaturvedi Lab">Lab</a>). I’m writing my honors thesis in economics with <a href="https://econ.unc.edu/people/hansen-peter/">Peter R. Hansen</a>.</p>
+      </div>
+      <div class="portrait-mount rail-card">
+        <img class="portrait" src="portrait.jpg" alt="Jiayi (Arthur) Qiu" width="128" height="128" fetchpriority="high">
         <nav class="social-links" aria-label="Contact">
           <a href="mailto:arthurq@ad.unc.edu">Email</a>
         </nav>
       </div>
+      <a class="hero-paper rail-card" href="#bridge-starvation">
+        <img src="bridge-starvation.svg?v=gsap-scroll" width="560" height="250" alt="">
+        <span>Bridge Starvation</span>
+      </a>
     </section>
 
     <section class="profile-grid container" id="profiles" aria-label="Research profiles">
@@ -77,11 +83,14 @@
         </div>
         <ol class="publication-list">
           <li>
-            <article class="publication rail-card">
+            <article class="publication rail-card" id="bridge-starvation">
               <div class="paper-copy">
                 <div class="entry-heading">
                   <h3>Bridge Starvation</h3>
-                  <span class="entry-label">ICML 2026 · Failure Modes in Agentic AI Workshop</span>
+                  <span class="entry-label venue-label">
+                    <img class="venue-mark" src="venue-icml.svg" width="37" height="20" alt="" loading="lazy">
+                    <span>ICML 2026 · Failure Modes in Agentic AI Workshop</span>
+                  </span>
                 </div>
                 <p class="publication-summary">A first search can find a clue and miss the supporting passage. A second search uses that clue to look for the passage.</p>
                 <p class="paper-meta">Jiayi (Arthur) Qiu</p>
@@ -109,7 +118,10 @@
               <div class="paper-copy">
                 <div class="entry-heading">
                   <h3>Atom-Keyed Retrieval</h3>
-                  <span class="entry-label">ICML 2026 · Graph Foundation Models Workshop</span>
+                  <span class="entry-label venue-label">
+                    <img class="venue-mark" src="venue-icml.svg" width="37" height="20" alt="" loading="lazy">
+                    <span>ICML 2026 · Graph Foundation Models Workshop</span>
+                  </span>
                 </div>
                 <p class="publication-summary">The retriever ranks short claims and gives the model the full passages they came from.</p>
                 <p class="paper-meta">Jiayi (Arthur) Qiu</p>
@@ -137,7 +149,10 @@
               <div class="paper-copy">
                 <div class="entry-heading">
                   <h3>Correcting Noise-Mispecified Operator Selection in Wild Compound LLM Agents</h3>
-                  <span class="entry-label">ICML 2026 · Agents in the Wild Workshop</span>
+                  <span class="entry-label venue-label">
+                    <img class="venue-mark" src="venue-icml.svg" width="37" height="20" alt="" loading="lazy">
+                    <span>ICML 2026 · Agents in the Wild Workshop</span>
+                  </span>
                 </div>
                 <p class="publication-summary">POISE uses Shapley-based comparisons to estimate each operator’s contribution when a compound agent’s outcomes are noisy.</p>
                 <p class="paper-meta">Jiayi Qiu</p>
@@ -165,7 +180,10 @@
               <div class="paper-copy">
                 <div class="entry-heading">
                   <h3>SIFT</h3>
-                  <span class="entry-label">ICDM 2025 · VISTA Workshop</span>
+                  <span class="entry-label venue-label">
+                    <img class="venue-mark venue-mark-icdm" src="venue-icdm-2025.png" width="37" height="20" alt="" loading="lazy">
+                    <span>ICDM 2025 · VISTA Workshop</span>
+                  </span>
                 </div>
                 <p class="publication-summary">An LLM reads table rows rewritten as short scenes and scores the columns. Those scores reweight the inputs to a tabular model.</p>
                 <p class="paper-meta">Jiayi (Arthur) Qiu · Oral presentation</p>
@@ -202,21 +220,30 @@
               <li>
                 <div class="entry-heading">
                   <a href="https://github.com/ArthurQQQQ/multipass-multihop-retrieval-ICMLW">MULTIPASS</a>
-                  <span class="entry-label">ICML 2026 · Failure Modes in Agentic AI Workshop</span>
+                  <span class="entry-label venue-label">
+                    <img class="venue-mark" src="venue-icml.svg" width="37" height="20" alt="" loading="lazy">
+                    <span>ICML 2026 · Failure Modes in Agentic AI Workshop</span>
+                  </span>
                 </div>
                 <p>Code for the second search in Bridge Starvation.</p>
               </li>
               <li>
                 <div class="entry-heading">
                   <a href="https://github.com/ArthurQQQQ/atom-keyed-chunk-retrieval-qa-ICMLW">Atom-Keyed Chunk Retrieval</a>
-                  <span class="entry-label">ICML 2026 · Graph Foundation Models Workshop</span>
+                  <span class="entry-label venue-label">
+                    <img class="venue-mark" src="venue-icml.svg" width="37" height="20" alt="" loading="lazy">
+                    <span>ICML 2026 · Graph Foundation Models Workshop</span>
+                  </span>
                 </div>
                 <p>Ranks short claims and retrieves their source passages.</p>
               </li>
               <li>
                 <div class="entry-heading">
                   <a href="https://github.com/ArthurQQQQ/SIFT-LLM-feature-reweighting-tabular-ICDMW">SIFT reproduction</a>
-                  <span class="entry-label">ICDM 2025 · VISTA Workshop (original paper)</span>
+                  <span class="entry-label venue-label">
+                    <img class="venue-mark venue-mark-icdm" src="venue-icdm-2025.png" width="37" height="20" alt="" loading="lazy">
+                    <span>ICDM 2025 · VISTA Workshop (original paper)</span>
+                  </span>
                 </div>
                 <p>Reproduces SIFT’s feature-weighting experiment.</p>
               </li>
