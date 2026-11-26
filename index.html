@@ -8,17 +8,24 @@
   <title>Jiayi (Arthur) Qiu</title>
   <link rel="canonical" href="https://arthurqqqq.github.io/">
   <link rel="preload" href="google-sans-flex-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=publication-rail">
-  <script type="module" src="research-scroll.js?v=publication-rail"></script>
+  <link rel="stylesheet" href="styles.css?v=scroll-details">
+  <script type="module" src="research-scroll.js?v=scroll-details"></script>
 </head>
 <body id="home">
-  <div class="pegboard" aria-hidden="true"></div>
+  <div class="pegboard" aria-hidden="true"><div class="pegboard-light"></div></div>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="container header-inner">
       <a class="wordmark" href="#home">Arthur Qiu</a>
       <nav class="main-nav" aria-label="Main navigation">
-        <a href="#profiles">Profiles</a>
+        <details class="nav-profiles" id="nav-profiles">
+          <summary>Profiles</summary>
+          <ul class="nav-profile-links">
+            <li><a href="#profiles">Profile previews</a></li>
+            <li><a href="https://github.com/ArthurQQQQ">GitHub</a></li>
+            <li><a href="https://scholar.google.com/citations?user=WC9dYREAAAAJ&amp;hl=en">Google Scholar</a></li>
+          </ul>
+        </details>
         <a href="#research">Publications</a>
         <a href="#projects">Projects</a>
       </nav>
@@ -298,6 +305,28 @@
     if (location.protocol === 'file:') {
       document.getElementById('paper-preview-link').hidden = false;
     }
+
+    const profileMenu = document.getElementById('nav-profiles');
+    profileMenu.addEventListener('pointerenter', (event) => {
+      if (event.pointerType === 'mouse') profileMenu.open = true;
+    });
+    profileMenu.addEventListener('pointerleave', (event) => {
+      if (event.pointerType === 'mouse' && !profileMenu.contains(document.activeElement)) profileMenu.open = false;
+    });
+    profileMenu.addEventListener('focusout', (event) => {
+      if (!profileMenu.contains(event.relatedTarget)) profileMenu.open = false;
+    });
+    profileMenu.addEventListener('click', (event) => {
+      if (event.target.closest('a')) profileMenu.open = false;
+    });
+    document.addEventListener('pointerdown', (event) => {
+      if (!profileMenu.contains(event.target)) profileMenu.open = false;
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape' || !profileMenu.open) return;
+      if (profileMenu.contains(document.activeElement)) profileMenu.querySelector('summary').focus();
+      profileMenu.open = false;
+    });
   </script>
 </body>
 </html>

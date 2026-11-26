@@ -3,6 +3,7 @@ import { gsap, ScrollTrigger } from './vendor/gsap-scrolltrigger-3.15.1.js';
 gsap.registerPlugin(ScrollTrigger);
 
 const main = document.getElementById('main');
+const boardLight = document.querySelector('.pegboard-light');
 const scholarPreview = document.getElementById('scholar-preview');
 const scholarLink = scholarPreview.querySelector('.profile-link');
 const research = document.getElementById('research');
@@ -91,6 +92,24 @@ for (const story of stories) {
 
 gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
   research.setAttribute('data-scroll-motion', '');
+
+  const lightShift = gsap.to(boardLight, { y: -72, ease: 'none', paused: true });
+  ScrollTrigger.create({
+    start: 0,
+    end: () => window.innerHeight * 1.1,
+    animation: lightShift,
+    scrub: true,
+  });
+
+  const revealTargets = main.querySelectorAll('.profile-preview, .paper-copy');
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting || entry.intersectionRatio < .1) continue;
+      entry.target.classList.add('scroll-reveal');
+      observer.unobserve(entry.target);
+    }
+  }, { rootMargin: '0px 0px -9% 0px', threshold: .1 });
+  for (const target of revealTargets) revealObserver.observe(target);
 
   let dockTop = 0;
   let paperTravel = 0;
@@ -181,6 +200,8 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
 
   return () => {
     cancelAnimationFrame(refreshFrame);
+    revealObserver.disconnect();
+    for (const target of revealTargets) target.classList.remove('scroll-reveal');
     resizeObserver.disconnect();
     window.removeEventListener('resize', scheduleRefresh);
     ScrollTrigger.removeEventListener('refreshInit', updateRailStops);
