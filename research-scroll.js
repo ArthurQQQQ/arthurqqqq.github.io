@@ -6,8 +6,15 @@ const main = document.getElementById('main');
 const siteHeader = document.querySelector('.site-header');
 const siteFooter = document.querySelector('.site-footer');
 const boardLight = document.querySelector('.pegboard-light');
-const scholarPreview = document.getElementById('scholar-preview');
-const scholarLink = scholarPreview.querySelector('.profile-link');
+const profiles = document.getElementById('profiles');
+const profileGrid = profiles.querySelector('.profile-grid');
+const profileCards = [...profileGrid.querySelectorAll('.profile-card')];
+const profileLinks = profileCards.map(card => card.querySelector('.profile-link'));
+const compactProfiles = window.matchMedia('(max-width: 560px)');
+const profileStops = [
+  { row: profiles, slide: profileGrid, guides: profileLinks, compact: false },
+  ...profileCards.map((row, index) => ({ row, slide: profileLinks[index], guides: [profileLinks[index]], compact: true })),
+];
 const research = document.getElementById('research');
 const researchHeading = research.querySelector('.rail-heading');
 const projects = document.getElementById('projects');
@@ -120,11 +127,11 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
   }, { rootMargin: '0px 0px -9% 0px', threshold: .1 });
   for (const target of revealTargets) revealObserver.observe(target);
 
-  let scholarTop = 0;
+  let profileTop = 0;
   let paperTop = 0;
   let projectTop = 0;
   let paperTravel = 0;
-  let scholarTravel = 0;
+  let profileTravel = 0;
   let projectTravel = 0;
 
   function setRailStop(row, article, fits) {
@@ -135,21 +142,25 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
   function updateRailStops() {
     const viewport = window.innerHeight;
     const headingTop = siteHeader.offsetHeight + 8;
-    scholarTop = Math.max(headingTop + 4, Math.round(Math.min(108, Math.max(72, viewport * .12))));
+    profileTop = Math.max(headingTop + 4, Math.round(Math.min(108, Math.max(72, viewport * .12))));
     paperTop = headingTop + researchHeading.offsetHeight + 12;
     projectTop = headingTop + projectsHeading.offsetHeight + 12;
     paperTravel = Math.round(Math.min(220, Math.max(144, viewport * .24)));
-    scholarTravel = Math.round(Math.min(136, Math.max(96, viewport * .16)));
+    profileTravel = Math.round(Math.min(136, Math.max(96, viewport * .16)));
     projectTravel = Math.round(Math.min(136, Math.max(96, viewport * .15)));
     main.style.setProperty('--section-heading-top', headingTop + 'px');
-    scholarPreview.style.setProperty('--rail-dock-top', scholarTop + 'px');
+    profiles.style.setProperty('--rail-dock-top', profileTop + 'px');
     research.style.setProperty('--rail-dock-top', paperTop + 'px');
     projects.style.setProperty('--rail-dock-top', projectTop + 'px');
     research.style.setProperty('--rail-dock-travel', paperTravel + 'px');
-    scholarPreview.style.setProperty('--rail-dock-travel', scholarTravel + 'px');
+    profiles.style.setProperty('--rail-dock-travel', profileTravel + 'px');
     projects.style.setProperty('--rail-dock-travel', projectTravel + 'px');
 
-    setRailStop(scholarPreview, scholarLink, scholarLink.offsetHeight <= viewport - scholarTop - 24);
+    for (const link of profileLinks) link.removeAttribute('data-rail-engaged');
+    for (const stop of profileStops) {
+      const fits = stop.compact === compactProfiles.matches && stop.slide.offsetHeight <= viewport - profileTop - 24;
+      stop.row.toggleAttribute('data-rail-stop', fits);
+    }
     for (const story of stories) {
       setRailStop(story.row, story.article, viewport >= 560 && story.article.offsetHeight <= viewport - paperTop - 24);
     }
@@ -182,9 +193,10 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
   updateRailStops();
   ScrollTrigger.addEventListener('refreshInit', updateRailStops);
 
-  function registerGuide(row, article, dockTop, travel) {
+  function registerGuide(row, guides, dockTop, travel, isCurrent = () => true) {
     function updateGuide({ isActive }) {
-      article.toggleAttribute('data-rail-engaged', isActive === true && row.hasAttribute('data-rail-stop'));
+      if (!isCurrent()) return;
+      for (const guide of guides) guide.toggleAttribute('data-rail-engaged', isActive === true && row.hasAttribute('data-rail-stop'));
     }
     ScrollTrigger.create({
       trigger: row,
@@ -195,7 +207,9 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
     });
   }
 
-  registerGuide(scholarPreview, scholarLink, () => scholarTop, () => scholarTravel);
+  for (const stop of profileStops) {
+    registerGuide(stop.row, stop.guides, () => profileTop, () => profileTravel, () => stop.compact === compactProfiles.matches);
+  }
 
   for (const story of stories) {
     const playhead = { progress: 0 };
@@ -217,7 +231,7 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
   }
 
   for (const workflow of workflows) {
-    registerGuide(workflow.row, workflow.article, () => projectTop, () => projectTravel);
+    registerGuide(workflow.row, [workflow.article], () => projectTop, () => projectTravel);
   }
 
   let refreshFrame = 0;
@@ -234,7 +248,7 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
   resizeObserver.observe(siteFooter);
   resizeObserver.observe(researchHeading);
   resizeObserver.observe(projectsHeading);
-  resizeObserver.observe(scholarLink);
+  for (const link of profileLinks) resizeObserver.observe(link);
   for (const story of stories) resizeObserver.observe(story.article);
   for (const workflow of workflows) resizeObserver.observe(workflow.article);
   window.addEventListener('resize', scheduleRefresh, { passive: true });
@@ -248,12 +262,13 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
     ScrollTrigger.removeEventListener('refreshInit', updateRailStops);
     research.removeAttribute('data-scroll-motion');
     main.style.removeProperty('--section-heading-top');
-    for (const section of [scholarPreview, research, projects]) {
+    for (const section of [profiles, research, projects]) {
       section.style.removeProperty('--rail-dock-top');
       section.style.removeProperty('--rail-dock-travel');
     }
     projects.style.removeProperty('--project-end-clearance');
-    setRailStop(scholarPreview, scholarLink, false);
+    for (const stop of profileStops) stop.row.removeAttribute('data-rail-stop');
+    for (const link of profileLinks) link.removeAttribute('data-rail-engaged');
     for (const workflow of workflows) setRailStop(workflow.row, workflow.article, false);
     stories.forEach(resetStory);
   };
