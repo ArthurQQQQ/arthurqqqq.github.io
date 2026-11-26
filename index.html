@@ -8,8 +8,8 @@
   <title>Jiayi (Arthur) Qiu</title>
   <link rel="canonical" href="https://arthurqqqq.github.io/">
   <link rel="preload" href="google-sans-flex-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=scroll-details">
-  <script type="module" src="research-scroll.js?v=scroll-details"></script>
+  <link rel="stylesheet" href="styles.css?v=section-rails">
+  <script type="module" src="research-scroll.js?v=section-rails"></script>
 </head>
 <body id="home">
   <div class="pegboard" aria-hidden="true"><div class="pegboard-light"></div></div>
@@ -37,7 +37,7 @@
       <div class="portrait-mount rail-card">
         <img class="portrait" src="portrait.jpg" alt="Jiayi (Arthur) Qiu" width="128" height="128" fetchpriority="high">
       </div>
-      <h1 id="profile-name">Jiayi (Arthur) Qiu</h1>
+      <h1 id="profile-name" class="rail-card"><span>Jiayi <span class="nickname">(Arthur)</span> Qiu</span><span class="name-rail" aria-hidden="true"></span></h1>
       <p class="research-thesis">I study how agents learn continually from experience and stay reliable over long horizons.</p>
       <div class="hero-details">
         <p class="affiliation"><img class="unc-mark" src="unc-interlocking-nc.png" alt="" width="29" height="23"> <span>Honors Carolina undergraduate at UNC–Chapel Hill</span></p>
@@ -52,15 +52,19 @@
     <section class="profile-section container" id="profiles" aria-label="Research profiles">
       <div class="profile-grid">
         <article class="profile-card" aria-labelledby="github-title">
-          <a class="profile-link" href="https://github.com/ArthurQQQQ" aria-labelledby="open-github-profile">
+          <a class="profile-link" href="https://github.com/ArthurQQQQ" aria-labelledby="open-github-profile" aria-describedby="github-summary github-stars">
             <header class="profile-card-header">
-              <h2 id="github-title">GitHub</h2>
+              <div class="profile-card-title">
+                <h2 id="github-title">GitHub</h2>
+                <span class="profile-stat" id="github-stars" aria-label="43 stars received across public non-fork repositories">43 stars</span>
+              </div>
               <span class="profile-action" id="open-github-profile">View GitHub</span>
             </header>
             <div class="profile-preview">
               <img src="github-page-preview.jpg?v=project-venues" width="1280" height="640" decoding="async"
                 alt="Public GitHub profile with the avatar, repository navigation, and research README">
             </div>
+            <p class="profile-summary" id="github-summary">Research workflows and public code.</p>
           </a>
         </article>
         <article class="profile-card" id="scholar-preview" aria-labelledby="scholar-title">
@@ -80,12 +84,9 @@
 
     <section class="section-block" id="research" aria-labelledby="research-title">
       <div class="container">
-        <div class="section-heading publications-heading rail-card">
+        <div class="rail-heading rail-card">
           <h2 id="research-title">Publications</h2>
-          <div class="publications-links">
-            <a href="https://scholar.google.com/citations?user=WC9dYREAAAAJ&amp;hl=en">More on Google Scholar</a>
-            <a id="paper-preview-link" href="https://arthurqqqq.github.io/#research" hidden>View animations on the live site</a>
-          </div>
+          <a id="paper-preview-link" href="https://arthurqqqq.github.io/#research" hidden>View animations on the live site</a>
         </div>
         <ol class="publication-list">
           <li>
@@ -218,82 +219,39 @@
 
     <section class="section-block" id="projects" aria-labelledby="projects-title">
       <div class="container">
-        <div class="section-heading"><h2 id="projects-title">Projects</h2></div>
-        <div class="project-categories rail-card">
-          <section class="project-category" aria-labelledby="research-code-title">
-            <h3 id="research-code-title">Research code</h3>
-            <ul class="projects-list">
-              <li>
-                <div class="entry-heading">
-                  <a href="https://github.com/ArthurQQQQ/multipass-multihop-retrieval-ICMLW">MULTIPASS</a>
-                  <span class="entry-label venue-label">
-                    <img class="venue-mark" src="venue-icml.svg" width="37" height="20" alt="" loading="lazy">
-                    <span>ICML 2026 · Failure Modes in Agentic AI Workshop</span>
-                  </span>
-                </div>
-                <p>Code for the second search in Bridge Starvation.</p>
-              </li>
-              <li>
-                <div class="entry-heading">
-                  <a href="https://github.com/ArthurQQQQ/atom-keyed-chunk-retrieval-qa-ICMLW">Atom-Keyed Chunk Retrieval</a>
-                  <span class="entry-label venue-label">
-                    <img class="venue-mark" src="venue-icml.svg" width="37" height="20" alt="" loading="lazy">
-                    <span>ICML 2026 · Graph Foundation Models Workshop</span>
-                  </span>
-                </div>
-                <p>Ranks short claims and retrieves their source passages.</p>
-              </li>
-              <li>
-                <div class="entry-heading">
-                  <a href="https://github.com/ArthurQQQQ/SIFT-LLM-feature-reweighting-tabular-ICDMW">SIFT reproduction</a>
-                  <span class="entry-label venue-label">
-                    <img class="venue-mark venue-mark-icdm" src="venue-icdm-2025.png" width="37" height="20" alt="" loading="lazy">
-                    <span>ICDM 2025 · VISTA Workshop (original paper)</span>
-                  </span>
-                </div>
-                <p>Reproduces SIFT’s feature-weighting experiment.</p>
-              </li>
-            </ul>
-          </section>
-          <section class="project-category" aria-labelledby="research-workflows-title">
-            <h3 id="research-workflows-title">Research workflows</h3>
-            <ul class="projects-list">
-              <li>
-                <div class="entry-heading">
-                  <a href="https://github.com/ArthurQQQQ/skill-engine">Skill Editor</a>
-                  <span class="entry-label">GitHub</span>
-                </div>
-                <p>Browse, compare, and edit local agent skills.</p>
-              </li>
-              <li>
-                <div class="entry-heading">
-                  <a href="https://github.com/ArthurQQQQ/advisor-ready-paper-structure">Paper Structure Review</a>
-                  <span class="entry-label">GitHub</span>
-                </div>
-                <p>Develop a research question or check the argument of a paper draft.</p>
-              </li>
-              <li>
-                <div class="entry-heading">
-                  <a href="https://github.com/ArthurQQQQ/paper-presentation-skill">Paper → Presentation</a>
-                  <span class="entry-label">GitHub</span>
-                </div>
-                <p>Build a research talk around a paper’s main result and evidence.</p>
-              </li>
-            </ul>
-          </section>
-          <section class="project-category" aria-labelledby="prototype-title">
-            <h3 id="prototype-title">Other builds</h3>
-            <ul class="projects-list">
-              <li>
-                <div class="entry-heading">
-                  <a href="https://github.com/ArthurQQQQ/yuelao-chatgpt-plugin">YueLao</a>
-                  <span class="entry-label">GitHub</span>
-                </div>
-                <p>A Chinese-language conversation prototype with cases linked to their sources.</p>
-              </li>
-            </ul>
-          </section>
+        <div class="rail-heading rail-card">
+          <h2 id="projects-title">Projects</h2>
+          <span class="entry-label">Research workflows</span>
         </div>
+        <ul class="projects-list">
+          <li>
+            <article class="workflow-card rail-card" aria-labelledby="skill-editor-title">
+              <div>
+                <h3 id="skill-editor-title"><a href="https://github.com/ArthurQQQQ/skill-engine">Skill Editor</a></h3>
+                <p>Browse, compare, and edit local agent skills.</p>
+              </div>
+              <a class="star-count" href="https://github.com/ArthurQQQQ/skill-engine/stargazers" aria-label="4 GitHub stars for Skill Editor">4 stars</a>
+            </article>
+          </li>
+          <li>
+            <article class="workflow-card rail-card" aria-labelledby="structure-review-title">
+              <div>
+                <h3 id="structure-review-title"><a href="https://github.com/ArthurQQQQ/advisor-ready-paper-structure">Paper Structure Review</a></h3>
+                <p>Develop a research question or check the argument of a paper draft.</p>
+              </div>
+              <a class="star-count" href="https://github.com/ArthurQQQQ/advisor-ready-paper-structure/stargazers" aria-label="5 GitHub stars for Paper Structure Review">5 stars</a>
+            </article>
+          </li>
+          <li>
+            <article class="workflow-card rail-card" aria-labelledby="paper-presentation-title">
+              <div>
+                <h3 id="paper-presentation-title"><a href="https://github.com/ArthurQQQQ/paper-presentation-skill">Paper → Presentation</a></h3>
+                <p>Build a research talk around a paper’s main result and evidence.</p>
+              </div>
+              <a class="star-count" href="https://github.com/ArthurQQQQ/paper-presentation-skill/stargazers" aria-label="5 GitHub stars for Paper to Presentation">5 stars</a>
+            </article>
+          </li>
+        </ul>
       </div>
     </section>
   </main>
@@ -307,12 +265,6 @@
     }
 
     const profileMenu = document.getElementById('nav-profiles');
-    profileMenu.addEventListener('pointerenter', (event) => {
-      if (event.pointerType === 'mouse') profileMenu.open = true;
-    });
-    profileMenu.addEventListener('pointerleave', (event) => {
-      if (event.pointerType === 'mouse' && !profileMenu.contains(document.activeElement)) profileMenu.open = false;
-    });
     profileMenu.addEventListener('focusout', (event) => {
       if (!profileMenu.contains(event.relatedTarget)) profileMenu.open = false;
     });

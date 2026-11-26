@@ -3,10 +3,19 @@ import { gsap, ScrollTrigger } from './vendor/gsap-scrolltrigger-3.15.1.js';
 gsap.registerPlugin(ScrollTrigger);
 
 const main = document.getElementById('main');
+const siteHeader = document.querySelector('.site-header');
+const siteFooter = document.querySelector('.site-footer');
 const boardLight = document.querySelector('.pegboard-light');
 const scholarPreview = document.getElementById('scholar-preview');
 const scholarLink = scholarPreview.querySelector('.profile-link');
 const research = document.getElementById('research');
+const researchHeading = research.querySelector('.rail-heading');
+const projects = document.getElementById('projects');
+const projectsHeading = projects.querySelector('.rail-heading');
+const workflows = [...projects.querySelectorAll('.projects-list > li')].map(row => ({
+  row,
+  article: row.querySelector('.workflow-card'),
+}));
 const phaseNames = ['one', 'two', 'three'];
 const stories = [...research.querySelectorAll('.publication-list > li')].map(row => ({
   row,
@@ -111,37 +120,57 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
   }, { rootMargin: '0px 0px -9% 0px', threshold: .1 });
   for (const target of revealTargets) revealObserver.observe(target);
 
-  let dockTop = 0;
+  let scholarTop = 0;
+  let paperTop = 0;
+  let projectTop = 0;
   let paperTravel = 0;
   let scholarTravel = 0;
+  let projectTravel = 0;
+
+  function setRailStop(row, article, fits) {
+    row.toggleAttribute('data-rail-stop', fits);
+    if (!fits) article.removeAttribute('data-rail-engaged');
+  }
 
   function updateRailStops() {
     const viewport = window.innerHeight;
-    dockTop = Math.round(Math.min(108, Math.max(72, viewport * .12)));
+    const headingTop = siteHeader.offsetHeight + 8;
+    scholarTop = Math.max(headingTop + 4, Math.round(Math.min(108, Math.max(72, viewport * .12))));
+    paperTop = headingTop + researchHeading.offsetHeight + 12;
+    projectTop = headingTop + projectsHeading.offsetHeight + 12;
     paperTravel = Math.round(Math.min(220, Math.max(144, viewport * .24)));
     scholarTravel = Math.round(Math.min(136, Math.max(96, viewport * .16)));
-    main.style.setProperty('--rail-dock-top', dockTop + 'px');
+    projectTravel = Math.round(Math.min(136, Math.max(96, viewport * .15)));
+    main.style.setProperty('--section-heading-top', headingTop + 'px');
+    scholarPreview.style.setProperty('--rail-dock-top', scholarTop + 'px');
+    research.style.setProperty('--rail-dock-top', paperTop + 'px');
+    projects.style.setProperty('--rail-dock-top', projectTop + 'px');
     research.style.setProperty('--rail-dock-travel', paperTravel + 'px');
     scholarPreview.style.setProperty('--rail-dock-travel', scholarTravel + 'px');
+    projects.style.setProperty('--rail-dock-travel', projectTravel + 'px');
 
-    const room = viewport - dockTop - 24;
-    const scholarFits = scholarLink.offsetHeight <= room;
-    scholarPreview.toggleAttribute('data-rail-stop', scholarFits);
-    if (!scholarFits) scholarLink.removeAttribute('data-rail-engaged');
+    setRailStop(scholarPreview, scholarLink, scholarLink.offsetHeight <= viewport - scholarTop - 24);
     for (const story of stories) {
-      const fits = viewport >= 560 && story.article.offsetHeight <= room;
-      story.row.toggleAttribute('data-rail-stop', fits);
-      if (!fits) story.article.removeAttribute('data-rail-engaged');
+      setRailStop(story.row, story.article, viewport >= 560 && story.article.offsetHeight <= viewport - paperTop - 24);
     }
+    for (const workflow of workflows) {
+      setRailStop(workflow.row, workflow.article, viewport >= 560 && workflow.article.offsetHeight <= viewport - projectTop - 24);
+    }
+
+    const lastWorkflow = workflows[workflows.length - 1];
+    const clearance = lastWorkflow.row.hasAttribute('data-rail-stop')
+      ? Math.max(0, viewport - projectTop - lastWorkflow.article.offsetHeight - siteFooter.offsetHeight)
+      : 0;
+    projects.style.setProperty('--project-end-clearance', clearance + 'px');
   }
 
-  function dockStart(row) {
-    return window.scrollY + row.getBoundingClientRect().top - dockTop;
+  function dockStart(row, top) {
+    return window.scrollY + row.getBoundingClientRect().top - top;
   }
 
   function scrollBounds(story) {
     if (story.row.hasAttribute('data-rail-stop')) {
-      const start = dockStart(story.row);
+      const start = dockStart(story.row, paperTop);
       return { start, end: start + paperTravel };
     }
 
@@ -153,17 +182,20 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
   updateRailStops();
   ScrollTrigger.addEventListener('refreshInit', updateRailStops);
 
-  function updateScholarGuide({ isActive }) {
-    scholarLink.toggleAttribute('data-rail-engaged', isActive === true && scholarPreview.hasAttribute('data-rail-stop'));
+  function registerGuide(row, article, dockTop, travel) {
+    function updateGuide({ isActive }) {
+      article.toggleAttribute('data-rail-engaged', isActive === true && row.hasAttribute('data-rail-stop'));
+    }
+    ScrollTrigger.create({
+      trigger: row,
+      start: () => dockStart(row, dockTop()),
+      end: () => dockStart(row, dockTop()) + travel(),
+      onToggle: updateGuide,
+      onRefresh: updateGuide,
+    });
   }
 
-  ScrollTrigger.create({
-    trigger: scholarPreview,
-    start: () => dockStart(scholarPreview),
-    end: () => dockStart(scholarPreview) + scholarTravel,
-    onToggle: updateScholarGuide,
-    onRefresh: updateScholarGuide,
-  });
+  registerGuide(scholarPreview, scholarLink, () => scholarTop, () => scholarTravel);
 
   for (const story of stories) {
     const playhead = { progress: 0 };
@@ -184,6 +216,10 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
     });
   }
 
+  for (const workflow of workflows) {
+    registerGuide(workflow.row, workflow.article, () => projectTop, () => projectTravel);
+  }
+
   let refreshFrame = 0;
   function scheduleRefresh() {
     if (refreshFrame) return;
@@ -194,8 +230,13 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
   }
 
   const resizeObserver = new ResizeObserver(scheduleRefresh);
+  resizeObserver.observe(siteHeader);
+  resizeObserver.observe(siteFooter);
+  resizeObserver.observe(researchHeading);
+  resizeObserver.observe(projectsHeading);
   resizeObserver.observe(scholarLink);
   for (const story of stories) resizeObserver.observe(story.article);
+  for (const workflow of workflows) resizeObserver.observe(workflow.article);
   window.addEventListener('resize', scheduleRefresh, { passive: true });
 
   return () => {
@@ -206,11 +247,14 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
     window.removeEventListener('resize', scheduleRefresh);
     ScrollTrigger.removeEventListener('refreshInit', updateRailStops);
     research.removeAttribute('data-scroll-motion');
-    main.style.removeProperty('--rail-dock-top');
-    scholarPreview.style.removeProperty('--rail-dock-travel');
-    research.style.removeProperty('--rail-dock-travel');
-    scholarPreview.removeAttribute('data-rail-stop');
-    scholarLink.removeAttribute('data-rail-engaged');
+    main.style.removeProperty('--section-heading-top');
+    for (const section of [scholarPreview, research, projects]) {
+      section.style.removeProperty('--rail-dock-top');
+      section.style.removeProperty('--rail-dock-travel');
+    }
+    projects.style.removeProperty('--project-end-clearance');
+    setRailStop(scholarPreview, scholarLink, false);
+    for (const workflow of workflows) setRailStop(workflow.row, workflow.article, false);
     stories.forEach(resetStory);
   };
 });
