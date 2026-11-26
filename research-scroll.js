@@ -39,7 +39,7 @@ function paintStory(story, progress, imageLoaded = false) {
   const revealMiddle = blendAt(progress, 1 / 3);
   const revealEnd = blendAt(progress, 2 / 3);
   const weights = [1 - revealMiddle, revealMiddle - revealEnd, revealEnd];
-  story.figure.style.setProperty('--scroll-accent', round(progress));
+  story.article.style.setProperty('--scroll-accent', round(progress));
 
   if (!story.svg) return;
   if (stepChanged || imageLoaded) {
@@ -59,7 +59,7 @@ function resetStory(story) {
   story.progress = -1;
   story.row.removeAttribute('data-pinned');
   story.figure.removeAttribute('data-step');
-  story.figure.style.removeProperty('--scroll-accent');
+  story.article.style.removeProperty('--scroll-accent');
 
   if (!story.svg) return;
   story.svg.removeAttribute('data-scroll-driven');

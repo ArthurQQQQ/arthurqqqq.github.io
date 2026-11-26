@@ -8,10 +8,11 @@
   <title>Jiayi (Arthur) Qiu</title>
   <link rel="canonical" href="https://arthurqqqq.github.io/">
   <link rel="preload" href="google-sans-flex-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=graphite-gallery">
-  <script type="module" src="research-scroll.js?v=pegboard"></script>
+  <link rel="stylesheet" href="styles.css?v=pegboard-rail">
+  <script type="module" src="research-scroll.js?v=pegboard-rail"></script>
 </head>
 <body id="home">
+  <div class="pegboard" aria-hidden="true"></div>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="container header-inner">
@@ -25,7 +26,7 @@
   </header>
 
   <main id="main">
-    <section class="hero container" aria-labelledby="profile-name">
+    <section class="hero container rail-card" aria-labelledby="profile-name">
       <div class="hero-copy">
         <h1 id="profile-name">Jiayi (Arthur) Qiu</h1>
         <p class="affiliation"><img class="unc-mark" src="unc-interlocking-nc.png" alt="" width="29" height="23"> <span>Honors Carolina undergraduate at UNC–Chapel Hill</span></p>
@@ -43,7 +44,7 @@
 
     <section class="profile-grid container" id="profiles" aria-label="Research profiles">
       <article class="profile-card" aria-labelledby="github-title">
-        <a class="profile-link" href="https://github.com/ArthurQQQQ" aria-labelledby="open-github-profile">
+        <a class="profile-link rail-card" href="https://github.com/ArthurQQQQ" aria-labelledby="open-github-profile">
           <header class="profile-card-header">
             <h2 id="github-title">GitHub</h2>
             <span class="profile-action" id="open-github-profile">View GitHub</span>
@@ -55,7 +56,7 @@
         </a>
       </article>
       <article class="profile-card" aria-labelledby="scholar-title">
-        <a class="profile-link" href="https://scholar.google.com/citations?user=WC9dYREAAAAJ&amp;hl=en" aria-labelledby="open-scholar-profile">
+        <a class="profile-link rail-card" href="https://scholar.google.com/citations?user=WC9dYREAAAAJ&amp;hl=en" aria-labelledby="open-scholar-profile">
           <header class="profile-card-header">
             <h2 id="scholar-title">Google Scholar</h2>
             <span class="profile-action" id="open-scholar-profile">View Scholar</span>
@@ -76,7 +77,7 @@
         </div>
         <ol class="publication-list">
           <li>
-            <article class="publication">
+            <article class="publication rail-card">
               <div class="paper-copy">
                 <div class="entry-heading">
                   <h3>Bridge Starvation</h3>
@@ -104,7 +105,7 @@
             </article>
           </li>
           <li>
-            <article class="publication">
+            <article class="publication rail-card">
               <div class="paper-copy">
                 <div class="entry-heading">
                   <h3>Atom-Keyed Retrieval</h3>
@@ -132,7 +133,7 @@
             </article>
           </li>
           <li id="poise">
-            <article class="publication">
+            <article class="publication rail-card">
               <div class="paper-copy">
                 <div class="entry-heading">
                   <h3>Correcting Noise-Mispecified Operator Selection in Wild Compound LLM Agents</h3>
@@ -160,7 +161,7 @@
             </article>
           </li>
           <li>
-            <article class="publication">
+            <article class="publication rail-card">
               <div class="paper-copy">
                 <div class="entry-heading">
                   <h3>SIFT</h3>
@@ -194,7 +195,7 @@
     <section class="section-block" id="projects" aria-labelledby="projects-title">
       <div class="container">
         <div class="section-heading"><h2 id="projects-title">Projects</h2></div>
-        <div class="project-categories">
+        <div class="project-categories rail-card">
           <section class="project-category" aria-labelledby="research-code-title">
             <h3 id="research-code-title">Research code</h3>
             <ul class="projects-list">
