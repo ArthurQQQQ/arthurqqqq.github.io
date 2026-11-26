@@ -47,9 +47,9 @@ a:hover { text-decoration-thickness: 2px; }
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(circle at 13px 12px, #0e0f11 1.4px, transparent 2px) 0 0 / 26px 26px,
-    radial-gradient(circle at 13px 13px, #2e3033 1.3px, transparent 2.3px) 0 0 / 26px 26px,
-    linear-gradient(140deg, #1c1e20, #17181a 68%, #151618);
+    radial-gradient(circle at 13px 12px, #090a0c 2px, transparent 2.6px) 0 0 / 26px 26px,
+    radial-gradient(circle at 13px 13.1px, #50535a 1.9px, transparent 2.7px) 0 0 / 26px 26px,
+    linear-gradient(140deg, #242629, #202225 68%, #1a1c1e);
 }
 .pegboard::before, .pegboard::after {
   position: absolute;
