@@ -372,6 +372,20 @@ a:hover { text-decoration-thickness: 2px; }
   background: var(--surface);
 }
 .publication-list > li + li { margin-top: 24px; }
+.publication-list > [data-rail-stop]::after {
+  display: block;
+  height: var(--paper-dock-travel);
+  content: "";
+}
+.publication-list > [data-rail-stop] > .publication {
+  position: sticky;
+  top: var(--paper-dock-top);
+}
+.publication[data-rail-engaged] {
+  --guide-line: #bea076;
+  --guide-face: #a98356;
+  --guide-shade: #65503a;
+}
 .paper-copy { min-width: 0; }
 .paper-copy .entry-heading { display: grid; gap: 5px; }
 .paper-copy h3 {
@@ -432,7 +446,7 @@ a:hover { text-decoration-thickness: 2px; }
 #research[data-scroll-motion] .paper-phases li::before {
   position: absolute;
   inset: -1px 0 auto;
-  height: 2px;
+  height: 3px;
   background: var(--phase-color);
   transform: scaleX(clamp(0, calc(var(--scroll-accent) * 3 - var(--phase-index)), 1));
   transform-origin: left;
@@ -509,6 +523,8 @@ a:hover { text-decoration-thickness: 2px; }
     --strong-line: #aeb6c4;
   }
   .skip-link, .site-header, .site-footer, .profile-preview { display: none; }
+  .publication-list > [data-rail-stop]::after { display: none; }
+  .publication-list > [data-rail-stop] > .publication { position: relative; top: auto; }
   .paper-figure { print-color-adjust: exact; }
   .publication, .project-category { break-inside: avoid; }
   .container { width: 100%; }

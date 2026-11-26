@@ -5,6 +5,7 @@ gsap.registerPlugin(ScrollTrigger);
 const research = document.getElementById('research');
 const phaseNames = ['one', 'two', 'three'];
 const stories = [...research.querySelectorAll('.publication-list > li')].map(row => ({
+  row,
   article: row.querySelector('.publication'),
   figure: row.querySelector('.paper-media'),
   image: row.querySelector('.paper-figure'),
@@ -26,6 +27,7 @@ function paintStory(story, progress, imageLoaded = false) {
   if (story.progress === progress && !imageLoaded) return;
 
   story.progress = progress;
+  story.article.toggleAttribute('data-rail-engaged', story.row.hasAttribute('data-rail-stop') && progress > 0 && progress < 1);
   const stage = Math.min(2, Math.floor(progress * 3));
   const stepChanged = story.stage !== stage;
   if (stepChanged) {
@@ -56,6 +58,8 @@ function resetStory(story) {
   story.labels[story.stage]?.removeAttribute('aria-current');
   story.stage = -1;
   story.progress = -1;
+  story.row.removeAttribute('data-rail-stop');
+  story.article.removeAttribute('data-rail-engaged');
   story.figure.removeAttribute('data-step');
   story.figure.style.removeProperty('--scroll-accent');
 
@@ -85,6 +89,37 @@ for (const story of stories) {
 gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
   research.setAttribute('data-scroll-motion', '');
 
+  let dockTop = 0;
+  let dockTravel = 0;
+
+  function updateRailStops() {
+    const viewport = window.innerHeight;
+    dockTop = Math.round(Math.min(108, Math.max(72, viewport * .12)));
+    dockTravel = Math.round(Math.min(220, Math.max(144, viewport * .24)));
+    research.style.setProperty('--paper-dock-top', dockTop + 'px');
+    research.style.setProperty('--paper-dock-travel', dockTravel + 'px');
+
+    for (const story of stories) {
+      const fits = viewport >= 560 && story.article.offsetHeight <= viewport - dockTop - 24;
+      story.row.toggleAttribute('data-rail-stop', fits);
+      if (!fits) story.article.removeAttribute('data-rail-engaged');
+    }
+  }
+
+  function scrollBounds(story) {
+    if (story.row.hasAttribute('data-rail-stop')) {
+      const start = window.scrollY + story.row.getBoundingClientRect().top - dockTop;
+      return { start, end: start + dockTravel };
+    }
+
+    const top = window.scrollY + story.figure.getBoundingClientRect().top;
+    const viewport = window.innerHeight;
+    return { start: top - viewport * .86, end: top - viewport * .21 };
+  }
+
+  updateRailStops();
+  ScrollTrigger.addEventListener('refreshInit', updateRailStops);
+
   for (const story of stories) {
     const playhead = { progress: 0 };
     paintStory(story, 0);
@@ -96,9 +131,9 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
       onUpdate: () => paintStory(story, playhead.progress),
     });
     ScrollTrigger.create({
-      trigger: story.figure,
-      start: 'top 86%',
-      end: 'top 21%',
+      trigger: story.row,
+      start: () => scrollBounds(story).start,
+      end: () => scrollBounds(story).end,
       animation,
       scrub: true,
     });
@@ -121,7 +156,10 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
     cancelAnimationFrame(refreshFrame);
     resizeObserver.disconnect();
     window.removeEventListener('resize', scheduleRefresh);
+    ScrollTrigger.removeEventListener('refreshInit', updateRailStops);
     research.removeAttribute('data-scroll-motion');
+    research.style.removeProperty('--paper-dock-top');
+    research.style.removeProperty('--paper-dock-travel');
     stories.forEach(resetStory);
   };
 });
