@@ -250,17 +250,22 @@ a:hover { text-decoration-thickness: 2px; }
   font-size: 14px;
 }
 .unc-mark { display: block; width: 21px; height: auto; flex: none; }
+.portrait-mount {
+  padding: 5px;
+  border: 1px solid var(--strong-line);
+  border-radius: 9px;
+  background: #16171a;
+  box-shadow: 0 3px 8px rgb(0 0 0 / .22);
+}
 .portrait {
   display: block;
-  width: var(--portrait-size);
+  width: 100%;
   height: auto;
   aspect-ratio: 1;
-  border-radius: 6px;
-  outline: 1px solid var(--strong-line);
+  border-radius: 4px;
   object-fit: cover;
 }
-.hero-actions { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 10px; }
-.social-links { display: flex; align-items: center; flex-wrap: wrap; gap: 5px 14px; font-size: 14px; }
+.social-links { display: flex; align-items: center; flex-wrap: wrap; gap: 5px 14px; margin-top: 10px; font-size: 14px; }
 .social-links a {
   display: inline-flex;
   min-height: 32px;
@@ -278,43 +283,6 @@ a:hover { text-decoration-thickness: 2px; }
 }
 .resume-link span { color: var(--muted); font-size: .75rem; }
 .resume-link:hover { background: var(--raised); }
-.scroll-cue {
-  display: grid;
-  flex: none;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  border: 1px solid var(--strong-line);
-  border-radius: 8px;
-  color: var(--brass);
-}
-.scroll-cue:is(:hover, :focus-visible) { background: var(--raised); }
-.scroll-cue-mark {
-  position: relative;
-  width: 14px;
-  height: 14px;
-}
-.scroll-cue-mark::before,
-.scroll-cue-mark::after {
-  position: absolute;
-  content: "";
-}
-.scroll-cue-mark::before {
-  inset: 1px auto auto 6px;
-  width: 2px;
-  height: 11px;
-  border-radius: 1px;
-  background: currentColor;
-}
-.scroll-cue-mark::after {
-  box-sizing: border-box;
-  inset: 5px auto auto 3px;
-  width: 8px;
-  height: 8px;
-  border: solid currentColor;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-}
 
 .profile-grid {
   --profile-gap: 24px;
@@ -562,35 +530,45 @@ a:hover { text-decoration-thickness: 2px; }
 .projects-list > li + li { margin-top: 15px; }
 .workflow-card {
   display: grid;
-  grid-template:
-    "title preview"
-    "description preview"
-    / minmax(0, 1fr) clamp(84px, 11vw, 122px);
+  grid-template-columns: minmax(0, 1fr) clamp(168px, 22vw, 244px);
   align-items: center;
   column-gap: clamp(12px, 2.1vw, 24px);
-  row-gap: 4px;
+  row-gap: 6px;
   padding: clamp(14px, 2.3vw, 23px);
   border: 1px solid var(--line);
   border-radius: 12px;
   background: var(--surface);
 }
 .workflow-card h3 {
-  grid-area: title;
   font-size: clamp(18px, 2.2vw, 22px);
   font-weight: 530;
   line-height: 1.25;
 }
 .workflow-card h3 a { color: var(--ink); }
-.workflow-card p { grid-area: description; max-width: 74ch; color: var(--muted); font-size: .9375rem; line-height: 1.5; }
-.workflow-preview {
-  grid-area: preview;
-  display: block;
-  width: 100%;
-  height: 46px;
-  border: 1px solid var(--line);
-  border-radius: 5px;
+.workflow-card p { margin-top: 6px; max-width: 74ch; color: var(--muted); font-size: .9375rem; line-height: 1.5; }
+.workflow-visual {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--strong-line);
+  border-radius: 7px;
   background: var(--page);
-  object-fit: contain;
+}
+.workflow-image {
+  position: relative;
+  transform: scale(calc(1 + .035 * var(--project-progress, 0)));
+}
+.workflow-image img { display: block; width: 100%; height: auto; }
+.workflow-focus {
+  position: absolute;
+  inset: var(--y) auto auto var(--x);
+  width: var(--w);
+  height: var(--h);
+  border: 1.5px solid var(--focus-color);
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px rgb(255 255 255 / .35);
+  opacity: var(--focus, 0);
+  transform: translateY(calc(5px * (1 - var(--focus, 0))));
+  pointer-events: none;
 }
 .site-footer { color: var(--muted); font-size: 14px; }
 .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 9px 20px; padding-block: 18px; border-top: 1px solid var(--line); }
@@ -603,13 +581,8 @@ a:hover { text-decoration-thickness: 2px; }
   #research .publication[id], .workflow-card h3 { scroll-margin-block-start: 0; }
 }
 @media screen and (prefers-reduced-motion: no-preference) {
-  .scroll-cue-mark { animation: point-down 1.15s .45s 2; }
   .scroll-reveal { animation: scroll-reveal 440ms ease-out; }
   .scroll-reveal:focus-within { animation: none; }
-}
-@keyframes point-down {
-  0%, 62%, 100% { transform: translateY(0); }
-  30% { transform: translateY(4px); }
 }
 @keyframes scroll-reveal {
   from { opacity: var(--reveal-start, .68); }
@@ -631,8 +604,8 @@ a:hover { text-decoration-thickness: 2px; }
       / var(--portrait-size) minmax(0, 1fr);
     gap: 12px 15px;
   }
-  .hero-identity > div { display: contents; }
-  .hero-identity .portrait { grid-area: portrait; }
+  .hero-name { display: contents; }
+  .portrait-mount { grid-area: portrait; }
   .hero h1 { grid-area: name; }
   .hero .research-thesis { grid-area: statement; margin-top: 0; }
   .profile-grid { --profile-gap: 16px; grid-template-columns: minmax(0, 1fr); }
@@ -650,18 +623,13 @@ a:hover { text-decoration-thickness: 2px; }
   .main-nav { gap: clamp(8px, 2.8vw, 15px); }
   .nav-profile-links { inset-inline: auto 0; width: min(calc(100vw - 2 * var(--page-edge)), max(100%, 12rem)); }
   .workflow-card {
-    grid-template:
-      "title preview"
-      "description description"
-      / minmax(0, 1fr) clamp(52px, 16vw, 78px);
-    column-gap: 8px;
+    grid-template-columns: minmax(0, 1fr);
   }
   .workflow-card h3 { font-size: clamp(17px, 3.7vw, 19px); }
-  .workflow-preview { height: 23px; }
+  .workflow-visual { width: min(100%, clamp(155px, 43vw, 244px)); margin-top: 4px; }
 }
 @media (pointer: coarse) {
   .publication-links a, .social-links a { min-height: 44px; }
-  .scroll-cue { width: 44px; height: 44px; }
 }
 @media print {
   .pegboard, .rail-card::before, .rail-card::after, .profile-grid::before,
@@ -678,11 +646,12 @@ a:hover { text-decoration-thickness: 2px; }
     --line: #d7dbe2;
     --strong-line: #aeb6c4;
   }
-  .skip-link, .site-header, .site-footer, .profile-preview, .scroll-cue { display: none; }
+  .skip-link, .site-header, .site-footer, .profile-preview, .workflow-focus { display: none; }
   [data-rail-stop]::after { display: none; }
   [data-rail-stop] > :is(.publication, .profile-grid, .profile-link, .workflow-card), .rail-heading { position: relative; top: auto; }
   #projects { padding-block-end: 46px; }
   .paper-figure { print-color-adjust: exact; }
+  .workflow-image { transform: none; }
   .publication, .workflow-card { break-inside: avoid; }
   .container { width: 100%; }
 }

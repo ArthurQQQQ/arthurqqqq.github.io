@@ -19,10 +19,15 @@ const research = document.getElementById('research');
 const researchHeading = research.querySelector('.rail-heading');
 const projects = document.getElementById('projects');
 const projectsHeading = projects.querySelector('.rail-heading');
-const workflows = [...projects.querySelectorAll('.projects-list > li')].map(row => ({
-  row,
-  article: row.querySelector('.workflow-card'),
-}));
+const workflows = [...projects.querySelectorAll('.projects-list > li')].map(row => {
+  const visual = row.querySelector('.workflow-visual');
+  return {
+    row,
+    article: row.querySelector('.workflow-card'),
+    visual,
+    markers: [...visual.querySelectorAll('.workflow-focus')],
+  };
+});
 const phaseNames = ['one', 'two', 'three'];
 const stories = [...research.querySelectorAll('.publication-list > li')].map(row => ({
   row,
@@ -179,15 +184,17 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
     return window.scrollY + row.getBoundingClientRect().top - top;
   }
 
-  function scrollBounds(story) {
-    if (story.row.hasAttribute('data-rail-stop')) {
-      const start = dockStart(story.row, paperTop);
-      return { start, end: start + paperTravel };
+  function visualBounds(row, visual, dockTop, travel) {
+    if (row.hasAttribute('data-rail-stop')) {
+      const start = dockStart(row, dockTop);
+      return { start, end: start + travel };
     }
 
-    const top = window.scrollY + story.figure.getBoundingClientRect().top;
+    const top = window.scrollY + visual.getBoundingClientRect().top;
     const viewport = window.innerHeight;
-    return { start: top - viewport * .86, end: top - viewport * .21 };
+    const start = top - viewport * .86;
+    const end = Math.min(top - viewport * .21, ScrollTrigger.maxScroll(window));
+    return { start, end: Math.max(start + 1, end) };
   }
 
   updateRailStops();
@@ -212,6 +219,7 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
   }
 
   for (const story of stories) {
+    const bounds = () => visualBounds(story.row, story.figure, paperTop, paperTravel);
     const playhead = { progress: 0 };
     paintStory(story, 0);
     const animation = gsap.to(playhead, {
@@ -223,15 +231,33 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
     });
     ScrollTrigger.create({
       trigger: story.row,
-      start: () => scrollBounds(story).start,
-      end: () => scrollBounds(story).end,
+      start: () => bounds().start,
+      end: () => bounds().end,
       animation,
       scrub: true,
     });
   }
 
   for (const workflow of workflows) {
-    registerGuide(workflow.row, [workflow.article], () => projectTop, () => projectTravel);
+    const { row, article, visual, markers } = workflow;
+    const bounds = () => visualBounds(row, visual, projectTop, projectTravel);
+    function updateVisual({ progress, isActive }) {
+      article.toggleAttribute('data-rail-engaged', isActive && row.hasAttribute('data-rail-stop'));
+      visual.style.setProperty('--project-progress', round(progress));
+
+      const first = blendAt(progress, .15);
+      const second = blendAt(progress, markers.length === 3 ? .45 : .59);
+      const third = markers.length === 3 ? blendAt(progress, .75) : 0;
+      const weights = [first - second, second - third, third];
+      markers.forEach((marker, index) => marker.style.setProperty('--focus', round(weights[index])));
+    }
+    ScrollTrigger.create({
+      trigger: row,
+      start: () => bounds().start,
+      end: () => bounds().end,
+      onUpdate: updateVisual,
+      onRefresh: updateVisual,
+    });
   }
 
   let refreshFrame = 0;
@@ -269,7 +295,11 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
     projects.style.removeProperty('--project-end-clearance');
     for (const stop of profileStops) stop.row.removeAttribute('data-rail-stop');
     for (const link of profileLinks) link.removeAttribute('data-rail-engaged');
-    for (const workflow of workflows) setRailStop(workflow.row, workflow.article, false);
+    for (const workflow of workflows) {
+      setRailStop(workflow.row, workflow.article, false);
+      workflow.visual.style.removeProperty('--project-progress');
+      for (const marker of workflow.markers) marker.style.removeProperty('--focus');
+    }
     stories.forEach(resetStory);
   };
 });

@@ -8,8 +8,8 @@
   <title>Jiayi (Arthur) Qiu</title>
   <link rel="canonical" href="https://arthurqqqq.github.io/">
   <link rel="preload" href="google-sans-flex-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=scroll-cue">
-  <script type="module" src="research-scroll.js?v=profile-hardware"></script>
+  <link rel="stylesheet" href="styles.css?v=project-visuals">
+  <script type="module" src="research-scroll.js?v=project-visuals"></script>
 </head>
 <body id="home">
   <div class="pegboard" aria-hidden="true"><div class="pegboard-light"></div></div>
@@ -35,8 +35,10 @@
   <main id="main">
     <section class="hero container rail-card" aria-labelledby="profile-name">
       <div class="hero-identity">
-        <img class="portrait" src="portrait.jpg" alt="Jiayi (Arthur) Qiu" width="128" height="128" fetchpriority="high">
-        <div>
+        <div class="portrait-mount">
+          <img class="portrait" src="portrait.jpg?v=256" alt="Jiayi (Arthur) Qiu" width="256" height="256" fetchpriority="high">
+        </div>
+        <div class="hero-name">
           <h1 id="profile-name">
             Arthur Qiu
             <span class="formal-name">Jiayi Qiu</span>
@@ -48,15 +50,10 @@
         <p class="affiliation"><img class="unc-mark" src="unc-interlocking-nc.png" alt="" width="29" height="23"> <span>Honors Carolina undergraduate at UNC–Chapel Hill</span></p>
         <p>I major in computer science and economics and minor in mathematics.</p>
         <p>I work with <a href="https://www.ssriva.com/">Shashank Srivastava</a> (<a href="https://l3.cs.unc.edu/" aria-label="Learning from Language Lab (L³)">Lab</a>) and <a href="https://cs.unc.edu/person/snigdha-chaturvedi/">Snigdha Chaturvedi</a> (<a href="https://nlp.cs.unc.edu/#lab-Chaturvedi-Lab" aria-label="Chaturvedi Lab">Lab</a>). I’m writing my honors thesis in economics with <a href="https://econ.unc.edu/people/hansen-peter/">Peter R. Hansen</a>.</p>
-        <div class="hero-actions">
-          <nav class="social-links" aria-label="Contact">
-            <a class="resume-link" href="resume.pdf">Résumé <span>PDF</span></a>
-            <a href="mailto:arthurq@ad.unc.edu">Email</a>
-          </nav>
-          <a class="scroll-cue" href="#profiles" aria-label="Scroll to profile previews">
-            <span class="scroll-cue-mark" aria-hidden="true"></span>
-          </a>
-        </div>
+        <nav class="social-links" aria-label="Contact">
+          <a class="resume-link" href="resume.pdf">Résumé <span>PDF</span></a>
+          <a href="mailto:arthurq@ad.unc.edu">Email</a>
+        </nav>
       </div>
     </section>
 
@@ -236,50 +233,99 @@
         <ul class="projects-list">
           <li>
             <article class="workflow-card rail-card" aria-labelledby="neuralbank-title">
-              <h3 id="neuralbank-title"><a href="https://arthurqqqq.github.io/NeuralBank/">NeuralBank</a></h3>
-              <p>Explore 64 neural architectures and mechanisms through diagrams and quizzes. Compare related models, follow prerequisites, and pick up where you left off in the same browser. <a href="https://github.com/ArthurQQQQ/NeuralBank" aria-label="NeuralBank source code">Source</a></p>
-              <img class="workflow-preview" src="workflow-neuralbank.jpg" width="360" height="174" loading="lazy"
-                alt="NeuralBank’s Transformer encoder diagram with the attention layer highlighted">
+              <div class="workflow-copy">
+                <h3 id="neuralbank-title"><a href="https://arthurqqqq.github.io/NeuralBank/">NeuralBank</a></h3>
+                <p>Explore 64 neural architectures and mechanisms through diagrams and quizzes. Compare related models, follow prerequisites, and pick up where you left off in the same browser. <a href="https://github.com/ArthurQQQQ/NeuralBank" aria-label="NeuralBank source code">Source</a></p>
+              </div>
+              <figure class="workflow-visual" style="--focus-color: #19787b">
+                <div class="workflow-image">
+                  <img src="workflow-neuralbank.jpg?v=project-visuals" width="560" height="271" loading="lazy"
+                    alt="NeuralBank’s Transformer encoder diagram, from the attention layer to the output tokens">
+                  <span class="workflow-focus" style="--x: 35%; --y: 21%; --w: 24%; --h: 53%" aria-hidden="true"></span>
+                  <span class="workflow-focus" style="--x: 84%; --y: 28%; --w: 12%; --h: 46%" aria-hidden="true"></span>
+                </div>
+              </figure>
             </article>
           </li>
           <li>
             <article class="workflow-card rail-card" aria-labelledby="skill-editor-title">
-              <h3 id="skill-editor-title"><a href="https://github.com/ArthurQQQQ/skill-engine">Skill Editor</a></h3>
-              <p>Browse your local skill library and compare instructions that overlap. Check the source, version, and destination before installing, then restore a backed-up version if needed.</p>
-              <img class="workflow-preview" src="workflow-skill-editor.jpg" width="360" height="144" loading="lazy"
-                alt="Skill Editor’s cover with connected skill files">
+              <div class="workflow-copy">
+                <h3 id="skill-editor-title"><a href="https://github.com/ArthurQQQQ/skill-engine">Skill Editor</a></h3>
+                <p>Browse your local skill library and compare instructions that overlap. Check the source, version, and destination before installing, then restore a backed-up version if needed.</p>
+              </div>
+              <figure class="workflow-visual" style="--focus-color: #a8eee4">
+                <div class="workflow-image">
+                  <img src="workflow-skill-editor.jpg?v=project-visuals" width="560" height="224" loading="lazy"
+                    alt="Skill Editor’s cover showing files connected to a shared destination">
+                  <span class="workflow-focus" style="--x: 59%; --y: 35%; --w: 15%; --h: 31%" aria-hidden="true"></span>
+                  <span class="workflow-focus" style="--x: 84%; --y: 32%; --w: 15%; --h: 36%" aria-hidden="true"></span>
+                </div>
+              </figure>
             </article>
           </li>
           <li>
             <article class="workflow-card rail-card" aria-labelledby="structure-review-title">
-              <h3 id="structure-review-title"><a href="https://github.com/ArthurQQQQ/advisor-ready-paper-structure">Paper Structure Review</a></h3>
-              <p>Turn a paper PDF into an argument map you can review offline. Follow claims to highlighted passages, flag missing comparisons, and approve suggested edits one at a time.</p>
-              <img class="workflow-preview" src="workflow-paper-structure.jpg" width="360" height="180" loading="lazy"
-                alt="Sample review with a suggested outline and comments by paper section">
+              <div class="workflow-copy">
+                <h3 id="structure-review-title"><a href="https://github.com/ArthurQQQQ/advisor-ready-paper-structure">Paper Structure Review</a></h3>
+                <p>Turn a paper PDF into an argument map you can review offline. Follow claims to highlighted passages, flag missing comparisons, and approve suggested edits one at a time.</p>
+              </div>
+              <figure class="workflow-visual" style="--focus-color: #7c5b9b">
+                <div class="workflow-image">
+                  <img src="workflow-paper-structure.jpg?v=project-visuals" width="560" height="280" loading="lazy"
+                    alt="Sample review flags baseline coverage and suggests aligning the split and metric">
+                  <span class="workflow-focus" style="--x: 30%; --y: 66%; --w: 25%; --h: 13%" aria-hidden="true"></span>
+                  <span class="workflow-focus" style="--x: 54%; --y: 66%; --w: 36%; --h: 13%" aria-hidden="true"></span>
+                </div>
+              </figure>
             </article>
           </li>
           <li>
             <article class="workflow-card rail-card" aria-labelledby="paper-presentation-title">
-              <h3 id="paper-presentation-title"><a href="https://github.com/ArthurQQQQ/paper-presentation-skill">Paper → Presentation</a></h3>
-              <p>Turn a paper into a timed research talk using its original figures. Choose which mechanism and results to cover, then rehearse with notes for each slide.</p>
-              <img class="workflow-preview" src="workflow-paper-presentation.jpg" width="360" height="202" loading="lazy"
-                alt="A reference slide showing how ReasoningBank retrieves past experiences">
+              <div class="workflow-copy">
+                <h3 id="paper-presentation-title"><a href="https://github.com/ArthurQQQQ/paper-presentation-skill">Paper → Presentation</a></h3>
+                <p>Turn a paper into a timed research talk using its original figures. Choose which mechanism and results to cover, then rehearse with notes for each slide.</p>
+              </div>
+              <figure class="workflow-visual" style="--focus-color: #4267a3">
+                <div class="workflow-image">
+                  <img src="workflow-paper-presentation.jpg?v=project-visuals" width="560" height="315" loading="lazy"
+                    alt="A ReasoningBank slide shows three steps in retrieving past experiences">
+                  <span class="workflow-focus" style="--x: 4%; --y: 59%; --w: 27%; --h: 24%" aria-hidden="true"></span>
+                  <span class="workflow-focus" style="--x: 30%; --y: 59%; --w: 36%; --h: 24%" aria-hidden="true"></span>
+                  <span class="workflow-focus" style="--x: 65%; --y: 59%; --w: 30%; --h: 24%" aria-hidden="true"></span>
+                </div>
+              </figure>
             </article>
           </li>
           <li>
             <article class="workflow-card rail-card" aria-labelledby="yuelao-title">
-              <h3 id="yuelao-title"><a href="https://github.com/ArthurQQQQ/yuelao-chatgpt-plugin">YueLao</a></h3>
-              <p>Try a Chinese-language conversation prototype with eight dialogue styles. The release includes a demo you can run locally and example conversations linked to the original clips.</p>
-              <img class="workflow-preview" src="workflow-yuelao.jpg" width="360" height="216" loading="lazy"
-                alt="YueLao’s quadrant diagram of five early conversation styles">
+              <div class="workflow-copy">
+                <h3 id="yuelao-title"><a href="https://github.com/ArthurQQQQ/yuelao-chatgpt-plugin">YueLao</a></h3>
+                <p>Try a Chinese-language conversation prototype with eight dialogue styles. The release includes a demo you can run locally and example conversations linked to the original clips.</p>
+              </div>
+              <figure class="workflow-visual" style="--focus-color: #416b5e">
+                <div class="workflow-image">
+                  <img src="workflow-yuelao.jpg?v=project-visuals" width="560" height="215" loading="lazy"
+                    alt="Four quadrants of YueLao’s five early conversation styles, from naming a feeling to suggesting an action">
+                  <span class="workflow-focus" style="--x: 2%; --y: 54%; --w: 46%; --h: 42%" aria-hidden="true"></span>
+                  <span class="workflow-focus" style="--x: 2%; --y: 4%; --w: 46%; --h: 42%" aria-hidden="true"></span>
+                </div>
+              </figure>
             </article>
           </li>
           <li>
             <article class="workflow-card rail-card" aria-labelledby="classroom-title">
-              <h3 id="classroom-title"><a href="https://github.com/ArthurQQQQ/COMP523-TeamH">Classroom Scheduling</a></h3>
-              <p>A UNC COMP 523 team project for browsing course schedules and finding available classrooms. It combines 25Live schedules with Google Calendar bookings to flag double bookings and rooms that are too small.</p>
-              <img class="workflow-preview" src="workflow-classroom.jpg" width="360" height="168" loading="lazy"
-                alt="Weekly classroom schedule with overlapping bookings marked in red">
+              <div class="workflow-copy">
+                <h3 id="classroom-title"><a href="https://github.com/ArthurQQQQ/COMP523-TeamH">Classroom Scheduling</a></h3>
+                <p>A UNC COMP 523 team project for browsing course schedules and finding available classrooms. It combines 25Live schedules with Google Calendar bookings to flag double bookings and rooms that are too small.</p>
+              </div>
+              <figure class="workflow-visual" style="--focus-color: #99332c">
+                <div class="workflow-image">
+                  <img src="workflow-classroom.jpg?v=project-visuals" width="560" height="261" loading="lazy"
+                    alt="Weekly classroom schedule with overlapping bookings marked in red">
+                  <span class="workflow-focus" style="--x: 41.5%; --y: 6%; --w: 18%; --h: 88%" aria-hidden="true"></span>
+                  <span class="workflow-focus" style="--x: 81%; --y: 62%; --w: 17%; --h: 14%" aria-hidden="true"></span>
+                </div>
+              </figure>
             </article>
           </li>
         </ul>
