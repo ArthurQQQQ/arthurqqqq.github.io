@@ -543,7 +543,7 @@ a:hover { text-decoration-thickness: 2px; }
   line-height: 1.25;
 }
 .workflow-card h3 a { color: var(--ink); }
-.workflow-card p { grid-area: description; max-width: 66ch; color: var(--muted); font-size: .9375rem; line-height: 1.5; }
+.workflow-card p { grid-area: description; max-width: 74ch; color: var(--muted); font-size: .9375rem; line-height: 1.5; }
 .workflow-preview {
   grid-area: preview;
   display: block;

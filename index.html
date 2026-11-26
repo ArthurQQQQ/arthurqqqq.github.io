@@ -8,7 +8,7 @@
   <title>Jiayi (Arthur) Qiu</title>
   <link rel="canonical" href="https://arthurqqqq.github.io/">
   <link rel="preload" href="google-sans-flex-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=identity-plaque">
+  <link rel="stylesheet" href="styles.css?v=project-gallery">
   <script type="module" src="research-scroll.js?v=profile-hardware"></script>
 </head>
 <body id="home">
@@ -109,7 +109,7 @@
                 <p class="paper-meta">Jiayi (Arthur) Qiu</p>
                 <div class="publication-links">
                   <a href="https://icml.cc/virtual/2026/77991" aria-label="ICML program for Bridge Starvation">ICML program</a>
-                  <a href="https://github.com/ArthurQQQQ/multipass-multihop-retrieval-ICMLW" aria-label="MULTIPASS code">Code</a>
+                  <a href="https://github.com/ArthurQQQQ/multipass-multihop-retrieval-ICMLW">MULTIPASS code</a>
                 </div>
               </div>
               <figure class="paper-media" aria-label="An initial query finds a first clue. A second pass can use a bridge entity to find the supporting source.">
@@ -140,7 +140,7 @@
                 <p class="paper-meta">Jiayi (Arthur) Qiu</p>
                 <div class="publication-links">
                   <a href="https://openreview.net/forum?id=4xdvVhh8gb" aria-label="OpenReview record for Atom-Keyed Retrieval">OpenReview</a>
-                  <a href="https://github.com/ArthurQQQQ/atom-keyed-chunk-retrieval-qa-ICMLW" aria-label="Atom-Keyed Retrieval code">Code</a>
+                  <a href="https://github.com/ArthurQQQQ/atom-keyed-chunk-retrieval-qa-ICMLW">Retrieval code</a>
                 </div>
               </div>
               <figure class="paper-media" aria-label="Atomic propositions are ranked, mapped to their original passages, and returned to the reader.">
@@ -202,7 +202,7 @@
                 <p class="paper-meta">Jiayi (Arthur) Qiu · Oral presentation</p>
                 <div class="publication-links">
                   <a href="https://doi.org/10.1109/ICDMW69685.2025.00298" aria-label="IEEE article for SIFT">IEEE</a>
-                  <a href="https://github.com/ArthurQQQQ/SIFT-LLM-feature-reweighting-tabular-ICDMW" aria-label="SIFT code">Code</a>
+                  <a href="https://github.com/ArthurQQQQ/SIFT-LLM-feature-reweighting-tabular-ICDMW">SIFT reproduction</a>
                 </div>
               </div>
               <figure class="paper-media" aria-label="Table rows become short written scenes. A language model scores feature importance, and the weights are applied to tabular inputs.">
@@ -227,13 +227,20 @@
       <div class="container">
         <div class="rail-heading rail-card">
           <h2 id="projects-title">Projects</h2>
-          <span class="entry-label">Research workflows</span>
         </div>
         <ul class="projects-list">
           <li>
+            <article class="workflow-card rail-card" aria-labelledby="neuralbank-title">
+              <h3 id="neuralbank-title"><a href="https://arthurqqqq.github.io/NeuralBank/">NeuralBank</a></h3>
+              <p>Explore 64 neural architectures and mechanisms through diagrams and quizzes. Compare related models, follow prerequisites, and pick up where you left off in the same browser. <a href="https://github.com/ArthurQQQQ/NeuralBank" aria-label="NeuralBank source code">Source</a></p>
+              <img class="workflow-preview" src="workflow-neuralbank.jpg" width="360" height="174" loading="lazy"
+                alt="NeuralBank’s Transformer encoder diagram with the attention layer highlighted">
+            </article>
+          </li>
+          <li>
             <article class="workflow-card rail-card" aria-labelledby="skill-editor-title">
               <h3 id="skill-editor-title"><a href="https://github.com/ArthurQQQQ/skill-engine">Skill Editor</a></h3>
-              <p>Compare overlapping skills, preview installs, and back up versions before replacing them.</p>
+              <p>Browse your local skill library and compare instructions that overlap. Check the source, version, and destination before installing, then restore a backed-up version if needed.</p>
               <img class="workflow-preview" src="workflow-skill-editor.jpg" width="360" height="144" loading="lazy"
                 alt="Skill Editor’s cover with connected skill files">
             </article>
@@ -241,7 +248,7 @@
           <li>
             <article class="workflow-card rail-card" aria-labelledby="structure-review-title">
               <h3 id="structure-review-title"><a href="https://github.com/ArthurQQQQ/advisor-ready-paper-structure">Paper Structure Review</a></h3>
-              <p>See a PDF’s argument as a map, with linked excerpts and edits you can approve.</p>
+              <p>Turn a paper PDF into an argument map you can review offline. Follow claims to highlighted passages, flag missing comparisons, and approve suggested edits one at a time.</p>
               <img class="workflow-preview" src="workflow-paper-structure.jpg" width="360" height="180" loading="lazy"
                 alt="Sample review with a suggested outline and comments by paper section">
             </article>
@@ -249,9 +256,25 @@
           <li>
             <article class="workflow-card rail-card" aria-labelledby="paper-presentation-title">
               <h3 id="paper-presentation-title"><a href="https://github.com/ArthurQQQQ/paper-presentation-skill">Paper → Presentation</a></h3>
-              <p>Turn a paper into a timed slide deck with original figures and notes for each slide.</p>
+              <p>Turn a paper into a timed research talk using its original figures. Choose which mechanism and results to cover, then rehearse with notes for each slide.</p>
               <img class="workflow-preview" src="workflow-paper-presentation.jpg" width="360" height="202" loading="lazy"
                 alt="A reference slide showing how ReasoningBank retrieves past experiences">
+            </article>
+          </li>
+          <li>
+            <article class="workflow-card rail-card" aria-labelledby="yuelao-title">
+              <h3 id="yuelao-title"><a href="https://github.com/ArthurQQQQ/yuelao-chatgpt-plugin">YueLao</a></h3>
+              <p>Try a Chinese-language conversation prototype with eight dialogue styles. The release includes a demo you can run locally and example conversations linked to the original clips.</p>
+              <img class="workflow-preview" src="workflow-yuelao.jpg" width="360" height="216" loading="lazy"
+                alt="YueLao’s quadrant diagram of five early conversation styles">
+            </article>
+          </li>
+          <li>
+            <article class="workflow-card rail-card" aria-labelledby="classroom-title">
+              <h3 id="classroom-title"><a href="https://github.com/ArthurQQQQ/COMP523-TeamH">Classroom Scheduling</a></h3>
+              <p>A UNC COMP 523 team project for browsing course schedules and finding available classrooms. It combines 25Live schedules with Google Calendar bookings to flag double bookings and rooms that are too small.</p>
+              <img class="workflow-preview" src="workflow-classroom.jpg" width="360" height="168" loading="lazy"
+                alt="Weekly classroom schedule with overlapping bookings marked in red">
             </article>
           </li>
         </ul>
