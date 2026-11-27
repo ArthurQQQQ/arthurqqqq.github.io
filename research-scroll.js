@@ -19,29 +19,26 @@ const research = document.getElementById('research');
 const researchHeading = research.querySelector('.rail-heading');
 const projects = document.getElementById('projects');
 const projectsHeading = projects.querySelector('.rail-heading');
-const workflows = [...projects.querySelectorAll('.projects-list > li')].map(row => {
-  const visual = row.querySelector('.workflow-visual');
-  return {
-    row,
-    article: row.querySelector('.workflow-card'),
-    visual,
-    markers: [...visual.querySelectorAll('.workflow-focus')],
-  };
-});
+const stories = readStories(research, '.publication-list > li', '.publication');
+const workflows = readStories(projects, '.projects-list > li', '.workflow-card');
+const figures = [...stories, ...workflows];
 const phaseNames = ['one', 'two', 'three'];
-const stories = [...research.querySelectorAll('.publication-list > li')].map(row => ({
-  row,
-  article: row.querySelector('.publication'),
-  figure: row.querySelector('.paper-media'),
-  image: row.querySelector('.paper-figure'),
-  labels: [...row.querySelectorAll('.paper-phases li')],
-  svg: null,
-  stage: -1,
-  progress: -1,
-}));
 
 const clamp = gsap.utils.clamp(0, 1);
 const round = gsap.utils.snap(0.0001);
+
+function readStories(section, rowSelector, articleSelector) {
+  return [...section.querySelectorAll(rowSelector)].map(row => ({
+    row,
+    article: row.querySelector(articleSelector),
+    figure: row.querySelector('.paper-media'),
+    image: row.querySelector('.paper-figure'),
+    labels: [...row.querySelectorAll('.paper-phases li')],
+    svg: null,
+    stage: -1,
+    progress: -1,
+  }));
+}
 
 function blendAt(progress, center) {
   const t = clamp((progress - (center - 0.065)) / 0.13);
@@ -106,13 +103,14 @@ function attachImage(story) {
   if (story.progress >= 0) paintStory(story, story.progress, true);
 }
 
-for (const story of stories) {
+for (const story of figures) {
   story.image.addEventListener('load', () => attachImage(story));
   attachImage(story);
 }
 
 gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
   research.setAttribute('data-scroll-motion', '');
+  projects.setAttribute('data-scroll-motion', '');
 
   const lightShift = gsap.to(boardLight, { y: -72, ease: 'none', paused: true });
   ScrollTrigger.create({
@@ -218,8 +216,8 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
     registerGuide(stop.row, stop.guides, () => profileTop, () => profileTravel, () => stop.compact === compactProfiles.matches);
   }
 
-  for (const story of stories) {
-    const bounds = () => visualBounds(story.row, story.figure, paperTop, paperTravel);
+  function registerStory(story, dockTop, travel) {
+    const bounds = () => visualBounds(story.row, story.figure, dockTop(), travel());
     const playhead = { progress: 0 };
     paintStory(story, 0);
     const animation = gsap.to(playhead, {
@@ -238,27 +236,8 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
     });
   }
 
-  for (const workflow of workflows) {
-    const { row, article, visual, markers } = workflow;
-    const bounds = () => visualBounds(row, visual, projectTop, projectTravel);
-    function updateVisual({ progress, isActive }) {
-      article.toggleAttribute('data-rail-engaged', isActive && row.hasAttribute('data-rail-stop'));
-      visual.style.setProperty('--project-progress', round(progress));
-
-      const first = blendAt(progress, .15);
-      const second = blendAt(progress, markers.length === 3 ? .45 : .59);
-      const third = markers.length === 3 ? blendAt(progress, .75) : 0;
-      const weights = [first - second, second - third, third];
-      markers.forEach((marker, index) => marker.style.setProperty('--focus', round(weights[index])));
-    }
-    ScrollTrigger.create({
-      trigger: row,
-      start: () => bounds().start,
-      end: () => bounds().end,
-      onUpdate: updateVisual,
-      onRefresh: updateVisual,
-    });
-  }
+  for (const story of stories) registerStory(story, () => paperTop, () => paperTravel);
+  for (const workflow of workflows) registerStory(workflow, () => projectTop, () => projectTravel);
 
   let refreshFrame = 0;
   function scheduleRefresh() {
@@ -275,8 +254,7 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
   resizeObserver.observe(researchHeading);
   resizeObserver.observe(projectsHeading);
   for (const link of profileLinks) resizeObserver.observe(link);
-  for (const story of stories) resizeObserver.observe(story.article);
-  for (const workflow of workflows) resizeObserver.observe(workflow.article);
+  for (const story of figures) resizeObserver.observe(story.article);
   window.addEventListener('resize', scheduleRefresh, { passive: true });
 
   return () => {
@@ -287,6 +265,7 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
     window.removeEventListener('resize', scheduleRefresh);
     ScrollTrigger.removeEventListener('refreshInit', updateRailStops);
     research.removeAttribute('data-scroll-motion');
+    projects.removeAttribute('data-scroll-motion');
     main.style.removeProperty('--section-heading-top');
     for (const section of [profiles, research, projects]) {
       section.style.removeProperty('--rail-dock-top');
@@ -295,11 +274,6 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
     projects.style.removeProperty('--project-end-clearance');
     for (const stop of profileStops) stop.row.removeAttribute('data-rail-stop');
     for (const link of profileLinks) link.removeAttribute('data-rail-engaged');
-    for (const workflow of workflows) {
-      setRailStop(workflow.row, workflow.article, false);
-      workflow.visual.style.removeProperty('--project-progress');
-      for (const marker of workflow.markers) marker.style.removeProperty('--focus');
-    }
-    stories.forEach(resetStory);
+    figures.forEach(resetStory);
   };
 });

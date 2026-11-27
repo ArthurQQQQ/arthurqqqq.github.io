@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 250" data-active-step="1" role="img" aria-labelledby="presentation-figure-title presentation-figure-desc">
+  <title id="presentation-figure-title">From paper to talk</title>
+  <desc id="presentation-figure-desc">Select a figure from the source paper, arrange the background, method and results across slides, and rehearse with timing and speaker notes.</desc>
+  <defs>
+    <pattern id="presentation-figure-grid" width="16" height="16" patternUnits="userSpaceOnUse">
+      <path d="M16 0H0V16" fill="none" stroke="#53668e" stroke-opacity=".22"/>
+    </pattern>
+  </defs>
+  <style>
+    text { font: 19px system-ui, sans-serif; fill: #eceef9; }
+    .heading { font: 27px Georgia, serif; }
+    .note { font-size: 19px; fill: #b9c4e2; }
+    .source { --weight: var(--weight-one, 1); --accent: #99b5ff; --tint: #243a60; }
+    .sequence { --weight: var(--weight-two, 0); --accent: #79d9c3; --tint: #173932; }
+    .rehearsal { --weight: var(--weight-three, 0); --accent: #e9bf8a; --tint: #3e3024; }
+    .surface {
+      fill: #192130;
+      stroke: #59698a;
+      stroke-width: 1.6;
+      fill: color-mix(in srgb, #192130, var(--tint) calc(100% * var(--weight)));
+      stroke: color-mix(in srgb, #59698a, var(--accent) calc(100% * var(--weight)));
+    }
+    .glyph {
+      fill: none;
+      stroke: #a4b2d3;
+      stroke-width: 2.1;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke: color-mix(in srgb, #a4b2d3, var(--accent) calc(100% * var(--weight)));
+    }
+    .extract {
+      opacity: calc(.45 + .55 * var(--weight-one, 1));
+      transform: translateY(calc(-5px * var(--progress-one, 0) * var(--weight-one, 1)));
+    }
+    .slide {
+      transform: translateY(calc(var(--slide-offset) * var(--weight-two, 0) * (1 - var(--progress-two, 0))));
+    }
+    .playhead {
+      opacity: var(--weight-two, 0);
+      transform: translateX(calc(151px * var(--progress-two, 0)));
+    }
+    .clock-hand {
+      transform-origin: 475px 111px;
+      transform: rotate(calc(85deg * var(--progress-three, 0)));
+    }
+    .notes-mark {
+      opacity: var(--weight-three, 0);
+      transform-origin: left;
+      transform: scaleX(var(--progress-three, 0));
+    }
+  </style>
+  <rect x=".5" y=".5" width="559" height="249" rx="12" fill="#141824" stroke="#30374f"/>
+  <text class="heading" x="25" y="36">From paper to talk</text>
+  <path d="M25 50.5h510" stroke="#3e4865"/>
+  <rect x="25" y="64" width="510" height="142" rx="8" fill="url(#presentation-figure-grid)" stroke="#30374f"/>
+  <path d="M137 117h33m-6-5 6 5-6 5m221-5h33m-6-5 6 5-6 5" fill="none" stroke="#8898be" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <g class="source">
+    <path class="surface" d="M48 76h61l19 19v73H48a5 5 0 0 1-5-5V81a5 5 0 0 1 5-5Z"/>
+    <path class="glyph" d="M109 76v19h19M56 96h37m-37 58h37"/>
+    <g class="extract">
+      <rect x="55" y="106" width="62" height="36" rx="4" fill="#20304d" stroke="#99b5ff" stroke-width="1.7"/>
+      <path d="M68 129l18-12 17 12" fill="none" stroke="#99b5ff" stroke-width="1.6"/>
+      <path d="M64 125h8v8h-8Zm18-12h8v8h-8Zm17 12h8v8h-8Z" fill="#99b5ff"/>
+    </g>
+    <text x="86" y="193" text-anchor="middle">Paper figure</text>
+  </g>
+
+  <g class="sequence">
+    <path d="M173 157h212" fill="none" stroke="#59708c" stroke-width="1.5"/>
+    <circle class="playhead" cx="203" cy="157" r="4.4" fill="#9de9d8"/>
+    <g class="slide" style="--slide-offset: 4px">
+      <rect class="surface" x="170" y="92" width="67" height="53" rx="5"/>
+      <path class="glyph" d="M181 104h36m-36 9h29"/>
+      <text x="203.5" y="136" text-anchor="middle">Why</text>
+    </g>
+    <g class="slide" style="--slide-offset: 9px">
+      <rect class="surface" x="245" y="92" width="67" height="53" rx="5"/>
+      <path class="glyph" d="M259 107h39m-7-5 7 5-7 5"/>
+      <text x="278.5" y="136" text-anchor="middle">How</text>
+    </g>
+    <g class="slide" style="--slide-offset: 14px">
+      <rect class="surface" x="320" y="92" width="67" height="53" rx="5"/>
+      <path class="glyph" d="M331 104h44m-44 9h33"/>
+      <text x="353.5" y="136" text-anchor="middle">Results</text>
+    </g>
+    <text x="279" y="193" text-anchor="middle">Slide sequence</text>
+  </g>
+
+  <g class="rehearsal">
+    <rect class="surface" x="425" y="76" width="101" height="92" rx="8"/>
+    <circle class="glyph" cx="475" cy="111" r="17"/>
+    <path class="glyph" d="M475 91v-5m-6 0h12"/>
+    <path class="glyph clock-hand" d="M475 100v11l6 4"/>
+    <path class="glyph" d="M440 139h69m-69 11h50"/>
+    <path class="notes-mark" d="M440 139h69m-69 11h50" fill="none" stroke="#e9bf8a" stroke-width="2.5" stroke-linecap="round" style="transform-box: fill-box"/>
+    <text x="475" y="193" text-anchor="middle">Rehearse</text>
+  </g>
+  <text class="note" x="26" y="232">Rehearse with slide timing and speaker notes.</text>
+</svg>

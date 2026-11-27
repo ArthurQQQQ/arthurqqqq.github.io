@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 250" data-active-step="1" role="img" aria-labelledby="se-title se-desc">
+  <title id="se-title">Skill Editor change review</title>
+  <desc id="se-desc">Compare overlapping instructions in local skill files. Review the source, version, and destination of a change. Install the chosen version or restore a managed backup.</desc>
+  <defs>
+    <pattern id="se-grid" width="17" height="17" patternUnits="userSpaceOnUse">
+      <path d="M17 0H0V17" fill="none" stroke="#53668e" stroke-opacity=".23"/>
+    </pattern>
+    <clipPath id="se-board">
+      <rect x="20" y="61" width="520" height="167" rx="9"/>
+    </clipPath>
+  </defs>
+  <style>
+    text { font: 500 18px system-ui, sans-serif; fill: #e8ecf8; }
+    .title { font: 26px Georgia, serif; }
+    .label { font-size: 19px; font-weight: 600; }
+    .caption { fill: color-mix(in srgb, #bec8de, var(--ink) calc(var(--weight) * 100%)); }
+    .file { fill: #202b42; stroke: #687da4; stroke-width: 1.4; stroke-linejoin: round; }
+    .lines { fill: none; stroke: #899bc2; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .link { fill: none; stroke: #7184aa; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .route { stroke-dasharray: 3 5; }
+    .frame {
+      fill: color-mix(in srgb, #1b2438, var(--tint) calc(var(--weight) * 100%));
+      stroke: color-mix(in srgb, #536588, var(--ink) calc(var(--weight) * 100%));
+      stroke-width: 1.3;
+    }
+    .one { --weight: var(--weight-one, 1); --progress: var(--progress-one, 0); --ink: #99b5ff; --tint: #243961; }
+    .two { --weight: var(--weight-two, 0); --progress: var(--progress-two, 0); --ink: #79d9c3; --tint: #183832; }
+    .three { --weight: var(--weight-three, 0); --progress: var(--progress-three, 0); --ink: #e9bf8a; --tint: #362c26; }
+    .trace { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .draw { opacity: var(--weight); stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--progress)); }
+    .match { opacity: calc(.25 + .35 * var(--weight) + .4 * var(--weight) * var(--progress)); }
+    .verify { opacity: calc(.1 + .9 * var(--weight) * clamp(0, var(--progress) * 3 - var(--row), 1)); }
+  </style>
+  <rect x=".5" y=".5" width="559" height="249" rx="13" fill="#141824" stroke="#30374f"/>
+  <text class="title" x="22" y="37">Skill change review</text>
+  <path d="M22 49h516" stroke="#3e4865"/>
+  <rect x="20" y="61" width="520" height="167" rx="9" fill="#1a2132" stroke="#394361"/>
+  <g clip-path="url(#se-board)">
+    <rect x="20" y="61" width="520" height="167" fill="url(#se-grid)"/>
+  </g>
+
+  <g class="one">
+    <text class="label caption" x="104" y="87" text-anchor="middle">Compare</text>
+    <path class="file" d="M34 110h39l13 13v62H34Z"/>
+    <path class="file" d="M120 121h39l13 13v62h-52Z"/>
+    <path class="lines" d="M73 111v12h13m73-1v12h13m-129 4h33m-33 25h31m55-15h33m-33 24h31"/>
+    <path class="trace match" d="M43 150h27m59 10h27"/>
+    <path class="link route" d="M86 150c13 0 20 10 34 10"/>
+    <path class="trace draw" d="M86 150c13 0 20 10 34 10" pathLength="1"/>
+    <text x="103" y="218" text-anchor="middle">Overlap</text>
+  </g>
+
+  <path class="link" d="M181 152h16m-6-5 6 5-6 5m168-5h16m-6-5 6 5-6 5"/>
+  <g class="two">
+    <text class="label caption" x="280" y="87" text-anchor="middle">Preview change</text>
+    <rect class="frame" x="206" y="105" width="148" height="103" rx="8"/>
+    <path class="link" d="M219 142h121m-121 30h121"/>
+    <text x="220" y="131">Source</text>
+    <text x="220" y="161">Version</text>
+    <text x="220" y="192">Destination</text>
+    <g class="trace">
+      <path class="verify" style="--row:0" d="m325 124 4 4 8-8"/>
+      <path class="verify" style="--row:1" d="m325 154 4 4 8-8"/>
+      <path class="verify" style="--row:2" d="m325 185 4 4 8-8"/>
+    </g>
+  </g>
+
+  <g class="three">
+    <text class="label caption" x="452" y="87" text-anchor="middle">Local library</text>
+    <rect class="frame" x="384" y="105" width="140" height="41" rx="7"/>
+    <rect class="file" x="384" y="168" width="140" height="40" rx="7"/>
+    <path class="lines" d="M397 116h11v18h-11zm2 6h7m-7 6h7m-11 51h15v17h-15zm0 6h15"/>
+    <text x="418" y="132">Installed</text>
+    <text x="418" y="194">Backup</text>
+    <path class="link route" d="M504 167v-18m-5 5 5-5 5 5"/>
+    <path class="trace draw" d="M504 167v-18m-5 5 5-5 5 5" pathLength="1"/>
+  </g>
+</svg>

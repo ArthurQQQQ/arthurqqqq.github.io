@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 250" data-active-step="1" role="img" aria-labelledby="nb-title nb-desc">
+  <title id="nb-title">NeuralBank architecture learning path</title>
+  <desc id="nb-desc">Follow MLP and ResNet prerequisites to Transformer, trace a signal through self-attention, then answer a quiz and keep progress in the browser.</desc>
+  <defs>
+    <pattern id="nb-grid" width="16" height="16" patternUnits="userSpaceOnUse">
+      <path d="M16 0H0V16" fill="none" stroke="#53668e" stroke-opacity=".24"/>
+    </pattern>
+    <clipPath id="nb-board">
+      <rect x="20" y="61" width="520" height="167" rx="9"/>
+    </clipPath>
+  </defs>
+  <style>
+    text { font: 500 18px system-ui, sans-serif; fill: #e8ecf8; }
+    .title { font: 26px Georgia, serif; }
+    .label { font-size: 19px; font-weight: 600; }
+    .caption { fill: color-mix(in srgb, #bec8de, var(--ink) calc(var(--weight) * 100%)); }
+    .path { fill: none; stroke: #677aa5; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .node { fill: #1b263c; stroke: #52688b; stroke-width: 1.25; }
+    .accent-node {
+      fill: color-mix(in srgb, #1a2235, var(--tint) calc(var(--weight) * 100%));
+      stroke: color-mix(in srgb, #536588, var(--ink) calc(var(--weight) * 100%));
+    }
+    .one { --weight: var(--weight-one, 1); --progress: var(--progress-one, 0); --ink: #99b5ff; --tint: #243961; }
+    .two { --weight: var(--weight-two, 0); --progress: var(--progress-two, 0); --ink: #79d9c3; --tint: #183832; }
+    .three { --weight: var(--weight-three, 0); --progress: var(--progress-three, 0); --ink: #e9bf8a; --tint: #362c26; }
+    .trace { fill: none; stroke: var(--ink); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2; }
+    .drawing { opacity: var(--weight); stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--progress)); }
+    .signal {
+      fill: #b4f5e5;
+      opacity: calc(var(--weight) * min(1, var(--progress) * 12));
+      transform: translateX(calc(var(--progress) * 111px));
+    }
+    .cell { fill: color-mix(in srgb, #394e70, #79d9c3 calc(var(--weight) * 100%)); }
+    .saved { fill: color-mix(in srgb, #aab8d1, var(--ink) calc(var(--weight) * 100%)); font-size: 18px; }
+  </style>
+  <rect x=".5" y=".5" width="559" height="249" rx="13" fill="#141824" stroke="#30374f"/>
+  <text class="title" x="22" y="37">Architecture learning path</text>
+  <path d="M22 49h516" stroke="#3e4865"/>
+  <rect x="20" y="61" width="520" height="167" rx="9" fill="#1a2132" stroke="#394361"/>
+  <g clip-path="url(#nb-board)">
+    <rect x="20" y="61" width="520" height="167" fill="url(#nb-grid)"/>
+    <path d="M193 70v150m174-150v150" stroke="#3d4b68"/>
+  </g>
+
+  <g class="one">
+    <text class="label caption" x="106" y="87" text-anchor="middle">Prerequisites</text>
+    <path class="path" d="M65 143v9q0 6 6 6h27q8 0 8 8v9m43-32v9q0 6-6 6h-29q-8 0-8 8"/>
+    <path class="trace drawing" d="M65 143v9q0 6 6 6h27q8 0 8 8v9m43-32v9q0 6-6 6h-29q-8 0-8 8" pathLength="1"/>
+    <rect class="node" x="33" y="110" width="65" height="33" rx="6"/>
+    <rect class="node" x="109" y="110" width="76" height="33" rx="6"/>
+    <text x="65" y="132" text-anchor="middle">MLP</text>
+    <text x="147" y="132" text-anchor="middle">ResNet</text>
+    <rect class="node accent-node" x="32" y="175" width="147" height="34" rx="6"/>
+    <text x="106" y="198" text-anchor="middle">Transformer</text>
+  </g>
+
+  <g class="two">
+    <text class="label caption" x="280" y="87" text-anchor="middle">Signal trace</text>
+    <path class="path" d="M225 147h112m-8-6 8 6-8 6"/>
+    <path class="trace drawing" d="M225 147h112" pathLength="1"/>
+    <rect class="node" x="207" y="129" width="21" height="35" rx="4"/>
+    <rect class="node" x="332" y="129" width="21" height="35" rx="4"/>
+    <path class="path" d="M213 137h9m-9 10h9m-9 10h9m116-20h9m-9 10h9m-9 10h9"/>
+    <rect class="node accent-node" x="249" y="112" width="62" height="70" rx="7"/>
+    <path d="M257 145h46m-30-24v52m14-52v52m-30-35h46m-46 24h46" stroke="#52688b" stroke-width="1"/>
+    <g class="cell">
+      <rect x="259" y="124" width="11" height="10" rx="2" opacity=".66"/>
+      <rect x="275" y="140" width="10" height="11" rx="2"/>
+      <rect x="290" y="155" width="11" height="11" rx="2" opacity=".63"/>
+      <rect x="259" y="155" width="11" height="11" rx="2" opacity=".28"/>
+      <rect x="291" y="125" width="10" height="10" rx="2" opacity=".28"/>
+    </g>
+    <circle class="signal" cx="225" cy="147" r="4"/>
+    <text x="280" y="205" text-anchor="middle">Self-attention</text>
+  </g>
+
+  <g class="three">
+    <text class="label caption" x="453" y="87" text-anchor="middle">Recall check</text>
+    <rect class="node accent-node" x="383" y="106" width="140" height="71" rx="7"/>
+    <path class="path" d="M397 119h97m-74 19h81m-81 22h64"/>
+    <rect x="397" y="132" width="13" height="13" rx="3" fill="#192131" stroke="#677aa5"/>
+    <rect x="397" y="154" width="13" height="13" rx="3" fill="#192131" stroke="#677aa5"/>
+    <path class="trace drawing" d="m399 138 3 3 5-6" pathLength="1"/>
+    <rect x="387" y="195" width="17" height="14" rx="3" fill="none" stroke="#8f9ebc" stroke-width="1.5"/>
+    <path d="M391 195v-5a4.5 4.5 0 0 1 9 0v5" fill="none" stroke="#8f9ebc" stroke-width="1.5"/>
+    <text class="saved" x="412" y="207">Saved locally</text>
+  </g>
+</svg>

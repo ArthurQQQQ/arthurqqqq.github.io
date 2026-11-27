@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 250" data-active-step="1" role="img" aria-labelledby="yl-title yl-desc">
+  <title id="yl-title">From a situation to a source clip</title>
+  <desc id="yl-desc">Describe a situation, choose one of eight dialogue styles, and retrieve a similar example with a link to the relevant time in its source clip.</desc>
+  <defs>
+    <pattern id="yl-grid" width="18" height="18" patternUnits="userSpaceOnUse">
+      <path d="M18 0H0V18" fill="none" stroke="#53668e" stroke-opacity=".19"/>
+    </pattern>
+    <marker id="yl-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="m1 1 6 3-6 3" fill="none" stroke="#7789ae" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+  <style>
+    text { font-family: system-ui, sans-serif; fill: #edf0fa; }
+    .heading { font: 26px Georgia, serif; }
+    .label { font-size: 20px; font-weight: 550; text-anchor: middle; }
+    .initial { font-size: 18px; font-weight: 600; text-anchor: middle; }
+    .card { stroke-width: 1.5; }
+    .ink { fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .incoming { --weight: var(--weight-one, 1); --accent: #99b5ff; --tint: #233a61; }
+    .style-choice { --weight: var(--weight-two, 0); --accent: #79d9c3; --tint: #173b38; }
+    .clip { --weight: var(--weight-three, 0); --accent: #e9bf8a; --tint: #3a2b25; }
+    .incoming, .style-choice, .clip {
+      --detail: color-mix(in srgb, var(--accent) calc(26% + 74% * var(--weight)), #8293b4);
+    }
+    .card {
+      fill: color-mix(in srgb, var(--tint) calc(22% + 78% * var(--weight)), #1b2336);
+      stroke: var(--detail);
+    }
+    .ink { stroke: var(--detail); }
+    .option { fill: #192333; stroke: #526781; }
+    .route { fill: none; stroke: #7789ae; stroke-width: 1.5; marker-end: url(#yl-arrow); }
+    .cursor { opacity: var(--weight); fill: var(--accent); }
+    .situation-cursor { transform: translateX(calc(39px * var(--progress-one, 0))); }
+    .style-cursor { transform: translateX(calc(40px * var(--progress-two, 0))); }
+    .clip-cursor { transform: translateX(calc(52px * var(--progress-three, 0))); }
+    .clip-progress {
+      opacity: var(--weight);
+      transform: scaleX(var(--progress-three, 0));
+      transform-origin: 427px 160px;
+    }
+  </style>
+  <rect x=".5" y=".5" width="559" height="249" rx="13" fill="#141824" stroke="#30374f"/>
+  <text class="heading" x="24" y="38">From a situation to a source clip</text>
+  <path d="M24 54h512" stroke="#3e4865"/>
+  <rect x="24" y="66" width="512" height="131" rx="8" fill="url(#yl-grid)" stroke="#2e374e"/>
+
+  <path d="M143 129h29m0 0v-24h16m-16 24v26h16" fill="none" stroke="#627596" stroke-width="1.5"/>
+  <path class="route" d="M356 105h15q9 0 9 10v4q0 10 9 10h18"/>
+
+  <g class="incoming">
+    <path class="card" d="M44 91h91a8 8 0 0 1 8 8v52a8 8 0 0 1-8 8H71l-16 14v-14H44a8 8 0 0 1-8-8V99a8 8 0 0 1 8-8Z"/>
+    <path class="ink" d="M54 113h64m-64 14h47m-47 14h55"/>
+    <circle class="cursor situation-cursor" cx="55" cy="141" r="3.2"/>
+    <text class="label" x="89" y="227">Situation</text>
+  </g>
+
+  <g class="style-choice">
+    <rect class="option" x="188" y="87" width="36" height="36" rx="6"/>
+    <rect class="option" x="232" y="87" width="36" height="36" rx="6"/>
+    <rect class="option" x="276" y="87" width="36" height="36" rx="6"/>
+    <rect class="card" x="320" y="87" width="36" height="36" rx="6"/>
+    <rect class="option" x="188" y="137" width="36" height="36" rx="6"/>
+    <rect class="option" x="232" y="137" width="36" height="36" rx="6"/>
+    <rect class="option" x="276" y="137" width="36" height="36" rx="6"/>
+    <rect class="option" x="320" y="137" width="36" height="36" rx="6"/>
+    <text class="initial" x="206" y="112">LL</text>
+    <text class="initial" x="250" y="112">TJ</text>
+    <text class="initial" x="294" y="112">QQ</text>
+    <text class="initial" x="338" y="112">TS</text>
+    <text class="initial" x="206" y="162">AY</text>
+    <text class="initial" x="250" y="162">JG</text>
+    <text class="initial" x="294" y="162">FG</text>
+    <text class="initial" x="338" y="162">GL</text>
+    <path class="ink" d="M357 105h13q10 0 10 10v4q0 10 9 10h15" opacity="var(--weight)"/>
+    <path class="cursor" d="M390 124l8 5-8 5z"/>
+    <circle class="cursor style-cursor" cx="322" cy="81" r="3.2"/>
+    <text class="label" x="272" y="227">8 dialogue styles</text>
+  </g>
+
+  <g class="clip">
+    <rect class="card" x="409" y="89" width="115" height="87" rx="8"/>
+    <circle class="ink" cx="466.5" cy="120" r="16"/>
+    <path d="M463 113v14l10-7z" fill="var(--detail)"/>
+    <path class="ink" d="M427 160h79" opacity=".55"/>
+    <path class="ink clip-progress" d="M427 160h52"/>
+    <circle class="cursor clip-cursor" cx="427" cy="160" r="4"/>
+    <text class="label" x="464" y="227">Clip + timecode</text>
+  </g>
+</svg>

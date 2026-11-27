@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 250" data-active-step="1" role="img" aria-labelledby="cr-title cr-desc">
+  <title id="cr-title">Find overlaps in a room schedule</title>
+  <desc id="cr-desc">The room scheduler aligns a course from 25Live with a booking from Google Calendar on a shared room timeline. It flags the period where both occupy the same room. A separate check compares enrollment with room capacity.</desc>
+  <defs>
+    <pattern id="cr-grid" width="28" height="28" patternUnits="userSpaceOnUse">
+      <path d="M28 0H0V28" fill="none" stroke="#53668e" stroke-opacity=".26"/>
+    </pattern>
+    <pattern id="cr-hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(32)">
+      <path d="M1 0v8" stroke="#e9bf8a" stroke-opacity=".6" stroke-width="2"/>
+    </pattern>
+  </defs>
+  <style>
+    text { font-family: system-ui, sans-serif; fill: #edf0fa; }
+    .heading { font: 26px Georgia, serif; }
+    .label { font-size: 20px; font-weight: 550; }
+    .room { font-size: 18px; fill: #b4bbd2; }
+    .source { --w: var(--weight-one, 1); }
+    .column-guide { --w: var(--weight-two, 0); }
+    .conflict { --w: var(--weight-three, 0); }
+    .course {
+      fill: color-mix(in srgb, #263e67 calc(35% + 65% * var(--w)), #1a2337);
+      stroke: color-mix(in srgb, #99b5ff calc(32% + 68% * var(--w)), #667c9d);
+    }
+    .booking {
+      fill: color-mix(in srgb, #21413e calc(35% + 65% * var(--w)), #1a2337);
+      stroke: color-mix(in srgb, #79d9c3 calc(32% + 68% * var(--w)), #667c9d);
+    }
+    .course, .booking { stroke-width: 1.5; }
+    .course-ink { stroke: #99b5ff; }
+    .booking-ink { stroke: #79d9c3; }
+    .source-ink { opacity: calc(.4 + .6 * var(--w)); }
+    .load-cursor { opacity: var(--w); transform: translateX(calc(75px * var(--progress-one, 0))); }
+    .playhead { opacity: var(--w); transform: translateX(calc(137px * var(--progress-two, 0))); }
+    .overlap { opacity: calc(.18 + .74 * var(--w)); }
+    .overlap-trace {
+      opacity: var(--w);
+      transform: scaleY(var(--progress-three, 0));
+      transform-origin: 365px 100px;
+    }
+    .overlap-label { fill: color-mix(in srgb, #e9bf8a calc(38% + 62% * var(--w)), #b4bbd2); }
+  </style>
+  <rect x=".5" y=".5" width="559" height="249" rx="13" fill="#141824" stroke="#30374f"/>
+  <text class="heading" x="24" y="38">Find overlaps in a room schedule</text>
+  <path d="M24 54h512" stroke="#3e4865"/>
+
+  <rect x="24" y="67" width="512" height="124" rx="8" fill="#192132" stroke="#394361"/>
+  <path d="M194 68h333a8 8 0 0 1 8 8v106a8 8 0 0 1-8 8H194z" fill="url(#cr-grid)"/>
+  <path d="M194 68v123m0-62h342" fill="none" stroke="#435275"/>
+  <path d="M210 79v9m28-9v6m28-6v9m28-9v6m28-6v9m28-9v6m28-6v9m28-9v6m28-6v9m28-9v6m28-6v9m28-9v6" fill="none" stroke="#7d8cad" stroke-opacity=".66"/>
+
+  <g class="source">
+    <text class="label" x="37" y="112">25Live</text>
+    <text class="label" x="37" y="159">Google Calendar</text>
+    <rect class="course" x="219" y="95" width="180" height="26" rx="5"/>
+    <rect class="booking" x="333" y="142" width="154" height="26" rx="5"/>
+    <path class="course-ink source-ink" d="M230 108h62" stroke-width="2" stroke-linecap="round"/>
+    <path class="booking-ink source-ink" d="M344 155h72" stroke-width="2" stroke-linecap="round"/>
+    <circle class="load-cursor" cx="231" cy="108" r="3.2" fill="#99b5ff"/>
+    <circle class="load-cursor" cx="346" cy="155" r="3.2" fill="#79d9c3"/>
+  </g>
+
+  <g class="column-guide">
+    <path class="playhead" d="M196 82v98" stroke="#79d9c3" stroke-width="2"/>
+    <path d="M207 180h302m-6-4 6 4-6 4" fill="none" stroke="#7789ae" stroke-width="1.2"/>
+    <text class="room" x="26" y="224">Same room</text>
+  </g>
+
+  <g class="conflict">
+    <rect class="overlap" x="333" y="94" width="66" height="76" rx="3" fill="url(#cr-hatch)"/>
+    <rect class="overlap-trace" x="333" y="100" width="66" height="72" rx="3" fill="none" stroke="#e9bf8a" stroke-width="1.7"/>
+    <path d="M333 180v19h66v-19m-33 19v7" fill="none" stroke="#e9bf8a" stroke-width="1.4" opacity="calc(.4 + .6 * var(--w))"/>
+    <text class="label overlap-label" x="366" y="228" text-anchor="middle">Double booking</text>
+  </g>
+</svg>
