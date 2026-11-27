@@ -527,13 +527,13 @@ a:hover { text-decoration-thickness: 2px; }
 }
 
 #projects { padding-block-end: max(46px, var(--project-end-clearance, 0px)); }
-.projects-list > li + li { margin-top: 15px; }
+.projects-list > li + li { margin-top: clamp(20px, 2.4vw, 30px); }
 .workflow-card {
   display: grid;
   grid-template-columns: minmax(0, 1fr) clamp(282px, 36vw, 390px);
   align-items: center;
-  gap: 15px clamp(20px, 3vw, 38px);
-  padding: clamp(14px, 2.3vw, 23px);
+  gap: 19px clamp(24px, 4vw, 48px);
+  padding: clamp(17px, 2.6vw, 27px);
   border: 1px solid var(--line);
   border-radius: 12px;
   background: var(--surface);
@@ -544,23 +544,16 @@ a:hover { text-decoration-thickness: 2px; }
   line-height: 1.25;
 }
 .workflow-card h3 a { color: var(--ink); }
-.workflow-card p { margin-top: 6px; max-width: 74ch; color: var(--muted); font-size: .9375rem; line-height: 1.5; }
-.project-meme { min-width: 0; margin: 0; text-align: center; }
-.meme-window { display: grid; place-items: center; padding: 3px 5px 13px; }
-.meme-window img {
+.workflow-card p { margin-top: 8px; max-width: 58ch; color: var(--muted); font-size: .9375rem; line-height: 1.55; }
+.project-preview { min-width: 0; margin: 0; }
+.project-preview img {
   display: block;
-  width: auto;
+  width: 100%;
   height: auto;
-  max-width: 100%;
-  max-height: clamp(176px, 18vw, 228px);
   border: 1px solid var(--strong-line);
-  border-radius: 6px;
-  transform: translateY(calc(10px * (1 - var(--meme-progress, 1))))
-    rotate(calc(-1.5deg * (1 - var(--meme-progress, 1))));
+  border-radius: 7px;
+  transform: translateY(calc(6px * (1 - var(--preview-progress, 1))));
 }
-.project-meme figcaption { margin-top: 5px; color: var(--muted); font-size: .75rem; line-height: 1.4; }
-.project-meme figcaption a { color: inherit; }
-.project-meme figcaption a:is(:hover, :focus-visible) { color: var(--ink); }
 .site-footer { color: var(--muted); font-size: 14px; }
 .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 9px 20px; padding-block: 18px; border-top: 1px solid var(--line); }
 
@@ -639,7 +632,7 @@ a:hover { text-decoration-thickness: 2px; }
   [data-rail-stop] > :is(.publication, .profile-grid, .profile-link, .workflow-card), .rail-heading { position: relative; top: auto; }
   #projects { padding-block-end: 46px; }
   .paper-figure { print-color-adjust: exact; }
-  .meme-window img { transform: none; }
+  .project-preview img { transform: none; }
   .publication, .workflow-card { break-inside: avoid; }
   .container { width: 100%; }
 }
