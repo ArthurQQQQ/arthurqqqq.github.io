@@ -516,7 +516,7 @@ a:hover { text-decoration-thickness: 2px; }
 .paper-phases li:nth-child(2) { --phase-index: 1; --phase-color: var(--phase-mint); }
 .paper-phases li:nth-child(3) { --phase-index: 2; --phase-color: var(--phase-amber); }
 .paper-phases [aria-current="step"] { color: var(--phase-color); }
-:is(#research, #projects)[data-scroll-motion] .paper-phases li::before {
+#research[data-scroll-motion] .paper-phases li::before {
   position: absolute;
   inset: -1px 0 auto;
   height: 3px;
@@ -545,7 +545,22 @@ a:hover { text-decoration-thickness: 2px; }
 }
 .workflow-card h3 a { color: var(--ink); }
 .workflow-card p { margin-top: 6px; max-width: 74ch; color: var(--muted); font-size: .9375rem; line-height: 1.5; }
-.workflow-visual .paper-phases { margin-top: 8px; }
+.project-meme { min-width: 0; margin: 0; text-align: center; }
+.meme-window { display: grid; place-items: center; padding: 3px 5px 13px; }
+.meme-window img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: clamp(176px, 18vw, 228px);
+  border: 1px solid var(--strong-line);
+  border-radius: 6px;
+  transform: translateY(calc(10px * (1 - var(--meme-progress, 1))))
+    rotate(calc(-1.5deg * (1 - var(--meme-progress, 1))));
+}
+.project-meme figcaption { margin-top: 5px; color: var(--muted); font-size: .75rem; line-height: 1.4; }
+.project-meme figcaption a { color: inherit; }
+.project-meme figcaption a:is(:hover, :focus-visible) { color: var(--ink); }
 .site-footer { color: var(--muted); font-size: 14px; }
 .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 9px 20px; padding-block: 18px; border-top: 1px solid var(--line); }
 
@@ -624,6 +639,7 @@ a:hover { text-decoration-thickness: 2px; }
   [data-rail-stop] > :is(.publication, .profile-grid, .profile-link, .workflow-card), .rail-heading { position: relative; top: auto; }
   #projects { padding-block-end: 46px; }
   .paper-figure { print-color-adjust: exact; }
+  .meme-window img { transform: none; }
   .publication, .workflow-card { break-inside: avoid; }
   .container { width: 100%; }
 }

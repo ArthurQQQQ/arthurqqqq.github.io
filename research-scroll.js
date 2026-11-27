@@ -20,8 +20,11 @@ const researchHeading = research.querySelector('.rail-heading');
 const projects = document.getElementById('projects');
 const projectsHeading = projects.querySelector('.rail-heading');
 const stories = readStories(research, '.publication-list > li', '.publication');
-const workflows = readStories(projects, '.projects-list > li', '.workflow-card');
-const figures = [...stories, ...workflows];
+const workflows = [...projects.querySelectorAll('.projects-list > li')].map(row => ({
+  row,
+  article: row.querySelector('.workflow-card'),
+  figure: row.querySelector('.project-meme'),
+}));
 const phaseNames = ['one', 'two', 'three'];
 
 const clamp = gsap.utils.clamp(0, 1);
@@ -103,14 +106,13 @@ function attachImage(story) {
   if (story.progress >= 0) paintStory(story, story.progress, true);
 }
 
-for (const story of figures) {
+for (const story of stories) {
   story.image.addEventListener('load', () => attachImage(story));
   attachImage(story);
 }
 
 gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
   research.setAttribute('data-scroll-motion', '');
-  projects.setAttribute('data-scroll-motion', '');
 
   const lightShift = gsap.to(boardLight, { y: -72, ease: 'none', paused: true });
   ScrollTrigger.create({
@@ -237,7 +239,21 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
   }
 
   for (const story of stories) registerStory(story, () => paperTop, () => paperTravel);
-  for (const workflow of workflows) registerStory(workflow, () => projectTop, () => projectTravel);
+  for (const { row, article, figure } of workflows) {
+    const bounds = () => visualBounds(row, figure, projectTop, projectTravel);
+    function paintMeme({ progress }) {
+      article.toggleAttribute('data-rail-engaged', row.hasAttribute('data-rail-stop') && progress > 0 && progress < 1);
+      const eased = progress * progress * (3 - 2 * progress);
+      figure.style.setProperty('--meme-progress', round(eased));
+    }
+    ScrollTrigger.create({
+      trigger: row,
+      start: () => bounds().start,
+      end: () => bounds().end,
+      onUpdate: paintMeme,
+      onRefresh: paintMeme,
+    });
+  }
 
   let refreshFrame = 0;
   function scheduleRefresh() {
@@ -254,7 +270,7 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
   resizeObserver.observe(researchHeading);
   resizeObserver.observe(projectsHeading);
   for (const link of profileLinks) resizeObserver.observe(link);
-  for (const story of figures) resizeObserver.observe(story.article);
+  for (const { article } of [...stories, ...workflows]) resizeObserver.observe(article);
   window.addEventListener('resize', scheduleRefresh, { passive: true });
 
   return () => {
@@ -265,7 +281,6 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
     window.removeEventListener('resize', scheduleRefresh);
     ScrollTrigger.removeEventListener('refreshInit', updateRailStops);
     research.removeAttribute('data-scroll-motion');
-    projects.removeAttribute('data-scroll-motion');
     main.style.removeProperty('--section-heading-top');
     for (const section of [profiles, research, projects]) {
       section.style.removeProperty('--rail-dock-top');
@@ -274,6 +289,10 @@ gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
     projects.style.removeProperty('--project-end-clearance');
     for (const stop of profileStops) stop.row.removeAttribute('data-rail-stop');
     for (const link of profileLinks) link.removeAttribute('data-rail-engaged');
-    figures.forEach(resetStory);
+    for (const { row, article, figure } of workflows) {
+      setRailStop(row, article, false);
+      figure.style.removeProperty('--meme-progress');
+    }
+    stories.forEach(resetStory);
   };
 });
